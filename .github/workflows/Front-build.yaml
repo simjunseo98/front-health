@@ -40,7 +40,7 @@ jobs:
 
       # 빌드 출력 디렉토리 내용 확인
       - name: List build directory
-        run: ls -al ./dist
+        run: ls -al ./build
       
       # AWS에 접근하기 위한 권한을 설정합니다.
       - name: Configure AWS credentials
