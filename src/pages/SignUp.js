@@ -15,7 +15,7 @@ const valid = yup.object().shape({
     userEmail: yup.string().email('유효한 이메일을 입력하세요').required('이메일을 입력하세요'),
     userAddress: yup.string().required('주소를 입력하세요'),
     userAge: yup.number().typeError('나이는 숫자여야 합니다').required('나이를 입력하세요').positive('유효한 나이를 입력하세요').integer('나이는 정수여야 합니다'),
-    userPhone: yup.string().matches(/^\d{10,11}$/, '유효한 전화번호를 입력하세요').required('전화번호를 입력하세요')
+    userPhone: yup.number().typeError(/^\d{10,11}$/, '유효한 전화번호를 입력하세요').required('전화번호를 입력하세요')
 });
 
 const Signup = () => {
@@ -30,6 +30,7 @@ const Signup = () => {
             // 회원가입 성공 후 추가적인 처리 (예: 로그인 페이지로 이동)
         } catch (error) {
             console.error('회원가입 실패 :', error);
+            console.log(data)
         }
     };
 
@@ -74,7 +75,7 @@ const Signup = () => {
                 </div>
                 <div>
                     <label>전화번호 :</label>
-                    <input type="text" {...register('userPhone')} />
+                    <input type="number" {...register('userPhone')} />
                     <p>{errors.userPhone?.message}</p>
                 </div>
                 <button type="submit">Sign Up</button>
