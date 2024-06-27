@@ -25,7 +25,7 @@ const Signup = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('http://ec2-43-201-150-178.ap-northeast-2.compute.amazonaws.com:8081/api/v1/user/user/register', data);
+            const response = await axios.post('https://ec2-43-201-150-178.ap-northeast-2.compute.amazonaws.com:8081/api/v1/user/user/register', data);
             console.log('회원가입 성공 :', response.data);
             // 회원가입 성공 후 추가적인 처리 (예: 로그인 페이지로 이동)
         } catch (error) {
