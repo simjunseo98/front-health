@@ -16,9 +16,6 @@ function CommonHeader() {
                                 <li><Link to="/schedules" className="scroll-to-section">Schedules</Link></li>
                                 <li className="main-button"><Link to="/login">로그인</Link></li>
                             </ul>
-                            <a className='menu-trigger'>
-                                <span>Menu</span>
-                            </a>
                         </nav>
                     </div>
                 </div>
