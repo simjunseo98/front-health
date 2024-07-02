@@ -1,9 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-simple-toasts';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'; // 간결한 코드작성을 위해 form 관련 라이브러리인 yup 사용
-import axios from 'axios';
-
+import api from '../services/api';
 // 유효성 검사
 const valid = yup.object().shape({
     id: yup.string().required('ID를 입력하세요'),
@@ -19,17 +20,20 @@ const valid = yup.object().shape({
 });
 
 const Signup = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(valid)
     });
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('https://ec2-43-201-150-178.ap-northeast-2.compute.amazonaws.com:8081/api/v1/user/user/register', data);
+            const response = await api.post('/api/v1/user/user/register', data);
             console.log('회원가입 성공 :', response.data);
-            // 회원가입 성공 후 추가적인 처리 (예: 로그인 페이지로 이동)
+            toast('회원가입에 성공했습니다.', response.data)
+            navigate('/login')
         } catch (error) {
             console.error('회원가입 실패 :', error);
+            toast('회원가입에 실패했습니다.', error)
             console.log(data)
         }
     };
