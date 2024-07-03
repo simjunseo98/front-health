@@ -2,14 +2,12 @@ import React from 'react'
 import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/font-awesome.css';
 import '../../assets/css/templatemo-training-studio.css';
+import gymImage from '../../assets/images/gymBoxx.png';
 
 function CommonMainBanner() {
   return (
     <div className="main-banner" id="top">
-        <video autoplay muted loop id="bg-video">
-            <source src="../assets/images/gym-video.mp4" type="video/mp4" />
-        </video>
-
+        <img src={gymImage} alt="Gym Background" id="bg-video" />
         <div className="video-overlay header-text">
             <div className="caption">
                 <h6>work harder, get stronger</h6>

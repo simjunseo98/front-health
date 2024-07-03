@@ -1,27 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function CommonHeader() {
-    return (//header-area 에서 네비색상 변경
-        <header className="header-area header-sticky">  
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <nav className="main-nav">
-                            <Link to="/" className="logo">Healthy<em> Life</em></Link>
-                            <ul className="nav">
-                                <li><Link to="/" className="scroll-to-section">Home</Link></li>
-                                <li><Link to="/challenge" className="scroll-to-section">Challenge</Link></li>
-                                <li><Link to="/classes" className="scroll-to-section">Classes</Link></li>
-                                <li><Link to="/schedules" className="scroll-to-section">Schedules</Link></li>
-                                <li className="main-button"><Link to="/login">로그인</Link></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </header>
-    );
+function CommonHeader({ setActivePage, setLoggedIn }) {
+  const [activeLink, setActiveLink] = useState('/');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // 링크 클릭 시 상태 변경 함수
+  const handleLinkClick = (path) => {
+    setActiveLink(path); // 클릭된 링크의 path로 상태 업데이트
+    setActivePage(path); // 메인페이지에 상태 전달
+  };
+
+  // 로그아웃 로직 추가
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setLoggedIn(false); //부모컴포넌트에서 로그인 상태 업데이트
+  }
+
+  return (//header-area 에서 네비색상 변경
+    <header className="header-area header-sticky">
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <nav className="main-nav">
+              <Link to="/" className="logo">Healthy<em> Life</em></Link>
+              <ul className="nav">
+                <li><div onClick={() => handleLinkClick('/')} className={`scroll-to-section ${activeLink === '/' ? 'active' : ''}`}>Home</div></li>
+                <li><div onClick={() => handleLinkClick('/challenge')} className={`scroll-to-section ${activeLink === '/challenge' ? 'active' : ''}`}>Challenge</div></li>
+                <li><div onClick={() => handleLinkClick('/exercise')} className={`scroll-to-section ${activeLink === '/exercise' ? 'active' : ''}`}>Exercise</div></li>
+                <li><div onClick={() => handleLinkClick('/food')} className={`scroll-to-section ${activeLink === '/food' ? 'active' : ''}`}>Food</div></li>
+                <li><div onClick={() => handleLinkClick('/community')} className={`scroll-to-section ${activeLink === '/community' ? 'active' : ''}`}>Community</div></li>
+                <li><div onClick={() => handleLinkClick('/mypage')} className={`scroll-to-section ${activeLink === '/mypage' ? 'active' : ''}`}>MyPage</div></li>
+                {isLoggedIn ? (
+                  <li className="main-button"><button onClick={handleLogout}>로그아웃</button></li>
+                ) : (
+                  <li className="main-button"><Link to="/login">로그인</Link></li>
+                )}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }
 
 export default CommonHeader;
