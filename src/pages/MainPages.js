@@ -41,7 +41,8 @@ const MainPages = () => {
       case '/community':
         return <Community />;
       case '/mypage':
-        return isLoggedIn ? <MyPage /> : <Login setLoggedIn={setIsLoggedIn} />; //메인페이지에서 컴포넌트로 뜨게 할지 로그인 페이지로 넘길지 고민중..
+        // return isLoggedIn ? <MyPage /> : <Login setLoggedIn={setIsLoggedIn} />; //메인페이지에서 컴포넌트로 뜨게 할지 로그인 페이지로 넘길지 고민중..
+        return <MyPage />
       default:
         return <Home />;
     }
