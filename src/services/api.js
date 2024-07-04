@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const baseURL = 'http://ec2-43-201-150-178.ap-northeast-2.compute.amazonaws.com:8081';
+const baseURL = 'http://ec2-43-203-233-45.ap-northeast-2.compute.amazonaws.com:8081';
 
 const api = axios.create({
     baseURL: baseURL,
-    timeout: 10000, 
+    timeout: 30000, 
 });
 
 // 요청 인터셉터 설정: 헤더에 토큰 추가

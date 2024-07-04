@@ -27,7 +27,7 @@ const Signup = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await api.post('/api/v1/user/user/register', data);
+            const response = await api.post('/user/register', data);
             console.log('회원가입 성공 :', response.data);
             toast('회원가입에 성공했습니다.', response.data)
             navigate('/login')
