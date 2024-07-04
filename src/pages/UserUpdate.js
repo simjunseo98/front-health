@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import axios from 'axios';
-
+import api from '../services/api'
 // 유효성 검사 스키마 정의
 const schema = yup.object().shape({
     password: yup.string().min(6, '비밀번호는 최소 6자 이상이어야 합니다'),
@@ -42,7 +41,7 @@ const UserUpdate = ({ onCancel }) => {
         const { confirmPassword, ...updateData } = data;
 
         try {
-            const response = await axios.post('http://ec2-43-201-150-178.ap-northeast-2.compute.amazonaws.com:8081/api/v1/user/user/update', updateData);
+            const response = await api.post('/user/update', updateData);
             console.log('정보 수정 성공 :', response.data);
             // 정보 수정 성공 후 추가적인 처리 (예: 성공 메시지 표시)
         } catch (error) {
