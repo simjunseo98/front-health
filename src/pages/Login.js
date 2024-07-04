@@ -3,7 +3,6 @@ import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-simple-toasts';
 import Loading from '../components/common/Loading';
-
 const Login = () => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
