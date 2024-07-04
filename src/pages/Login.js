@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-simple-toasts';
 import Loading from '../components/common/Loading';
 
+
 const Login = ({setIsLoggedIn}) => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
