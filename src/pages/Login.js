@@ -3,7 +3,9 @@ import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-simple-toasts';
 import Loading from '../components/common/Loading';
-const Login = () => {
+
+
+const Login = ({setIsLoggedIn}) => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
@@ -22,6 +24,7 @@ const Login = () => {
             // 로그인 성공 후 추가적인 처리
             const token = response.data.token;   //받은 토큰 저장
             sessionStorage.setItem('token', token)
+            setIsLoggedIn(true);    //로그인 상태 업데이트
             navigate('/')
         } catch (error) {
             console.error('Login error:', error);
@@ -32,9 +35,9 @@ const Login = () => {
     };
 
     return (
-<div>
+        <div>
             {loading ? (
-                <Loading /> 
+                <Loading />
             ) : (
                 <div>
                     <h2>Login</h2>
