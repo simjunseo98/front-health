@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import api from '../services/api'
+
 // 유효성 검사 스키마 정의
 const schema = yup.object().shape({
     password: yup.string().min(6, '비밀번호는 최소 6자 이상이어야 합니다'),
@@ -57,11 +58,6 @@ const UserUpdate = ({ onCancel }) => {
                     <label>비밀번호 :</label>
                     <input type="password" {...register('password')} />
                     <p>{errors.password?.message}</p>
-                </div>
-                <div>
-                    <label>비밀번호 확인 :</label>
-                    <input type="password" {...register('confirmPassword')} />
-                    <p>{errors.confirmPassword?.message}</p>
                 </div>
                 <div>
                     <label>이름 :</label>
