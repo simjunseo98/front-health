@@ -1,0 +1,38 @@
+/* community.module.scss */
+.community-container {
+    max-width: 1000px; /* 전체 너비를 제한 */
+    margin: 20px auto; /* 가운데 정렬 및 위아래 여백 */
+    padding: 20px;
+    margin-top: 50px;
+    background-color: #f9f9f9; /* 배경색 추가 */
+    border-radius: 8px; /* 둥근 모서리 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  }
+  
+  .community-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .community-table th, .community-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .community-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .community-image {
+    width: 80px;
+    height: auto;
+    object-fit: cover; /* 이미지가 고정 크기에 맞춰 조정되도록 */
+  }
+  
+  .community-header {
+    margin-top: 20px; /* 헤더와의 간격을 조정 */
+    margin-bottom: 30px;
+    text-align: center; /* 중앙 정렬 */
+  }
+  

@@ -1,8 +1,20 @@
+// 이전꺼
+// .page {
+//   display: flex;
+//   justify-content: center; /* 가로 중앙 정렬 */
+//   align-items: center; /* 세로 중앙 정렬 */
+//   margin: 0px auto; /* 위아래 100px, 좌우 가운데 정렬 */
+//   width: 100%;
+//   height: 100vh;
+//   overflow-y: auto; /* 내용이 넘치면 스크롤 표시 */
+// }
+
+/* 수정한거 두환 */
 .page {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-  margin: 0px auto; /* 위아래 100px, 좌우 가운데 정렬 */
+  align-items: flex-start; /* 세로 상단 정렬 */
+  margin: 0 auto; /* 좌우 가운데 정렬 */
   width: 100%;
   height: 100vh;
   overflow-y: auto; /* 내용이 넘치면 스크롤 표시 */
