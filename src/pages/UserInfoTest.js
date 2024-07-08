@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
 
+
 const UserInfoTest = ({ onEditClick }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
