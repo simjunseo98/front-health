@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
+import Table from 'react-bootstrap/Table';
 
 const Community = () => {
   const [community, setCommunity] = useState([]);
@@ -27,13 +28,13 @@ const Community = () => {
   }
 
   if (error) {
-    return <p>에러메세지 : {error.message}</p>;
+    return <p>에러메세지: {error.message}</p>;
   }
 
   return (
     <div>
       <h2>커뮤니티 페이지입니다.(임시로 FakeAPi 연결)</h2>
-      <table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>이미지</th>
@@ -50,6 +51,7 @@ const Community = () => {
                 <img 
                   src={communityItem.image} 
                   alt={communityItem.title} 
+                  style={{ width: '50px', height: '50px' }}
                 />
               </td>
               <td>{communityItem.title}</td>
@@ -59,7 +61,7 @@ const Community = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };
