@@ -34,6 +34,7 @@ const Community = () => {
   return (
     <div>
       <h2>커뮤니티 페이지입니다.(임시로 FakeAPi 연결)</h2>
+      <div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -62,6 +63,7 @@ const Community = () => {
           ))}
         </tbody>
       </Table>
+      </div>  
     </div>
   );
 };
