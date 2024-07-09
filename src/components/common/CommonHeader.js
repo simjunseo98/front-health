@@ -30,8 +30,7 @@ function CommonHeader({ setActivePage, setLoggedIn }) {
               <ul className="nav">
                 <li><div onClick={() => handleLinkClick('/')} className={`scroll-to-section ${activeLink === '/' ? 'active' : ''}`}>Home</div></li>
                 <li><div onClick={() => handleLinkClick('/challenge')} className={`scroll-to-section ${activeLink === '/challenge' ? 'active' : ''}`}>Challenge</div></li>
-                <li><div onClick={() => handleLinkClick('/exercise')} className={`scroll-to-section ${activeLink === '/exercise' ? 'active' : ''}`}>Exercise</div></li>
-                <li><div onClick={() => handleLinkClick('/food')} className={`scroll-to-section ${activeLink === '/food' ? 'active' : ''}`}>Food</div></li>
+                <li><div onClick={() => handleLinkClick('/today')} className={`scroll-to-section ${activeLink === '/exercise' ? 'active' : ''}`}>Today's</div></li>
                 <li><div onClick={() => handleLinkClick('/community')} className={`scroll-to-section ${activeLink === '/community' ? 'active' : ''}`}>Community</div></li>
                 <li><div onClick={() => handleLinkClick('/mypage')} className={`scroll-to-section ${activeLink === '/mypage' ? 'active' : ''}`}>MyPage</div></li>
                 <li><Link to="/signuptest">회원가입 테스트</Link></li>
