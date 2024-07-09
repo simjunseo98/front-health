@@ -721,13 +721,14 @@ banner
 
 .main-banner {
   position: relative;
+  margin-top: 80px;
 }
 
 #bg-video {
-  min-width: 120%;
-  min-height: 140vh;
-  max-width: 120%;
-  max-height: 140vh;
+  min-width: 100%;
+  min-height: 100vh;
+  max-width: 100%;
+  max-height: 100vh;
   object-fit: cover;
   z-index: -1;
 }

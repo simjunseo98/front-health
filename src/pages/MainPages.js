@@ -9,6 +9,7 @@ import Exercise from './Exercise';
 import Food from './Food';
 import Community from './Community';
 import MyPage from './MyPage';
+import styles from '../assets/styles/layout.module.scss';
 
 const MainPages = () => {
   // MainPages 컴포넌트에서 상태를 관리할 useState 선언
@@ -50,7 +51,7 @@ const MainPages = () => {
   return (
     <div>
       <CommonHeader setActivePage={setActivePage} />
-      <div>
+      <div className={styles.mainLayout}>
         {renderPage()}
       </div>
       <CommonFooter />
