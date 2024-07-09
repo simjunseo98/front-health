@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
+import Table from 'react-bootstrap/Table';
 
 const Community = () => {
   const [community, setCommunity] = useState([]);
