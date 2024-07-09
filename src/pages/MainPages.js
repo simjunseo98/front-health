@@ -5,8 +5,7 @@ import CommonFooter from '../components/common/CommonFooter';
 import Home from '../components/common/CommonHome';
 import Login from '../pages/Login';
 import Challenge from './Challenge';
-import Exercise from './Exercise';
-import Food from './Food';
+import Today from './Today';
 import Community from './Community';
 import MyPage from './MyPage';
 import styles from '../assets/styles/layout.module.scss';
@@ -34,10 +33,8 @@ const MainPages = () => {
         return <Login setLoggedIn={setIsLoggedIn} />;
       case '/challenge':
         return <Challenge />;
-      case '/exercise':
-        return <Exercise />;
-      case '/food':
-        return <Food />;
+      case '/today':
+        return <Today />;
       case '/community':
         return <Community />;
       case '/mypage':

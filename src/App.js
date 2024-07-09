@@ -7,8 +7,7 @@ import MyPage from './pages/MyPage';
 import UserInfo from './pages/UserInfo';
 import UserUpdate from './pages/UserUpdate';
 import Challenge from './pages/Challenge';
-import Exercise from './pages/Exercise';
-import Food from './pages/Food';
+import Today from './pages/Today';
 import Community from './pages/Community';
 import SignUpTest from './pages/SignUpTest';  //Post 기능 확인용 테스트 클래스
 import UserUpdateTest from './pages/UserUpdateTest';
@@ -25,8 +24,7 @@ function App() {
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/userupdate" element={<UserUpdate />} />
           <Route path="/challenge" element={<Challenge />} />
-          <Route path="/exercise" element={<Exercise />} />
-          <Route path="/food" element={<Food />} />
+          <Route path="/today" element={<Today />} />
           <Route path="/community" element={<Community />} />
           <Route path="/signuptest" element={<SignUpTest />} />
           <Route path="/userupdatetest/:id" element={<UserUpdateTest />} />
