@@ -10,6 +10,8 @@ import Challenge from './pages/Challenge';
 import Exercise from './pages/Exercise';
 import Food from './pages/Food';
 import Community from './pages/Community';
+import SignUpTest from './pages/SignUpTest';  //Post 기능 확인용 테스트 클래스
+import UserUpdateTest from './pages/UserUpdateTest';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/food" element={<Food />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/signuptest" element={<SignUpTest />} />
+          <Route path="/userupdatetest/:id" element={<UserUpdateTest />} />
         </Routes>
         </BrowserRouter>
     </div>

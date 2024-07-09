@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://ec2-43-203-233-45.ap-northeast-2.compute.amazonaws.com:8081';
+const baseURL = 'https://fakestoreapi.com'; //서버 연결전까지 사용할 fakeApi
 
 const api = axios.create({
     baseURL: baseURL,

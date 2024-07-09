@@ -2,7 +2,9 @@ import React from 'react'
 
 const Exercise = () => {
   return (
-    <div>운동 페이지 입니다.</div>
+    <div>
+        <h1>운동 페이지 입니다.</h1>
+    </div>
   )
 }
 
