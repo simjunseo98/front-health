@@ -3,7 +3,6 @@ import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-simple-toasts';
 import Loading from '../components/common/Loading';
-import '../assets/styles/login.module.scss';
 
 
 const Login = ({setIsLoggedIn}) => {
@@ -36,21 +35,21 @@ const Login = ({setIsLoggedIn}) => {
     };
 
     return (
-        <div className='form-login'>
+        <div>
         {loading ? (
             <Loading />
         ) : (
-            <div className='form-container'>
-                <div className='form-inner-container'>
+            <div>
+                <div>
                     <h2>Login</h2>
-                        <div className='sign-in-container'>
+                        <div>
                     <br/>
                     <form onSubmit={handleSubmit}>
                         <label>Email</label>
                         <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
                         <label>Password</label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <div className='form-controls'>
+                        <div>
                         <button type="submit">Login</button>
                         </div>
                     </form>

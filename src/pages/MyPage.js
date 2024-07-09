@@ -1,7 +1,6 @@
 import React from 'react';
 import UserInfoTest from './UserInfoTest';
 import { useNavigate } from 'react-router-dom';
-import styles from '../assets/styles/layout.module.scss';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -11,12 +10,10 @@ const MyPage = () => {
   };
 
   return (
-    <div className={styles['layout-container']}>
-      <div className={styles['layout-content']}>
+      <div>
         <h1>마이페이지</h1>
         <UserInfoTest onEditClick={handleEditClick} />
       </div>
-    </div>
   );
 };
 

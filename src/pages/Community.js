@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
-import styles from '../assets/styles/community.module.scss';
 
 const Community = () => {
   const [community, setCommunity] = useState([]);
@@ -32,9 +31,9 @@ const Community = () => {
   }
 
   return (
-    <div className={styles['community-container']}>
-      <h2 className={styles['community-header']}>커뮤니티 페이지입니다.(임시로 FakeAPi 연결)</h2>
-      <table className={styles['community-table']}>
+    <div>
+      <h2>커뮤니티 페이지입니다.(임시로 FakeAPi 연결)</h2>
+      <table>
         <thead>
           <tr>
             <th>이미지</th>
@@ -51,7 +50,6 @@ const Community = () => {
                 <img 
                   src={communityItem.image} 
                   alt={communityItem.title} 
-                  className={styles['community-image']} 
                 />
               </td>
               <td>{communityItem.title}</td>
