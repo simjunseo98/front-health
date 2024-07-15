@@ -1,64 +1,78 @@
 import React, { useState } from 'react';
-import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
 import toast from 'react-simple-toasts';
-import Loading from '../components/common/Loading';
+import styles from '../assets/styles/login.module.css';
 
+const Login = ({ setIsLoggedIn }) => {
+  const navigate = useNavigate();
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-const Login = ({setIsLoggedIn}) => {
-    const navigate = useNavigate();
-    const [id, setId] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await api.post('/user/login', { id, password });
+      console.log('Login successful:', response.data);
+      const token = response.data.token;
+      sessionStorage.setItem('token', token);
+      setIsLoggedIn(true);
+      navigate('/');
+    } catch (error) {
+      console.error('Login error:', error);
+      toast('로그인이 실패했습니다. >> ', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true)
-        try {
-            const response = await api.post('/user/login', {
-                id,
-                password
-            });
-
-            console.log('Login successful:', response.data);
-            // 로그인 성공 후 추가적인 처리
-            const token = response.data.token;   //받은 토큰 저장
-            sessionStorage.setItem('token', token)
-            setIsLoggedIn(true);    //로그인 상태 업데이트
-            navigate('/')
-        } catch (error) {
-            console.error('Login error:', error);
-            toast('로그인이 실패했습니다. >> ', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
-        <div>
-        {loading ? (
-            <Loading />
-        ) : (
-            <div>
-                <div>
-                    <h2>Login</h2>
-                        <div>
-                    <br/>
-                    <form onSubmit={handleSubmit}>
-                        <label>Email</label>
-                        <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
-                        <label>Password</label>
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <div>
-                        <button type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            </div>
-            )}
+  return (
+    <div className={styles['login-container']}>
+      <main className={styles['form-signin']}>
+        <form onSubmit={handleSubmit}>
+          <img className="mb-4" src="bootstrap-logo.svg" alt="" width="72" height="57" />
+          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+          <div className="form-floating">
+            <input
+              type="email"
+              className="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+            />
+            <label htmlFor="floatingInput">Email address</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
+          <div className="form-check text-start my-3">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value="remember-me"
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" htmlFor="flexCheckDefault">
+              Remember me
+            </label>
+          </div>
+          <button className="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+          <p className="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+        </form>
+      </main>
     </div>
-    );
+  );
 };
 
 export default Login;

@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
 
-
 const UserInfoTest = ({ onEditClick }) => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await api.get('/products/1'); // 여기 부분은 로그인한 사용자 id로 들어가게 해야함
-        setUserInfo(response.data);
+        const response = await api.get('/products/1');
+        setUsers(response.data);
+        console.log(response.data);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -34,16 +34,22 @@ const UserInfoTest = ({ onEditClick }) => {
   return (
     <div>
       <h2>사용자 정보</h2>
-      {userInfo && (
-        <>
-          <p>아이디: {userInfo.id}</p>
-          <p>제목: {userInfo.title}</p>
-          <p>가격: {userInfo.price}</p>
-          <p>카테고리: {userInfo.category}</p>
-          <p>설명: {userInfo.description}</p>
-          <p>이미지: {userInfo.image}</p>
-          <button onClick={() => onEditClick(userInfo)}>정보 수정</button>
-        </>
+      {users.length > 0 ? (
+        users.map((user) => (
+          <div key={user.userId}>
+            <p>아이디: {user.userId}</p>
+            <p>비밀번호: {user.userPw}</p>
+            <p>이름: {user.userName}</p>
+            <p>이메일: {user.userEmail}</p>
+            <p>주소: {user.userAddress}</p>
+            <p>나이: {user.userAge}</p>
+            <p>폰 번호: {user.userPhone}</p>
+            <button onClick={() => onEditClick(user)}>정보 수정</button>
+            <hr />
+          </div>
+        ))
+      ) : (
+        <p>사용자 정보가 없습니다.</p>
       )}
     </div>
   );
