@@ -1,5 +1,5 @@
 import React from 'react';
-import UserInfoTest from './UserInfoTest';
+// import UserInfoTest from './UserInfoTest';
 import { useNavigate } from 'react-router-dom';
 import CommonSidebar from '../components/common/CommonSideBar';
 
