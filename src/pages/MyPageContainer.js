@@ -1,14 +1,13 @@
-// MyPageContainer.js
+// // MyPageContainer.js
 
-import React from 'react';
-import styles from './MyPageContainer.module.css';
+// import React from 'react';
 
-const MyPageContainer = ({ children }) => {
-  return (
-    <div className={styles.container}>
-      {children}
-    </div>
-  );
-};
+// const MyPageContainer = ({ children }) => {
+//   return (
+//     <div className={styles.container}>
+//       {children}
+//     </div>
+//   );
+// };
 
-export default MyPageContainer;
+// export default MyPageContainer;
