@@ -11,10 +11,7 @@ const MyPage = () => {
   };
 
   return (
-      <MyPageContainer>
         <CommonSidebar />
-        {/* 마이페이지 컨텐츠 등 추가 */}
-      </MyPageContainer>
     );
   };
 
