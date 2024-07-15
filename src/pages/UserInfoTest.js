@@ -10,7 +10,7 @@ const UserInfoTest = ({ onEditClick }) => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await api.get('/user/all');
+        const response = await api.get('/products/1');
         setUsers(response.data);
         console.log(response.data);
         setLoading(false);
