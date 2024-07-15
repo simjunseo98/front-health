@@ -11,6 +11,7 @@ import Today from './pages/Today';
 import Community from './pages/Community';
 import SignUpTest from './pages/SignUpTest';  //Post 기능 확인용 테스트 클래스
 import UserUpdateTest from './pages/UserUpdateTest';
+import CommunityDetail from './pages/CommunityDetail';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/challenge" element={<Challenge />} />
           <Route path="/today" element={<Today />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/community/:id" element={<CommunityDetail />} />
           <Route path="/signuptest" element={<SignUpTest />} />
           <Route path="/userupdatetest/:id" element={<UserUpdateTest />} />
         </Routes>
