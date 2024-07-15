@@ -1,74 +1,62 @@
-// CommonSidebar.js
-
 import React from 'react';
-import styles from '../../assets/styles/sidebar.module.css'; // CSS 모듈 import
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const CommonSidebar = () => {
+function CommonSidebar() {
   return (
-    <div className={`${styles.sidebar} d-flex flex-column flex-shrink-0 p-3 text-white bg-dark`} style={{ width: '280px' }}>
-      <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <svg className="bi me-2" width="40" height="32">
-          <use xlinkHref="#bootstrap"/>
+    <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style={{ width: '280px' }}>
+      <Link to="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <svg className="bi pe-none me-2" width="40" height="32">
+          <use xlinkHref="#bootstrap" />
         </svg>
-        <span className="fs-4">사이드바 1</span>
-      </a>
-      <hr/>
+        <span className="fs-4">Sidebar</span>
+      </Link>
+      <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page">
-            <svg className="bi me-2" width="16" height="16">
-              <use xlinkHref="#home"/>
+          <Link to="/mypage/userinfotest" className="nav-link active" aria-current="page">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home" />
             </svg>
-            홈
-          </a>
+            유저정보
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-link link-dark">
-            <svg className="bi me-2" width="16" height="16">
-              <use xlinkHref="#speedometer2"/>
+          <Link to="/mypage/dashboard" className="nav-link text-white">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#speedometer2" />
             </svg>
-            대시보드
-          </a>
+            Dashboard
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-link link-dark">
-            <svg className="bi me-2" width="16" height="16">
-              <use xlinkHref="#moon-stars-fill"/>
+          <Link to="/mypage/orders" className="nav-link text-white">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#table" />
             </svg>
-            비주얼라이저
-          </a>
+            Orders
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-link link-dark">
-            <svg className="bi me-2" width="16" height="16">
-              <use xlinkHref="#sun-fill"/>
+          <Link to="/mypage/products" className="nav-link text-white">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#grid" />
             </svg>
-            디자인
-          </a>
+            Products
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-link link-dark">
-            <svg className="bi me-2" width="16" height="16">
-              <use xlinkHref="#speedometer2"/>
+          <Link to="/mypage/customers" className="nav-link text-white">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#people-circle" />
             </svg>
-            대시보드 2
-          </a>
+            Customers
+          </Link>
         </li>
       </ul>
-      <hr/>
-      <div className="dropdown">
-        <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2"/>
-          <strong>mdo</strong>
-        </a>
-        <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
-          <li><a className="dropdown-item" href="#">새로운 기능</a></li>
-          <li><a className="dropdown-item" href="#">설정</a></li>
-          <li><a className="dropdown-item" href="#">로그아웃</a></li>
-        </ul>
-      </div>
     </div>
   );
-};
+}
 
 export default CommonSidebar;

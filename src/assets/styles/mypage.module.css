@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+}
+
+.sidebar {
+    flex:1;
+}
+
+.others {
+    flex:4;
+    background-color: wheat;
+}

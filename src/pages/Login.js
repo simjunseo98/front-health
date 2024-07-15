@@ -32,7 +32,7 @@ const Login = ({ setIsLoggedIn }) => {
     <div className={styles['login-container']}>
       <main className={styles['form-signin']}>
         <form onSubmit={handleSubmit}>
-          <img className="mb-4" src="bootstrap-logo.svg" alt="" width="72" height="57" />
+          <img className="mb-4" src="../assets/images/features-first-icon.png" alt="" width="72" height="57" />
           <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
           <div className="form-floating">
             <input

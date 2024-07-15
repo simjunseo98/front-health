@@ -33,7 +33,7 @@ function CommonHeader({ setActivePage, setLoggedIn }) {
                 <li><div onClick={() => handleLinkClick('/today')} className={`scroll-to-section ${activeLink === '/exercise' ? 'active' : ''}`}>Today's</div></li>
                 <li><div onClick={() => handleLinkClick('/community')} className={`scroll-to-section ${activeLink === '/community' ? 'active' : ''}`}>Community</div></li>
                 <li><div onClick={() => handleLinkClick('/mypage')} className={`scroll-to-section ${activeLink === '/mypage' ? 'active' : ''}`}>MyPage</div></li>
-                <li><Link to="/signuptest">회원가입 테스트</Link></li>
+                <li><Link to="/mypage">마이페이지 테스트</Link></li>
                 {isLoggedIn ? (
                   <li className="main-button"><button onClick={handleLogout}>로그아웃</button></li>
                 ) : (

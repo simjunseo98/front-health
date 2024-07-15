@@ -12,6 +12,7 @@ import Community from './pages/Community';
 import SignUpTest from './pages/SignUpTest';  //Post 기능 확인용 테스트 클래스
 import UserUpdateTest from './pages/UserUpdateTest';
 import CommunityDetail from './pages/CommunityDetail';
+import UserInfoTest from './pages/UserInfoTest';
 
 function App() {
   return (
@@ -21,7 +22,6 @@ function App() {
           <Route path="/" element={<MainPages />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/mypage" element={<MyPage />} />
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/userupdate" element={<UserUpdate />} />
           <Route path="/challenge" element={<Challenge />} />
@@ -30,6 +30,10 @@ function App() {
           <Route path="/community/:id" element={<CommunityDetail />} />
           <Route path="/signuptest" element={<SignUpTest />} />
           <Route path="/userupdatetest/:id" element={<UserUpdateTest />} />
+          {/* 마이페이지 전용 중첩 라우팅 */}
+          <Route path="/mypage" element={<MyPage />}>
+          <Route path="/mypage/userinfotest" element={<UserInfoTest />} /> 
+          </Route> 
         </Routes>
         </BrowserRouter>
     </div>
