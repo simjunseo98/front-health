@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
-import { Card } from '../components/common/Card';
+// import { Card } from '../components/common/Card';
 import styles from '../assets/styles/today.module.scss';
 
 const Today = () => {
@@ -50,7 +50,7 @@ const Today = () => {
       <div className={styles.todayHeader}>
         <h2>오늘 운동 완! 📝</h2>
       </div>
-      <div className={styles.todayBody}>
+      {/* <div className={styles.todayBody}>
         <div className={styles.cardList}>
         {posts.map ( post => (
           <div key={post.id} onClick={() => openModal(post)}>
@@ -59,7 +59,7 @@ const Today = () => {
           
         ))}
       </div>
-      </div>
+      </div> */}
     </div>
   );
 }
