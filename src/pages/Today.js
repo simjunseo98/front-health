@@ -12,10 +12,10 @@ const Today = () => {
   const [error, setError] = useState(null);
   // const [selectedPost, setSelectedPost] = useState(null);  주석친 부분을 현재 사용하지 않고 있어서 빌드 실패나는거- 두환
   // const [isModalOpen, setIsModalOpen] = useState(false);
-  const [page, setPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  // const [page, setPage] = useState(1);
+  // const [itemsPerPage] = useState(5);
   // const [search, setSearch] = useState('');   // 검색어 상태
-  const [searchResult, setSearchResult] = useState([]); // 검색결과 상태
+  // const [searchResult, setSearchResult] = useState([]); // 검색결과 상태
 
   useEffect(() => {
     const getToday = async () => {
@@ -32,13 +32,13 @@ const Today = () => {
     getToday();
   }, []);
   
-  useEffect(() => {
-    const filtered = posts.filter((item) =>
-      item.title.toLowerCase().includes(search.toLowerCase())
-    );
-    setSearchResult(filtered);
-    setPage(1); 
-  }, [search, posts]);
+  // useEffect(() => {
+  //   const filtered = posts.filter((item) =>
+  //     item.title.toLowerCase().includes(search.toLowerCase())
+  //   );
+  //   setSearchResult(filtered);
+  //   setPage(1); 
+  // }, [search, posts]);
 
   // const openModal = (post) => {
   //   setSelectedPost(post);
@@ -49,9 +49,9 @@ const Today = () => {
   //   setIsModalOpen(false);
   //   setSelectedPost(null);
   // };
-  const handlePageChange = (pageNumber) => {
-    setPage(pageNumber);
-  };
+  // const handlePageChange = (pageNumber) => {
+  //   setPage(pageNumber);
+  // };
 
 
   if (loading) {
@@ -78,7 +78,7 @@ const Today = () => {
           
         ))}
       </div>
-      <div className={styles.paginationContainer}>
+      {/* <div className={styles.paginationContainer}>
         <CommonPagination
           activePage={page}
           itemsCountPerPage={itemsPerPage}
@@ -86,7 +86,7 @@ const Today = () => {
           pageRangeDisplayed={5}
           handlePageChange={handlePageChange}
         />
-      </div>
+      </div> */}
       </div>
     </div>
   );
