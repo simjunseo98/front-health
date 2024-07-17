@@ -4,7 +4,7 @@ import Loading from '../components/common/Loading';
 import api from '../services/api';
 import { Card } from '../components/common/Card';
 import styles from '../assets/styles/today.module.scss';
-import CommonPagination from '../components/common/CommonPagination';
+// import CommonPagination from '../components/common/CommonPagination';
 
 const Today = () => {
   const [posts, setPosts] = useState([]);
