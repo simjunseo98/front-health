@@ -10,8 +10,8 @@ const Today = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedPost, setSelectedPost] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [selectedPost, setSelectedPost] = useState(null);  주석친 부분을 현재 사용하지 않고 있어서 빌드 실패나는거- 두환
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [itemsPerPage] = useState(5);
   const [search, setSearch] = useState('');   // 검색어 상태
@@ -40,15 +40,15 @@ const Today = () => {
     setPage(1); 
   }, [search, posts]);
 
-  const openModal = (post) => {
-    setSelectedPost(post);
-    setIsModalOpen(true);
-  };
+  // const openModal = (post) => {
+  //   setSelectedPost(post);
+  //   setIsModalOpen(true);
+  // };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedPost(null);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  //   setSelectedPost(null);
+  // };
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber);
   };
@@ -71,7 +71,8 @@ const Today = () => {
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
         {posts.map ( post => (
-          <div key={post.id} onClick={() => openModal(post)}>
+          // <div key={post.id} onClick={() => openModal(post)}> //잠깐 지울려고 밑에 div 하나더 만들었어 
+          <div>
             <Card post={post} />         
           </div>
           
