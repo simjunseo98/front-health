@@ -19,7 +19,7 @@ function CommonSidebar() {
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#home" />
             </svg>
-            유저정보
+            유저정보 테스트
           </Link>
         </li>
         <li>
