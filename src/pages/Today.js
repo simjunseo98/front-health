@@ -14,7 +14,7 @@ const Today = () => {
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [itemsPerPage] = useState(5);
-  const [search, setSearch] = useState('');   // 검색어 상태
+  // const [search, setSearch] = useState('');   // 검색어 상태
   const [searchResult, setSearchResult] = useState([]); // 검색결과 상태
 
   useEffect(() => {
