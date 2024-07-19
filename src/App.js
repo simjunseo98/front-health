@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/common/CommonHome';
 import Signup from './pages/SignUp';
 import Login from './pages/Login';
@@ -36,7 +36,9 @@ function App() {
             <Route path="/userupdatetest/:id" element={<UserUpdateTest />} />
             {/* 마이페이지 중첩라우팅 */}
             <Route path="/mypage" element={<MyPage />}>
+              <Route index element={<Navigate to="/mypage/userinfotest" />} />
               <Route path="userinfotest" element={<UserInfoTest />} />
+              {/* 필요한 다른 서브 페이지들 추가 */}
             </Route>
           </Routes>
         </div>
