@@ -1,12 +1,23 @@
-.container {
+.mainLayout {
     display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: whitesmoke; /* 배경색 */
+    /* padding: 20px; */
 }
 
 .sidebar {
-    flex:1;
+    flex: 0 0 250px; /* 사이드바 너비를 고정합니다. */
+    background-color: #f8f9fa;
+    height: 100%;
 }
 
-.others {
-    flex:4;
-    background-color: wheat;
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: whitesmoke; /* 오른쪽 콘텐츠 영역의 배경색 */
+}
+
+.noPadding {
+    padding: 0 !important;
 }
