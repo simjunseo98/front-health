@@ -53,7 +53,7 @@ function CommonHeader() {
                   </li>
                 ) : (
                   <li className="main-button">
-                    <Link to="/login" className={`scroll-to-section ${location.pathname === '/login' ? 'active' : ''}`}>
+                    <Link to="/login" className='scroll-to-section'>
                       로그인
                     </Link>
                   </li>
