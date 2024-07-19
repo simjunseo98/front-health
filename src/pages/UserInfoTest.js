@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import Table from 'react-bootstrap/Table';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
-const UserInfoTest = ({ onEditClick }) => {
-  const [users, setUsers] = useState([]);
+const UserInfoTest = () => {
+  const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserInfo = async () => {
+    const getUserInfo = async () => {
       try {
-        const response = await api.get('/products/1');
-        setUsers(response.data);
-        console.log(response.data);
+        const response = await api.get('/users/1');
+        setUserInfo(response.data);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -20,7 +23,7 @@ const UserInfoTest = ({ onEditClick }) => {
       }
     };
 
-    fetchUserInfo();
+    getUserInfo();
   }, []);
 
   if (loading) {
@@ -34,23 +37,46 @@ const UserInfoTest = ({ onEditClick }) => {
   return (
     <div>
       <h2>사용자 정보</h2>
-      {users.length > 0 ? (
-        users.map((user) => (
-          <div key={user.userId}>
-            <p>아이디: {user.userId}</p>
-            <p>비밀번호: {user.userPw}</p>
-            <p>이름: {user.userName}</p>
-            <p>이메일: {user.userEmail}</p>
-            <p>주소: {user.userAddress}</p>
-            <p>나이: {user.userAge}</p>
-            <p>폰 번호: {user.userPhone}</p>
-            <button onClick={() => onEditClick(user)}>정보 수정</button>
-            <hr />
-          </div>
-        ))
+      {userInfo ? (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>항목</th>
+              <th>정보</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>아이디</td>
+              <td>{userInfo.id}</td>
+            </tr>
+            <tr>
+              <td>이름</td>
+              <td>{userInfo.username}</td>
+            </tr>
+            <tr>
+              <td>이메일</td>
+              <td>{userInfo.email}</td>
+            </tr>
+            <tr>
+              <td>전화번호</td>
+              <td>{userInfo.phone}</td>
+            </tr>
+            <tr>
+              <td>주소</td>
+              {/* <td>{userInfo.address}</td> */}
+              <td>서울시 강남구</td>
+            </tr>
+            <tr>
+              <td>나이</td>
+              <td>27</td>
+            </tr>
+          </tbody>
+        </Table>
       ) : (
         <p>사용자 정보가 없습니다.</p>
       )}
+      <Button variant="primary" onClick={() => navigate('/mypage/userupdatetest')}>정보 수정</Button>
     </div>
   );
 };

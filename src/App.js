@@ -33,11 +33,11 @@ function App() {
             <Route path="/community" element={<Community />} />
             <Route path="/community/:id" element={<CommunityDetail />} />
             <Route path="/signuptest" element={<SignUpTest />} />
-            <Route path="/userupdatetest/:id" element={<UserUpdateTest />} />
             {/* 마이페이지 중첩라우팅 */}
             <Route path="/mypage" element={<MyPage />}>
               <Route index element={<Navigate to="/mypage/userinfotest" />} />
               <Route path="userinfotest" element={<UserInfoTest />} />
+              <Route path="userupdatetest" element={<UserUpdateTest />} />
               {/* 필요한 다른 서브 페이지들 추가 */}
             </Route>
           </Routes>

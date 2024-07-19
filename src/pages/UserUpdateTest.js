@@ -1,146 +1,141 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import api from '../services/api';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../components/common/Loading';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import * as yup from 'yup';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 // 유효성 검사 스키마 정의
-const schema = yup.object().shape({
-  id: yup.string().required('ID를 입력하세요.'),
-  title: yup.string().required('제목을 입력하세요.'),
-  price: yup.number().typeError('가격은 숫자여야 합니다.')  // 숫자형 필드로 정의
-    .required('가격을 입력하세요').positive('가격은 양수여야 합니다'),
-  category: yup.string().required('카테고리를 입력하세요.'),
-  description: yup.string().required('설명을 입력하세요.'),
-  image: yup.string().required('이미지 URL을 입력하세요.'),
+const validationSchema = yup.object().shape({
+  username: yup.string().required('이름을 입력하세요'),
+  email: yup.string().email('유효한 이메일을 입력하세요').required('이메일을 입력하세요'),
+  phone: yup.string().required('전화번호를 입력하세요'),
+  // address: yup.string().required('주소를 입력하세요'),
+  age: yup.number().required('나이를 입력하세요')
 });
 
 const UserUpdateTest = () => {
-  const { id } = useParams();
+  const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+  
+  // react-hook-form의 useForm 훅 사용
+  const { control, handleSubmit, formState: { errors }, setValue } = useForm({
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      username: '',
+      email: '',
+      phone: '',
+      address: '',
+      age: 0
+    }
   });
-  const [userInfo, setUserInfo] = useState(null); // userInfo 상태 추가
 
   useEffect(() => {
-    // 초기 데이터 설정
-    const fetchUserInfo = async () => {
+    const getUserInfo = async () => {
       try {
-        const response = await api.get(`/products/${id}`);
-        const userData = response.data;
-        setUserInfo(userData); // userInfo 설정
-        setValue('id', userData.id);
-        setValue('title', userData.title);
-        setValue('price', userData.price);
-        setValue('category', userData.category);
-        setValue('description', userData.description);
-        setValue('image', userData.image);
+        const response = await api.get('/users/1');
+        setUserInfo(response.data);
+        // setValue를 사용하여 폼 필드 초기화
+        Object.keys(response.data).forEach(key => setValue(key, response.data[key]));
+        setLoading(false);
       } catch (error) {
-        console.error('사용자 정보를 불러오는 데 실패했습니다.', error);
+        setError(error);
+        setLoading(false);
       }
     };
 
-    fetchUserInfo();
-  }, [id, setValue]);
+    getUserInfo();
+  }, [setValue]);
 
   const onSubmit = async (data) => {
     try {
-      const updatedFields = {}; // 변경된 필드들은 변경된 값을 담고 변경되지 않은 필드들은 기존값을 담는다.
-  
-      if (userInfo.id !== null) 
-        updatedFields.id = userInfo.id;
-
-      if (data.title !== userInfo.title) {
-        updatedFields.title = data.title;
-      } else {
-        updatedFields.title = userInfo.title; 
-      }
-  
-      if (data.price !== userInfo.price) {
-        updatedFields.price = data.price;
-      } else {
-        updatedFields.price = userInfo.price; 
-      }
-  
-      if (data.category !== userInfo.category) {
-        updatedFields.category = data.category;
-      } else {
-        updatedFields.category = userInfo.category; 
-      }
-  
-      if (data.description !== userInfo.description) {
-        updatedFields.description = data.description;
-      } else {
-        updatedFields.description = userInfo.description; 
-      }
-  
-      if (data.image !== userInfo.image) {
-        updatedFields.image = data.image;
-      } else {
-        updatedFields.image = userInfo.image;
-      }
-  
-      // 변경된 필드가 있을 때만 API 요청
-      if (Object.keys(updatedFields).length > 0) {
-        console.log('변경된 값들 :' ,updatedFields )
-        const response = await api.put(`/products/${id}`, updatedFields); 
-        console.log('정보 수정 성공 :', response.data);
-        alert('업데이트 성공~!');
-      } else {
-        console.log('변경된 필드가 없습니다.');
-      }
-  
-      navigate('/'); 
+      await api.put('/users/1', data);
+      alert('정보가 업데이트되었습니다.');
+      navigate('/mypage/userinfotest');
     } catch (error) {
-      console.error('정보 수정 실패 :', error);
-      alert('업데이트 실패~!');
+      console.error('Update error:', error);
+      alert('정보 업데이트에 실패했습니다.');
     }
   };
-  
 
-  if (!userInfo) {
+  if (loading) {
     return <div><Loading /></div>;
+  }
+
+  if (error) {
+    return <p>에러메세지 : {error.message}</p>;
   }
 
   return (
     <div>
       <h2>정보 수정</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>아이디 :</label>
-          <input type="text" {...register('id')} defaultValue={userInfo.id} readOnly />
-          <p>{errors.id?.message}</p>
-        </div>
-        <div>
-          <label>제목 :</label>
-          <input type="text" {...register('title')} defaultValue={userInfo.title} />
-          <p>{errors.title?.message}</p>
-        </div>
-        <div>
-          <label>가격 :</label>
-          <input type="text" {...register('price')} defaultValue={userInfo.price} />
-          <p>{errors.price?.message}</p>
-        </div>
-        <div>
-          <label>카테고리 :</label>
-          <input type="text" {...register('category')} defaultValue={userInfo.category} />
-          <p>{errors.category?.message}</p>
-        </div>
-        <div>
-          <label>설명 :</label>
-          <input type="text" {...register('description')} defaultValue={userInfo.description} />
-          <p>{errors.description?.message}</p>
-        </div>
-        <div>
-          <label>이미지 :</label>
-          <input type="text" {...register('image')} defaultValue={userInfo.image} />
-          <p>{errors.image?.message}</p>
-        </div>
-        <button type="submit">Update</button>
-      </form>
+      {userInfo ? (
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group className="mb-3">
+            <Form.Label>아이디</Form.Label>
+            <Controller
+              name="id"
+              control={control}
+              render={({ field }) => <Form.Control {...field} readOnly />}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>이름</Form.Label>
+            <Controller
+              name="username"
+              control={control}
+              render={({ field }) => <Form.Control {...field} />}
+            />
+            <p className="text-danger">{errors.username?.message}</p>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>이메일</Form.Label>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => <Form.Control {...field} />}
+            />
+            <p className="text-danger">{errors.email?.message}</p>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>전화번호</Form.Label>
+            <Controller
+              name="phone"
+              control={control}
+              render={({ field }) => <Form.Control {...field} />}
+            />
+            <p className="text-danger">{errors.phone?.message}</p>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>주소</Form.Label>
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => <Form.Control {...field} />}
+            />
+            <p className="text-danger">{errors.address?.message}</p>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>나이</Form.Label>
+            <Controller
+              name="age"
+              control={control}
+              render={({ field }) => <Form.Control type="number" {...field} />}
+            />
+            <p className="text-danger">{errors.age?.message}</p>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            업데이트
+          </Button>
+        </Form>
+      ) : (
+        <p>사용자 정보가 없습니다.</p>
+      )}
     </div>
   );
 };
