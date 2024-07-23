@@ -1,21 +1,44 @@
 /* login.module.css */
 .login-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
-    font-family: 'Roboto', sans-serif;
-    padding: 20px; /* 선택적으로 여백을 추가할 수 있습니다. */
-  }
-  
-  .form-signin {
-    width: 330%;
-    max-width: 400px;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px; /* 선택적으로 여백을 추가할 수 있습니다. */
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* 폼의 내용 중앙 정렬 */
+}
+
+img {
+  display: block;
+  margin: 0 auto; /* 이미지를 가로 중앙에 배치 */
+  width: 72px; /* 원하는 이미지 너비 */
+  height: 57px; /* 원하는 이미지 높이 */
+}
+
+h1.h3 {
+  margin-bottom: 1.5rem; /* 제목과 폼 사이의 여백 */
+}
+
+.form-floating {
+  margin-bottom: 1rem; /* 폼 필드 사이의 여백 */
+}
+
+.btn-primary {
+  background-color: #007bff; /* 버튼 배경색 */
+  border: none;
+  padding: 0.75rem 1.25rem; /* 버튼 안쪽 여백 */
+  border-radius: 0.25rem; /* 버튼의 둥근 모서리 */
+  color: white; /* 버튼 글자색 */
+}
