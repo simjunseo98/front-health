@@ -1,11 +1,12 @@
-import React from 'react'
-import styles from '../../assets/styles/loading.module.scss'
-//로딩중 일 때 사용하는 컴포넌트
+import React from 'react';
+import styles from '../../assets/styles/loading.module.scss';
 
 function Loading() {
   return (
-    <span className={styles.loader}></span>
-  )
+    <div className={styles.loaderContainer}>
+      <span className={styles.loader}></span>
+    </div>
+  );
 }
 
-export default Loading
+export default Loading;

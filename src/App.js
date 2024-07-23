@@ -14,6 +14,8 @@ import CommunityDetail from './pages/CommunityDetail';
 import UserInfoTest from './pages/UserInfoTest';
 import CommonHeader from './components/common/CommonHeader';
 import CommonFooter from './components/common/CommonFooter';
+import UserWrite from './pages/UserWrite';
+//css
 import styles from './assets/styles/layout.module.scss';
 
 function App() {
@@ -26,7 +28,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/userinfo" element={<UserInfo />} />
             <Route path="/userupdate" element={<UserUpdate />} />
             <Route path="/challenge" element={<Challenge />} />
             <Route path="/today" element={<Today />} />
@@ -37,7 +38,9 @@ function App() {
             <Route path="/mypage" element={<MyPage />}>
               <Route index element={<Navigate to="/mypage/userinfotest" />} />
               <Route path="userinfotest" element={<UserInfoTest />} />
+              <Route path="userinfo" element={<UserInfo />} />
               <Route path="userupdatetest" element={<UserUpdateTest />} />
+              <Route path="userwrite" element={<UserWrite />} />
               {/* 필요한 다른 서브 페이지들 추가 */}
             </Route>
           </Routes>
