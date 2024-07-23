@@ -10,14 +10,23 @@ const PostModal = ({ isOpen, isClose, post }) => {
   return (
     <Modal
       isOpen={isOpen}
-      isClose={isClose}
+      onRequestClose={isClose}
       contentLabel="Post Modal"
       className={styles.modal}
       overlayClassName={styles.overlay}>
       <div className={styles.modalContent}>
-        <h2>{post.title}</h2>
-        <p>{post.content}</p>
-        <button onClick={isClose}>Close</button>
+        <div className={styles.modalBody}>
+          <img src={post.image} alt={post.title} className={styles.modalImage} />
+          <div className={styles.modalText}>
+            <h2 className={styles.modalTitle}>{post.title}</h2>
+            <p className={styles.modalDescription}>{post.description}</p>
+          </div>
+          <div className={styles.modalFooter}>
+          <div className={styles.username}>{post.username}임시:작성자</div>
+          <div className={styles.date}>{post.date}임시:작성일</div>
+        </div>
+        </div>
+        <button className={styles.closeButton} onClick={isClose}>×</button>
       </div>
     </Modal>
   );
