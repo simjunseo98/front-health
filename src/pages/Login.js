@@ -16,11 +16,13 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      // POST 요청으로 변경
-      const response = await axios.post('https://trendy-healthy-backend.store/jwt/authenticate', 
-        { username: id, password: password }, 
-        { headers: { 'Content-Type': 'application/json' } }
-      );
+      // GET 요청으로 수정
+      const response = await axios.get('https://trendy-healthy-backend.store/jwt/authenticate', {
+        params: {
+          username: id,
+          password: password
+        }
+      });
 
       console.log('Login successful:', response.data);
       const { 'access-token': accessToken } = response.data;
