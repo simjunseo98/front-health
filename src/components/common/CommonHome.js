@@ -13,7 +13,7 @@ function CommonMainBanner() {
                 <h6>work harder, get stronger</h6>
                 <h2>easy with our <em>gym</em></h2>
                 <div className="main-button scroll-to-section">
-                    <a href="signup">회원가입</a>
+                    <a href="/signup">회원가입</a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
+// import api from '../services/api';
+import axios from 'axios';
 import toast from 'react-simple-toasts';
 import styles from '../assets/styles/login.module.css';
 import Loading from '../components/common/Loading';
@@ -15,7 +16,8 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.post('/user/login', { id, password });
+      // const response = await api.post('/user/login', { id, password });
+      const response = await axios.post('https://trendy-healthy-backend.store/jwt/authenticate', { id, password });
       console.log('Login successful:', response.data);
       const token = response.data.token;
       sessionStorage.setItem('token', token);

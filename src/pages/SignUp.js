@@ -4,7 +4,8 @@ import toast from 'react-simple-toasts';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'; // 간결한 코드작성을 위해 form 관련 라이브러리인 yup 사용
-import api from '../services/api';
+// import api from '../services/api';
+import axios from 'axios';
 // 유효성 검사
 const valid = yup.object().shape({
     id: yup.string().required('ID를 입력하세요'),
@@ -27,7 +28,8 @@ const Signup = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await api.post('/user/register', data);
+            // const response = await api.post('/user/register', data);
+            const response = await axios.post('https://trendy-healthy-backend.store/user/register', data);
             console.log('회원가입 성공 :', response.data);
             toast('회원가입에 성공했습니다.', response.data)
             navigate('/login')
