@@ -16,7 +16,7 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('https://trendy-healthy-backend.store/jwt/authenticate', { id, password });
+      const response = await axios.get('https://trendy-healthy-backend.store/jwt/authenticate', { id, password });
       console.log('Login successful:', response.data);
       const token = response.data.token;
       sessionStorage.setItem('token', token);
