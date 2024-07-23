@@ -42,7 +42,7 @@ const Signup = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('https://trendy-healthy-backend.store/user/register', data, {
+            const response = await axios.post('https://trendy-healthy-backend.store/user/signup', data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
