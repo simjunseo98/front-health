@@ -4,20 +4,20 @@ import toast from 'react-simple-toasts';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'; // 간결한 코드작성을 위해 form 관련 라이브러리인 yup 사용
-// import api from '../services/api';
 import axios from 'axios';
+
 // 유효성 검사
 const valid = yup.object().shape({
-    id: yup.string().required('ID를 입력하세요'),
-    password: yup.string().min(6, '비밀번호는 최소 6자 이상이어야 합니다').required('비밀번호를 입력하세요'),
+    userId: yup.string().required('ID를 입력하세요'),
+    userPw: yup.string().min(6, '비밀번호는 최소 6자 이상이어야 합니다').required('비밀번호를 입력하세요'),
     confirmPassword: yup.string()
-        .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다')
+        .oneOf([yup.ref('userPw'), null], '비밀번호가 일치하지 않습니다')
         .required('비밀번호 확인을 입력하세요'),
     userName: yup.string().required('이름을 입력하세요'),
     userEmail: yup.string().email('유효한 이메일을 입력하세요').required('이메일을 입력하세요'),
     userAddress: yup.string().required('주소를 입력하세요'),
     userAge: yup.number().typeError('나이는 숫자여야 합니다').required('나이를 입력하세요').positive('유효한 나이를 입력하세요').integer('나이는 정수여야 합니다'),
-    userPhone: yup.number().typeError(/^\d{10,11}$/, '유효한 전화번호를 입력하세요').required('전화번호를 입력하세요')
+    userPhone: yup.number().typeError('유효한 전화번호를 입력하세요').required('전화번호를 입력하세요')
 });
 
 const Signup = () => {
@@ -25,20 +25,6 @@ const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(valid)
     });
-
-    // const onSubmit = async (data) => {
-    //     try {
-    //         // const response = await api.post('/user/register', data);
-    //         const response = await axios.post('https://trendy-healthy-backend.store/user/register', data);
-    //         console.log('회원가입 성공 :', response.data);
-    //         toast('회원가입에 성공했습니다.', response.data)
-    //         navigate('/login')
-    //     } catch (error) {
-    //         console.error('회원가입 실패 :', error);
-    //         toast('회원가입에 실패했습니다.', error)
-    //         console.log(data)
-    //     }
-    // };
 
     const onSubmit = async (data) => {
         try {
@@ -57,7 +43,6 @@ const Signup = () => {
             console.log(data);
         }
     };
-    
 
     return (
         <div>
@@ -65,13 +50,13 @@ const Signup = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label>아이디 :</label>
-                    <input type="text" {...register('id')} />
-                    <p>{errors.id?.message}</p>
+                    <input type="text" {...register('userId')} />
+                    <p>{errors.userId?.message}</p>
                 </div>
                 <div>
                     <label>비밀번호 :</label>
-                    <input type="password" {...register('password')} />
-                    <p>{errors.password?.message}</p>
+                    <input type="password" {...register('userPw')} />
+                    <p>{errors.userPw?.message}</p>
                 </div>
                 <div>
                     <label>비밀번호 확인 :</label>
@@ -100,7 +85,7 @@ const Signup = () => {
                 </div>
                 <div>
                     <label>전화번호 :</label>
-                    <input type="number" {...register('userPhone')} />
+                    <input type="text" {...register('userPhone')} />
                     <p>{errors.userPhone?.message}</p>
                 </div>
                 <button type="submit">Sign Up</button>
