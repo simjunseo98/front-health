@@ -26,19 +26,38 @@ const Signup = () => {
         resolver: yupResolver(valid)
     });
 
+    // const onSubmit = async (data) => {
+    //     try {
+    //         // const response = await api.post('/user/register', data);
+    //         const response = await axios.post('https://trendy-healthy-backend.store/user/register', data);
+    //         console.log('회원가입 성공 :', response.data);
+    //         toast('회원가입에 성공했습니다.', response.data)
+    //         navigate('/login')
+    //     } catch (error) {
+    //         console.error('회원가입 실패 :', error);
+    //         toast('회원가입에 실패했습니다.', error)
+    //         console.log(data)
+    //     }
+    // };
+
     const onSubmit = async (data) => {
         try {
-            // const response = await api.post('/user/register', data);
-            const response = await axios.post('https://trendy-healthy-backend.store/user/register', data);
+            const response = await axios.post('https://trendy-healthy-backend.store/user/register', data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            });
             console.log('회원가입 성공 :', response.data);
-            toast('회원가입에 성공했습니다.', response.data)
-            navigate('/login')
+            toast('회원가입에 성공했습니다.', response.data);
+            navigate('/login');
         } catch (error) {
             console.error('회원가입 실패 :', error);
-            toast('회원가입에 실패했습니다.', error)
-            console.log(data)
+            toast('회원가입에 실패했습니다.', error);
+            console.log(data);
         }
     };
+    
 
     return (
         <div>
