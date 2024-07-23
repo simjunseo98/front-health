@@ -5,7 +5,6 @@ import api from '../services/api';
 import Table from 'react-bootstrap/Table';
 import CommonPagination from '../components/common/CommonPagination';
 import styles from '../assets/styles/community.module.scss';
-import Community from './Community';
 
 const UserWrite = () => {
   const [community, setCommunity] = useState([]);
