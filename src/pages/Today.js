@@ -1,66 +1,61 @@
-// src/pages/Today.js
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
 import { Card } from '../components/common/Card';
 import styles from '../assets/styles/today.module.scss';
-// import CommonPagination from '../components/common/CommonPagination';
+import CommonPagination from '../components/common/CommonPagination';
 
 const Today = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [selectedPost, setSelectedPost] = useState(null);  주석친 부분을 현재 사용하지 않고 있어서 빌드 실패나는거- 두환
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [page, setPage] = useState(1);
-  // const [itemsPerPage] = useState(5);
-  // const [search, setSearch] = useState('');   // 검색어 상태
-  // const [searchResult, setSearchResult] = useState([]); // 검색결과 상태
+  const [activePage, setActivePage] = useState(1); // 현재 페이지 상태
+  const [postsPerPage] = useState(20); // 페이지당 게시물 수
+  const [totalPosts, setTotalPosts] = useState(0); // 전체 게시물 수
 
   useEffect(() => {
     const getToday = async () => {
       try {
-        const response = await api.get('/products');
-        setPosts(response.data);
-        console.log(response.data);
+        const response = await api.get('/products', {
+          params: {
+            page: activePage,
+            limit: postsPerPage,
+          },
+        });
+
+        // 게시물과 총 게시물 수 설정
+        const fetchedPosts = response.data || [];
+        const total = parseInt(response.headers['x-total-count']) || fetchedPosts.length; // 총 게시물 수
+
+        setPosts(fetchedPosts);
+        setTotalPosts(total);
         setLoading(false);
       } catch (error) {
-        setError(error);
+        console.error('API 호출 중 오류 발생:', error);
+        setError(error.message || '알 수 없는 오류가 발생했습니다.');
         setLoading(false);
       }
     };
+
     getToday();
-  }, []);
-  
-  // useEffect(() => {
-  //   const filtered = posts.filter((item) =>
-  //     item.title.toLowerCase().includes(search.toLowerCase())
-  //   );
-  //   setSearchResult(filtered);
-  //   setPage(1); 
-  // }, [search, posts]);
+  }, [activePage, postsPerPage]); // activePage나 postsPerPage가 변경될 때마다 호출
 
-  // const openModal = (post) => {
-  //   setSelectedPost(post);
-  //   setIsModalOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  //   setSelectedPost(null);
-  // };
-  // const handlePageChange = (pageNumber) => {
-  //   setPage(pageNumber);
-  // };
-
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
 
   if (loading) {
     return <div><Loading /></div>;
   }
 
   if (error) {
-    return <p>에러메세지: {error.message}</p>;
+    return <p>에러메세지: {error}</p>;
   }
+
+  // 페이지에 맞는 게시물 계산
+  const indexOfLastItem = activePage * postsPerPage;
+  const indexOfFirstItem = indexOfLastItem - postsPerPage;
+  const currentItems = posts.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className={styles.todayWrapper}>
@@ -70,24 +65,24 @@ const Today = () => {
       
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
-        {posts.map ( post => (
-          // <div key={post.id} onClick={() => openModal(post)}> //잠깐 지울려고 밑에 div 하나더 만들었어 
-          <div>
-            <Card post={post} />         
-          </div>
-          
-        ))}
+          {currentItems.length > 0 ? (
+            currentItems.map(post => (
+              <div key={post.id}>
+                <Card post={post} />
+              </div>
+            ))
+          ) : (
+            <p>No posts available</p>
+          )}
+        </div>
       </div>
-      {/* <div className={styles.paginationContainer}>
-        <CommonPagination
-          activePage={page}
-          itemsCountPerPage={itemsPerPage}
-          totalItemsCount={searchResult.length}
-          pageRangeDisplayed={5}
-          handlePageChange={handlePageChange}
-        />
-      </div> */}
-      </div>
+      <CommonPagination
+        activePage={activePage}
+        itemsCountPerPage={postsPerPage}
+        totalItemsCount={totalPosts}
+        pageRangeDisplayed={5}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 }
