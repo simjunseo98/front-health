@@ -43,7 +43,7 @@ function CommonHeader() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/mypage" className={`scroll-to-section ${location.pathname === '/mypage' ? 'active' : ''}`}>
+                  <Link to="/mypage" className={`scroll-to-section ${location.pathname.startsWith('/mypage') ? 'active' : ''}`}>
                     MyPage
                   </Link>
                 </li>
