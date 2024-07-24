@@ -10,25 +10,18 @@ const Today = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activePage, setActivePage] = useState(1); // 현재 페이지 상태
-  const [postsPerPage] = useState(20); // 페이지당 게시물 수
-  const [totalPosts, setTotalPosts] = useState(0); // 전체 게시물 수
+  const [postsPerPage] = useState(16); // 페이지당 게시물 수
 
   useEffect(() => {
     const getToday = async () => {
       try {
         const response = await api.get('/products', {
-          params: {
-            page: activePage,
-            limit: postsPerPage,
-          },
+        
         });
 
         // 게시물과 총 게시물 수 설정
-        const fetchedPosts = response.data || [];
-        const total = parseInt(response.headers['x-total-count']) || fetchedPosts.length; // 총 게시물 수
 
-        setPosts(fetchedPosts);
-        setTotalPosts(total);
+        setPosts(response.data || []);
         setLoading(false);
       } catch (error) {
         console.error('API 호출 중 오류 발생:', error);
@@ -38,7 +31,7 @@ const Today = () => {
     };
 
     getToday();
-  }, [activePage, postsPerPage]); // activePage나 postsPerPage가 변경될 때마다 호출
+  }, []);
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
@@ -79,7 +72,7 @@ const Today = () => {
       <CommonPagination
         activePage={activePage}
         itemsCountPerPage={postsPerPage}
-        totalItemsCount={totalPosts}
+        totalItemsCount={posts.length}
         pageRangeDisplayed={5}
         handlePageChange={handlePageChange}
       />
