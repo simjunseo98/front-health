@@ -15,6 +15,7 @@ import UserInfoTest from './pages/UserInfoTest';
 import CommonHeader from './components/common/CommonHeader';
 import CommonFooter from './components/common/CommonFooter';
 import UserWrite from './pages/UserWrite';
+import CommunityWrite from './pages/CommunityWrite';
 //css
 import styles from './assets/styles/layout.module.scss';
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/today" element={<Today />} />
             <Route path="/community" element={<Community />} />
             <Route path="/community/:id" element={<CommunityDetail />} />
+            <Route path="/communitywrite" element={<CommunityWrite />} />
             <Route path="/signuptest" element={<SignUpTest />} />
             {/* 마이페이지 중첩라우팅 */}
             <Route path="/mypage" element={<MyPage />}>
