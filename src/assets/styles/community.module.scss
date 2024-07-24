@@ -2,8 +2,13 @@
 .paginationContainer {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.writeButtonContainer {
+  display: flex;
+  justify-content: flex-end;
 }
 
 h2 {
@@ -11,4 +16,5 @@ h2 {
   margin-top: 30px;
   margin-bottom: 40px;
 }
+
 

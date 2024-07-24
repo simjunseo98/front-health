@@ -63,11 +63,11 @@ const Community = () => {
     <div>
       <h2>커뮤니티 페이지입니다.(임시로 FakeAPi 연결)</h2>
       <div className='input-group' style={{ justifyContent: 'center', maxWidth: '600px', margin: '0 auto', marginBottom: '30px', marginTop:'30px' }}>
-        <input type="search" className='form-control rounded' style={{ flex: 1, marginRight: '10px' }} placeholder="Search" aria-label="Search" aria-describedby="search-addon"
+        <input type="search" className='form-control rounded' style={{ flex: 1, marginRight: '10px' }} placeholder="검색어를 입력하세요." aria-label="Search" aria-describedby="search-addon"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button type="button" className='btn btn-outline-primary' onClick={handleSearch} style={{ whiteSpace: 'nowrap' }}>Search</button>
+        <button type="button" className='btn btn-outline-primary' onClick={handleSearch} style={{ whiteSpace: 'nowrap' }}>검색</button>
       </div>
 
       <div>
@@ -104,6 +104,11 @@ const Community = () => {
           </tbody>
         </Table>
       </div>
+        <div className={styles.writeButtonContainer}>
+        <Link to="/communitywrite" className="btn btn-primary">
+          게시글작성
+        </Link>
+        </div>
       <div className={styles.paginationContainer}>
         <CommonPagination
           activePage={page}
