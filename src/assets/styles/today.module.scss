@@ -16,51 +16,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     overflow-x: auto;
-    padding: 1rem;
+    padding: 3rem;
   }
   
 
 
-.card-wrapper {
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card-wrapper:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-.card-body-img img {
-  border-radius: 10px;
-}
-
-.card-body-text {
-  padding: 10px;
-}
-
-.card-body-text-title {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.card-body-text-content {
-  font-size: 14px;
-  color: #666;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-}
-
-.username {
-  font-weight: bold;
-}
-
-.date {
-  font-size: 12px;
-  color: #aaa;
-}

@@ -13,7 +13,7 @@
 
 .modal {
   background: white;
-  width: 80%; /* 화면의 80% 너비 */
+  width: 100%; /* 화면의 80% 너비 */
   max-width: 800px; /* 최대 너비 */
   border-radius: 10px;
   height: 80%; /* 화면의 80% 높이 */
@@ -49,6 +49,7 @@
 
 .modalImage {
   width: 100%; /* 모달 너비에 맞게 */
+  height: 250px;
   max-height: 300px; /* 최대 높이 설정 */
   object-fit: initial; /* 비율 유지하며 채우기 */
   border-radius: 10px 10px 0 0; /* 모서리 둥글게 */
