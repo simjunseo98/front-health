@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/common/Loading';
 import api from '../services/api';
+import styles from '../assets/styles/community/communityDetail.module.scss';
 
 const CommunityDetail = () => {
   const { id } = useParams();
   const [communityItem, setCommunityItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const fetchCommunityItem = async () => {
@@ -22,6 +24,17 @@ const CommunityDetail = () => {
     };
 
     fetchCommunityItem();
+
+    // const fetchComments = async () => {
+    //   try {
+    //     const response = await api.get(`/comments/${id}`);
+    //     setComments(response.data);
+    //   } catch (error) {
+    //     console.error('댓글을 불러오는데 실패했습니다.', error);
+    //   }
+    // };
+
+    // fetchComments();
   }, [id]);
 
   if (loading) {
@@ -33,13 +46,31 @@ const CommunityDetail = () => {
   }
 
   return (
-    <div>
-      <h2>글 상세 페이지</h2>
-      <img src={communityItem.image} alt={communityItem.title} style={{ width: '100px', height: '100px' }} />
-      <h3>{communityItem.title}</h3>
-      <p>가격: {communityItem.price}</p>
-      <p>카테고리: {communityItem.category}</p>
-      <p>{communityItem.description}</p>
+    <div className={styles.communityDetail}>
+      {/* Community TB (커뮤니티 테이블) */}
+      <div className={styles.communityInfo}>
+        <h3>커뮤니티 정보</h3>
+        <p><strong>커뮤니티 고유번호:</strong> {communityItem.communitySq}</p>
+        <p><strong>글제목:</strong> {communityItem.communityTitle}</p>
+        <p><strong>글내용:</strong> {communityItem.communityContents}</p>
+        <p><strong>작성자:</strong> {communityItem.userId}</p>
+        <p><strong>작성일:</strong> {communityItem.communityCreated}</p>
+        <p><strong>조회수:</strong> {communityItem.communityCheck}</p>
+        <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
+      </div>
+
+      {/* CommunityComments TB (커뮤니티 댓글 테이블) */}
+      <div className={styles.commentsSection}>
+        <h3>댓글</h3>
+        {/* comments.map((comment) => (
+          <div key={comment.communityCommentsSq} className={styles.comment}>
+            <p><strong>작성자:</strong> {comment.userId}</p>
+            <p><strong>내용:</strong> {comment.communityCommentsContents}</p>
+            <p><strong>작성날짜:</strong> {comment.communityCommentsCreated}</p>
+          </div>
+        )) */}
+        <p>댓글 내용이 여기에 표시됩니다.</p>
+      </div>
     </div>
   );
 };

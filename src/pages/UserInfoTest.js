@@ -14,7 +14,7 @@ const UserInfoTest = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await api.get('/users/1');
+        const response = await api.get('/user/7002');
         setUserInfo(response.data);
         setLoading(false);
       } catch (error) {
@@ -48,28 +48,27 @@ const UserInfoTest = () => {
           <tbody>
             <tr>
               <td>아이디</td>
-              <td>{userInfo.id}</td>
+              <td>{userInfo.userId}</td>
             </tr>
             <tr>
               <td>이름</td>
-              <td>{userInfo.username}</td>
+              <td>{userInfo.userName}</td>
             </tr>
             <tr>
               <td>이메일</td>
-              <td>{userInfo.email}</td>
+              <td>{userInfo.userEmail}</td>
             </tr>
             <tr>
               <td>전화번호</td>
-              <td>{userInfo.phone}</td>
+              <td>{userInfo.userPhone}</td>
             </tr>
             <tr>
               <td>주소</td>
-              {/* <td>{userInfo.address}</td> */}
-              <td>서울시 강남구</td>
+              <td>{userInfo.userAddress}</td>
             </tr>
             <tr>
               <td>나이</td>
-              <td>27</td>
+              <td>{userInfo.userAge}</td>
             </tr>
           </tbody>
         </Table>

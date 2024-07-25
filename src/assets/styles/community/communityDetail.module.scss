@@ -1,0 +1,55 @@
+.communityDetail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .communityInfo {
+    margin-bottom: 20px;
+  }
+  
+  .communityInfo h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .communityInfo p {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .communityInfo p strong {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .commentsSection {
+    margin-top: 30px;
+  }
+  
+  .commentsSection h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .comment {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .comment p {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .comment p strong {
+    font-weight: bold;
+    color: #555;
+  }
+  
