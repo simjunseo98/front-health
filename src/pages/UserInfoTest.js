@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Loading from '../components/common/Loading';
-import api from '../services/api';
+// import api from '../services/api';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ const UserInfoTest = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await api.get('/user/7002');
+        const response = await axios.get('https://trendy-healthy-backend.store/user/7002');
         setUserInfo(response.data);
         setLoading(false);
       } catch (error) {
