@@ -37,7 +37,7 @@ const Community = () => {
       item.communityTitle.toLowerCase().includes(search.toLowerCase())
     );
     setSearchResult(filtered);
-    setPage(1); 
+    setPage(1);
   }, [search, community]);
 
   const handlePageChange = (pageNumber) => {
@@ -63,7 +63,7 @@ const Community = () => {
   return (
     <div>
       <h2>커뮤니티 페이지입니다.(임시로 FakeAPi 연결)</h2>
-      <div className='input-group' style={{ justifyContent: 'center', maxWidth: '600px', margin: '0 auto', marginBottom: '30px', marginTop:'30px' }}>
+      <div className='input-group' style={{ justifyContent: 'center', maxWidth: '600px', margin: '0 auto', marginBottom: '30px', marginTop: '30px' }}>
         <input type="search" className='form-control rounded' style={{ flex: 1, marginRight: '10px' }} placeholder="검색어를 입력하세요." aria-label="Search" aria-describedby="search-addon"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
@@ -87,33 +87,27 @@ const Community = () => {
           <tbody>
             {currentItems.map((communityItem) => (
               <tr key={communityItem.id}>
-                <td>
-                  <img
-                    src={communityItem.communitySq}
-                    alt={communityItem.communitySq}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                </td>
+                <td>{communityItem.communitySq}</td>
                 <td>
                   <Link to={`/community/${communityItem.communitySq}`}>
                     {communityItem.communityTitle}
                   </Link>
                 </td>
-                <td>{communityItem.communityContents }</td>
-                <td>{communityItem.userId }</td>
-                <td>{communityItem.communityCreated }</td>
-                <td>{communityItem.communityCheck }</td>
-                <td>{communityItem.communityRecommend }</td>
+                <td>{communityItem.communityContents}</td>
+                <td>{communityItem.userId}</td>
+                <td>{communityItem.communityCreated}</td>
+                <td>{communityItem.communityCheck}</td>
+                <td>{communityItem.communityRecommend}</td>
               </tr>
             ))}
           </tbody>
         </Table>
       </div>
-        <div className={styles.writeButtonContainer}>
+      <div className={styles.writeButtonContainer}>
         <Link to="/communitywrite" className="btn btn-primary">
           게시글작성
         </Link>
-        </div>
+      </div>
       <div className={styles.paginationContainer}>
         <CommonPagination
           activePage={page}

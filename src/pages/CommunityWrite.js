@@ -17,7 +17,7 @@ const UserWrite = () => {
 
     try {
       await api.post('/community', postData);
-      navigate('/community'); 
+      navigate('/community/register'); 
     } catch (error) {
       console.error('Error creating post:', error);
     }
