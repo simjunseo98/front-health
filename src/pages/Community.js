@@ -94,7 +94,7 @@ const Community = () => {
                   </Link>
                 </td>
                 <td>{communityItem.communityContents}</td>
-                <td>{communityItem.userId}</td>
+                <td>{communityItem.user.userId}</td>
                 <td>{communityItem.communityCreated}</td>
                 <td>{communityItem.communityCheck}</td>
                 <td>{communityItem.communityRecommend}</td>
