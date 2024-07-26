@@ -19,7 +19,7 @@ const Community = () => {
   useEffect(() => {
     const getCommunity = async () => {
       try {
-        const response = await api.get('/products');
+        const response = await api.get('https://trendy-healthy-backend.store/community/all');
         setCommunity(response.data);
         setLoading(false);
       } catch (error) {
@@ -74,11 +74,13 @@ const Community = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>이미지</th>
+              <th>번호</th>
               <th>제목</th>
-              <th>가격</th>
-              <th>카테고리</th>
-              <th>설명</th>
+              <th>내용</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+              <th>추천수</th>
             </tr>
           </thead>
           <tbody>
@@ -86,19 +88,21 @@ const Community = () => {
               <tr key={communityItem.id}>
                 <td>
                   <img
-                    src={communityItem.image}
-                    alt={communityItem.title}
+                    src={communityItem.communitySq}
+                    alt={communityItem.communitySq}
                     style={{ width: '50px', height: '50px' }}
                   />
                 </td>
                 <td>
-                  <Link to={`/community/${communityItem.id}`}>
-                    {communityItem.title}
+                  <Link to={`/community/${communityItem.communitySq}`}>
+                    {communityItem.communityTitle}
                   </Link>
                 </td>
-                <td>{communityItem.price}</td>
-                <td>{communityItem.category}</td>
-                <td>{communityItem.description}</td>
+                <td>{communityItem.communityContents }</td>
+                <td>{communityItem.userId }</td>
+                <td>{communityItem.communityCreated }</td>
+                <td>{communityItem.communityCheck }</td>
+                <td>{communityItem.communityRecommend }</td>
               </tr>
             ))}
           </tbody>
