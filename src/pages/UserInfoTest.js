@@ -15,7 +15,7 @@ const UserInfoTest = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await axios.get('https://trendy-healthy-backend.store/user/7002');
+        const response = await axios.get('https://trendy-healthy-backend.store/user/one/7002');
         setUserInfo(response.data);
         setLoading(false);
       } catch (error) {
