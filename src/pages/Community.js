@@ -34,7 +34,7 @@ const Community = () => {
 
   useEffect(() => {
     const filtered = community.filter((item) =>
-      item.title.toLowerCase().includes(search.toLowerCase())
+      item.communityTitle.toLowerCase().includes(search.toLowerCase())
     );
     setSearchResult(filtered);
     setPage(1); 
