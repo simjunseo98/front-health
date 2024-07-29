@@ -34,7 +34,7 @@ const UserWriteUpdate = () => {
     };
 
     fetchPostData();
-  }, []);
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
