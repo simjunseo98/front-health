@@ -10,9 +10,9 @@ body {
   }
   
   main {
-    height: 100vh;
+    height: 110vh;
     height: -webkit-fill-available;
-    max-height: 100vh;
+    max-height: 110vh;
     overflow-x: auto;
     overflow-y: hidden;
   }

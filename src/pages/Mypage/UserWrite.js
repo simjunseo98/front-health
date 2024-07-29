@@ -44,9 +44,9 @@ const UserWrite = () => {
     }
   };
 
-  //수정페이지 이동
   const handleEdit = (id) => {
-    navigate(`/community/${id}`);
+    console.log(id);
+    navigate(`/mypage/userwriteupdate/${id}`);
   };
 
   if (loading) {
@@ -93,8 +93,8 @@ const UserWrite = () => {
                   <td>{communityItem.price}</td>
                   <td>{communityItem.category}</td>
                   <td className={styles.tableCellCenter}>
-                    <Button variant="primary" onClick={() => handleEdit(communityItem.id)}>수정</Button>
-                    <Button variant="primary" onClick={() => handleDelete(communityItem.id)}>삭제</Button>
+                    <Button variant="success" onClick={() => handleEdit(communityItem.id)}>수정</Button>
+                    <Button variant="danger" onClick={() => handleDelete(communityItem.id)}>삭제</Button>
                   </td>
                 </tr>
               );
