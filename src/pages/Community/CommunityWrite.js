@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container } from 'react-bootstrap';
-import api from '../services/api';
-import styles from '../assets/styles/userWrite.module.scss';
+import api from '../../services/api';
+import styles from '../../assets/styles/userWrite.module.scss';
 
 const UserWrite = () => {
   const [title, setTitle] = useState('');

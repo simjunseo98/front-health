@@ -2,20 +2,20 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/common/CommonHome';
 import Signup from './pages/SignUp';
 import Login from './pages/Login';
-import MyPage from './pages/MyPage';
-import UserInfo from './pages/UserInfo';
-import UserUpdate from './pages/UserUpdate';
+import MyPage from './pages/Mypage/MyPage';
+import UserInfo from './pages/Mypage/UserInfo';
+import UserUpdate from './pages/Mypage/UserUpdate';
 import Challenge from './pages/Challenge';
 import Today from './pages/Today';
-import Community from './pages/Community';
+import Community from './pages/Community/Community';
 import SignUpTest from './pages/SignUpTest';  // Post 기능 확인용 테스트 클래스
-import UserUpdateTest from './pages/UserUpdateTest';
-import CommunityDetail from './pages/CommunityDetail';
-import UserInfoTest from './pages/UserInfoTest';
+import UserUpdateTest from './pages/Mypage/UserUpdateTest';
+import CommunityDetail from './pages/Community/CommunityDetail';
+import UserInfoTest from './pages/Mypage/UserInfoTest';
 import CommonHeader from './components/common/CommonHeader';
 import CommonFooter from './components/common/CommonFooter';
-import UserWrite from './pages/UserWrite';
-import CommunityWrite from './pages/CommunityWrite';
+import UserWrite from './pages/Mypage/UserWrite';
+import CommunityWrite from './pages/Community/CommunityWrite';
 //css
 import styles from './assets/styles/layout.module.scss';
 

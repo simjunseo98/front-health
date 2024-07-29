@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import Loading from '../components/common/Loading';
+import Loading from '../../components/common/Loading';
 // import api from '../services/api';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
