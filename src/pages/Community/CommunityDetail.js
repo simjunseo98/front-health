@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Loading from '../components/common/Loading';
-import api from '../services/api';
-import styles from '../assets/styles/community/communityDetail.module.scss';
+import Loading from '../../components/common/Loading';
+import api from '../../services/api';
+import styles from '../../assets/styles/community/communityDetail.module.scss';
 
 const CommunityDetail = () => {
   const { id } = useParams();

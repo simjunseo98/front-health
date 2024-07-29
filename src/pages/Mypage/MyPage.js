@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet  } from 'react-router-dom';
-import CommonSidebar from '../components/common/CommonSideBar';
-import styles from '../assets/styles/mypage.module.css';
+import CommonSidebar from '../../components/common/CommonSideBar';
+import styles from '../../assets/styles/mypage.module.css';
 
 const MyPage = () => {
 
