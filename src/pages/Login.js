@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import toast from 'react-simple-toasts';
 import styles from '../assets/styles/login.module.css';
 import Loading from '../components/common/Loading';
 import Logo from '../assets/images/dumbel.jpg';
+import api from '../services/api';
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -16,11 +16,13 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('https://trendy-healthy-backend.store/jwt/authenticate', 
-        { username: id, password: password },
-        { headers: { 'Content-Type': 'application/json' } }
+      const response = await api.post('/jwt/authenticate', 
+        null,
+        {
+          params: { username: id, password: password },
+          headers: { 'Content-Type': 'application/json' }
+        }
       );
-
       console.log('Login successful:', response.data);
       const { 'access-token': accessToken } = response.data;
       sessionStorage.setItem('token', accessToken);

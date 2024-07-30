@@ -16,7 +16,7 @@ function CommonSidebar() {
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
           <NavLink 
-            to="/mypage/userinfotest" 
+            to="/mypage/userinfo" 
             className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link text-white'}
             aria-current="page"
           >
