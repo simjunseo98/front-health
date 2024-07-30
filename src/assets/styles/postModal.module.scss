@@ -13,15 +13,16 @@
 
 .modal {
   background: white;
-  width: 100%; /* 화면의 80% 너비 */
-  max-width: 800px; /* 최대 너비 */
+  width: 80%; /* 너비를 넓힘 */
+  max-width: 1200px; /* 최대 너비를 넓힘 */
   border-radius: 10px;
-  height: 80%; /* 화면의 80% 높이 */
-  max-height: 80vh; /* 최대 높이: 80% 뷰포트 높이 */
-  overflow: hidden; /* 내부 콘텐츠 넘칠 경우 숨기기 */
+  height: 80%;
+  overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   animation: slide-down 0.3s ease-out;
   position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
 @keyframes slide-down {
@@ -37,38 +38,104 @@
 
 .modalContent {
   display: flex;
-  flex-direction: column;
-  height: 100%; /* 전체 높이 사용 */
+  flex-direction: row;
+  width: 100%;
 }
 
 .modalBody {
+  width: 120%; /* 이미지 부분을 넓힘 */
   padding: 20px;
-  flex: 1; /* 남은 공간을 다 차지하도록 설정 */
-  overflow-y: auto; /* 수직 스크롤 가능 */
+  overflow-y: auto;
 }
 
 .modalImage {
-  width: 100%; /* 모달 너비에 맞게 */
-  height: 250px;
-  max-height: 300px; /* 최대 높이 설정 */
-  object-fit: initial; /* 비율 유지하며 채우기 */
-  border-radius: 10px 10px 0 0; /* 모서리 둥글게 */
-  margin-bottom: 20px; /* 이미지와 내용 사이의 간격 */
+  width: 100%;
+  height: 90%;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .modalText {
-  padding: 0 20px;
-}
-
-.modalTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 
 .modalDescription {
   font-size: 1rem;
   color: #666;
+  border-bottom: 1px solid #ddd;
+}
+
+.commentSection {
+  width: 80%; /* 댓글 섹션을 줄임 */
+  padding: 20px;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentList {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+}
+
+.commentUsername {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.commentText {
+  flex: 1;
+}
+
+.commentForm {
+  display: flex;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+}
+
+.commentInput {
+  flex: 1;
+  padding: 10PX 100PX;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.commentButton {
+  padding: 0.5rem 0.5rem;
+  border: none;
+  background-color: white;
+  color: #0056b3;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+   color: #333;
+  }
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  position: sticky;
+  width: 100%;
+}
+
+.username, .date {
+  font-size: 0.875rem;
+  color: #888;
 }
 
 .closeButton {
@@ -80,20 +147,4 @@
   font-size: 1.5rem;
   cursor: pointer;
   color: #333;
-}
-
-.modalFooter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  bottom: 0;
-  padding: 0.5rem 1rem;
-  background-color: #f8f8f8;
-  border-top: 1px solid #ddd;
-  height: 60px; /* 고정된 높이 */
-}
-
-.username, .date {
-  font-size: 0.875rem;
-  color: #888;
 }
