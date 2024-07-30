@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-simple-toasts';
 import styles from '../assets/styles/login.module.css';
 import Loading from '../components/common/Loading';
 import Logo from '../assets/images/dumbel.jpg';
@@ -34,7 +33,7 @@ const Login = ({ setIsLoggedIn }) => {
       navigate('/');
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);
-      toast('로그인이 실패했습니다.');
+      alert('로그인이 실패했습니다.');
     } finally {
       setLoading(false);
     }

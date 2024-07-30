@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function CommonHeader() {
   const location = useLocation();
+  const navigate = useNavigate(); // useNavigate 훅을 추가
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // 로그아웃 로직 추가
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 세션 스토리지에서 토큰을 확인하여 로그인 상태 설정
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []); // 빈 배열로 useEffect가 컴포넌트 마운트 시에만 실행되도록 설정
+
+  // 로그아웃 로직 수정
   const handleLogout = () => {
     sessionStorage.removeItem('token');
     setIsLoggedIn(false);
-    location('/')
+    navigate('/'); // navigate를 사용하여 홈페이지로 이동
   }
 
   return (
