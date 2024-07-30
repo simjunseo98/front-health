@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
-// import api from '../services/api';
+import api from '../../services/api';
 import Table from 'react-bootstrap/Table';
 import CommonPagination from '../../components/common/CommonPagination';
 import styles from '../../assets/styles/community/community.module.scss';
@@ -20,7 +20,7 @@ const Community = () => {
   useEffect(() => {
     const getCommunity = async () => {
       try {
-        const response = await axios.get('https://trendy-healthy-backend.store/community/all');
+        const response = await api.get('/community/all');
         setCommunity(response.data);
         setLoading(false);
       } catch (error) {
@@ -62,7 +62,7 @@ const Community = () => {
 
   return (
     <div>
-      <h2>커뮤니티 페이지입니다.(임시로 FakeAPi 연결)</h2>
+      <h2>커뮤니티 페이지입니다.</h2>
       <div className='input-group' style={{ justifyContent: 'center', maxWidth: '600px', margin: '0 auto', marginBottom: '30px', marginTop: '30px' }}>
         <input type="search" className='form-control rounded' style={{ flex: 1, marginRight: '10px' }} placeholder="검색어를 입력하세요." aria-label="Search" aria-describedby="search-addon"
           value={searchInput}

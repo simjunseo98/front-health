@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
-import api from '../../services/api';
+// import api from '../../services/api';
+import axios from 'axios';
 import styles from '../../assets/styles/community/communityDetail.module.scss';
 
 const CommunityDetail = () => {
@@ -14,7 +15,7 @@ const CommunityDetail = () => {
   useEffect(() => {
     const fetchCommunityItem = async () => {
       try {
-        const response = await api.get(`/products/${id}`);
+        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
         setCommunityItem(response.data);
         setLoading(false);
       } catch (error) {
