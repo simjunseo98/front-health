@@ -5,7 +5,6 @@ import api from '../../services/api';
 import Table from 'react-bootstrap/Table';
 import CommonPagination from '../../components/common/CommonPagination';
 import styles from '../../assets/styles/community/community.module.scss';
-import axios from 'axios';
 
 const Community = () => {
   const [community, setCommunity] = useState([]);
