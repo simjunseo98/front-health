@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import MyPage from './pages/Mypage/MyPage';
 import UserInfo from './pages/Mypage/UserInfo';
 import Challenge from './pages/Challenge';
-import Today from './pages/Today';
+import Today from './pages/Today/Today';
 import Community from './pages/Community/Community';
 import UserUpdate from './pages/Mypage/UserUpdate';
 import CommunityDetail from './pages/Community/CommunityDetail';
@@ -16,6 +16,7 @@ import CommunityWrite from './pages/Community/CommunityWrite';
 import UserWriteUpdate from './pages/Mypage/UserWriteUpdate'
 //css
 import styles from './assets/styles/layout.module.scss';
+import TodayWrite from './pages/Today/TodayWrite';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/challenge" element={<Challenge />} />
             <Route path="/today" element={<Today />} />
+            <Route path="/todaywrite" element={<TodayWrite />}/>
             <Route path="/community" element={<Community />} />
             <Route path="/community/:id" element={<CommunityDetail />} />
             <Route path="/communitywrite" element={<CommunityWrite />} />

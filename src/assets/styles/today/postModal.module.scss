@@ -104,7 +104,7 @@
 
 .commentInput {
   flex: 1;
-  padding: 10PX 100PX;
+  padding: 1PX 100PX;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-right: 10px;
@@ -147,4 +147,12 @@
   font-size: 1.5rem;
   cursor: pointer;
   color: #333;
+}
+.heart{
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }

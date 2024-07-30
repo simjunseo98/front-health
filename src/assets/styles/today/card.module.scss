@@ -11,6 +11,7 @@
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin: 30px;
+  position: relative; /* 추가 */
 
   &:hover {
     transform: translateY(-10px);
@@ -41,21 +42,23 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  width: 100%;
-  bottom: 0;
-  background: rgb(243, 240, 240,0.1); /* 반투명 배경 추가 */
-  color: #0c0c0c; /* 텍스트 색상 변경 */
+  position: absolute; /* 추가 */
+  bottom: 0; /* 추가 */
+  width: 100%; /* 추가 */
+  background: rgba(0, 0, 0, 0.0); /* 추가: 투명한 배경색 */
+  color: #ddd; /* 추가: 텍스트 색상 흰색으로 */
 
   .username {
     font-size: 0.875rem;
   }
 
-  .heart {
+  .heart { 
     font-size: 1.3rem;
     cursor: pointer;
     transition: color 0.3s;
     display: flex;
     align-items: center;
+    margin-left: auto;
 
     &::before {
       content: attr(data-likes);

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import styles from '../../assets/styles/postModal.module.scss';
-
+import styles from '../../assets/styles/today/postModal.module.scss';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 Modal.setAppElement('#root'); // 애플리케이션의 루트 요소를 설정합니다.
 
-const PostModal = ({ isOpen, isClose, post }) => {
+const PostModal = ({ isOpen, isClose, post, isLiked, likes, toggleLike }) => {
   const [comments, setComments] = useState(post.comments || []);
   const [newComment, setNewComment] = useState('');
 
@@ -46,6 +46,9 @@ const PostModal = ({ isOpen, isClose, post }) => {
             ))}
           </div>
           <div className={styles.commentForm}>
+          <div className={styles.heart} onClick={toggleLike}>
+              {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {likes}
+            </div>
             <input
               type="text"
               className={styles.commentInput}

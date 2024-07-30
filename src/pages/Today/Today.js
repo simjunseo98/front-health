@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Loading from '../components/common/Loading';
-import api from '../services/api';
-import { Card } from '../components/common/Card';
-import styles from '../assets/styles/today.module.scss';
-import CommonPagination from '../components/common/CommonPagination';
+import { Link } from 'react-router-dom';
+import Loading from '../../components/common/Loading';
+import api from '../../services/api';
+import { Card} from '../../components/common/Card';
+import styles from '../../assets/styles/today/today.module.scss';
+import CommonPagination from '../../components/common/CommonPagination';
 
 const Today = () => {
   const [posts, setPosts] = useState([]);
@@ -55,7 +56,9 @@ const Today = () => {
       <div className={styles.todayHeader}>
         <h2>오늘 운동 완! 📝</h2>
       </div>
-      <button className={styles.addbutton}>글쓰기</button>
+      <Link to="/todaywrite" className="btn btn-primary">
+          게시글작성
+        </Link>
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
           {currentItems.length > 0 ? (
