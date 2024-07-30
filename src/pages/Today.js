@@ -55,7 +55,7 @@ const Today = () => {
       <div className={styles.todayHeader}>
         <h2>오늘 운동 완! 📝</h2>
       </div>
-      
+      <button className={styles.addbutton}>글쓰기</button>
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
           {currentItems.length > 0 ? (
