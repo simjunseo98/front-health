@@ -26,6 +26,10 @@ const Login = ({ setIsLoggedIn }) => {
       console.log('Login successful:', response.data);
       const { 'access-token': accessToken } = response.data;
       sessionStorage.setItem('token', accessToken);
+
+      // 확인용 로그
+      console.log('Stored token:', sessionStorage.getItem('token'));
+
       setIsLoggedIn(true);
       navigate('/');
     } catch (error) {
