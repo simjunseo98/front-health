@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function CommonHeader() {
   const location = useLocation();
@@ -21,7 +22,8 @@ function CommonHeader() {
   const handleLogout = () => {
     sessionStorage.removeItem('token');
     setIsLoggedIn(false);
-    navigate('/'); // navigate를 사용하여 홈페이지로 이동
+    alert('로그아웃 되었습니다.')
+    navigate('/');
   }
 
   return (
@@ -61,7 +63,7 @@ function CommonHeader() {
                 </li>
                 {isLoggedIn ? (
                   <li className="main-button">
-                    <button onClick={handleLogout}>로그아웃</button>
+                    <Button variant="warning" onClick={handleLogout}>로그아웃</Button>
                   </li>
                 ) : (
                   <li className="main-button">

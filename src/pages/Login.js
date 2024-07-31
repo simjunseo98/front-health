@@ -25,18 +25,14 @@ const Login = ({ setIsLoggedIn }) => {
       console.log('Login successful:', response.data);
       const { 'access-token': accessToken } = response.data;
       sessionStorage.setItem('token', accessToken);
-
-      console.log('Stored token:', sessionStorage.getItem('token'));
-      // 확인
-      console.log('Setting isLoggedIn to true');
+      alert('로그인 성공했습니다.😊')
       setIsLoggedIn(true);
-
       // 확인
       console.log('Navigating to /');
-      navigate('/');
+      navigate('/mypage');
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);
-      alert('로그인이 실패했습니다.');
+      alert('로그인이 실패했습니다.❌');
     } finally {
       setLoading(false);
     }
