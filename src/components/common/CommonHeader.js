@@ -9,6 +9,7 @@ function CommonHeader() {
   useEffect(() => {
     // 컴포넌트가 마운트될 때 세션 스토리지에서 토큰을 확인하여 로그인 상태 설정
     const token = sessionStorage.getItem('token');
+    console.log('토큰 여부'+ token);
     if (token) {
       setIsLoggedIn(true);
     } else {
