@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.post('/jwt/authenticate', 
+      const response = await api.post('/jwt/authenticate',
         null,
         {
           params: { username: id, password: password },
@@ -26,10 +26,13 @@ const Login = ({ setIsLoggedIn }) => {
       const { 'access-token': accessToken } = response.data;
       sessionStorage.setItem('token', accessToken);
 
-      // 확인용 로그
       console.log('Stored token:', sessionStorage.getItem('token'));
-
+      // 확인
+      console.log('Setting isLoggedIn to true');
       setIsLoggedIn(true);
+
+      // 확인
+      console.log('Navigating to /');
       navigate('/');
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);
