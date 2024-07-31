@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
-import api from '../../services/api';
 import { Card} from '../../components/common/Card';
 import styles from '../../assets/styles/today/today.module.scss';
 import CommonPagination from '../../components/common/CommonPagination';
+import axios from 'axios';
 
 const Today = () => {
   const [posts, setPosts] = useState([]);
@@ -16,7 +16,7 @@ const Today = () => {
   useEffect(() => {
     const getToday = async () => {
       try {
-        const response = await api.get('/products', {
+        const response = await axios.get('https://fakestoreapi.com/products', {
         
         });
 

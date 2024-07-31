@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 function CommonHeader() {
   const location = useLocation();
-  const navigate = useNavigate(); // useNavigate 훅을 추가
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ function CommonHeader() {
     sessionStorage.removeItem('token');
     setIsLoggedIn(false);
     alert('로그아웃 되었습니다.')
-    navigate('/');
+    window.location.href = '/';
   }
 
   return (

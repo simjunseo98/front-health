@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from '../assets/styles/login.module.css';
 import Loading from '../components/common/Loading';
 import Logo from '../assets/images/dumbel.jpg';
 import api from '../services/api';
 
 const Login = ({ setIsLoggedIn }) => {
-  const navigate = useNavigate();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,14 +20,12 @@ const Login = ({ setIsLoggedIn }) => {
           headers: { 'Content-Type': 'application/json' }
         }
       );
-      console.log('Login successful:', response.data);
+      console.log('응답 데이터 : ', response);
       const { 'access-token': accessToken } = response.data;
       sessionStorage.setItem('token', accessToken);
       alert('로그인 성공했습니다.😊')
       setIsLoggedIn(true);
-      // 확인
-      console.log('Navigating to /');
-      navigate('/mypage');
+      window.location.href = '/';
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);
       alert('로그인이 실패했습니다.❌');
