@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-simple-toasts';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup'; // 간결한 코드작성을 위해 form 관련 라이브러리인 yup 사용
-import axios from 'axios';
+import * as yup from 'yup';
+import api from '../services/api';
 
 // 유효성 검사
 const valid = yup.object().shape({
@@ -27,19 +27,23 @@ const Signup = () => {
     });
 
     const onSubmit = async (data) => {
+        // 문자열인 요소들을 숫자타입으로 변경
+        data.userAge = parseInt(data.userAge, 10);  
+        data.userPhone = parseInt(data.userPhone, 10);
+
         try {
-            const response = await axios.post('https://trendy-healthy-backend.store/user/signup', data, {
+            const response = await api.post('/user/signup', data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 withCredentials: true
             });
             console.log('회원가입 성공 :', response.data);
-            toast('회원가입에 성공했습니다.', response.data);
+            alert('회원가입 성공😊')
             navigate('/login');
         } catch (error) {
             console.error('회원가입 실패 :', error);
-            toast('회원가입에 실패했습니다.', error);
+            alert('회원가입 실패했습니다.❌')
             console.log(data);
         }
     };
