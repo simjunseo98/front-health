@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Button, Container } from 'react-bootstrap';
-import api from '../../services/api';
+// import api from '../../services/api';
+import axios from 'axios';
 import styles from '../../assets/styles/userWrite.module.scss';
 
 const UserWriteUpdate = () => {
@@ -18,7 +19,7 @@ const UserWriteUpdate = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await api.get(`/products/${id}`);
+        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
         console.log(id)
         const data = response.data;
         setTitle(data.title);
@@ -41,9 +42,11 @@ const UserWriteUpdate = () => {
     const postData = { title, contents, userId, created, category, price, image };
 
     try {
-      await api.put('/products/1', postData);  // id를 사용하여 데이터 업데이트
-      navigate('/mypage/userwrite');  // 수정 후 목록 페이지로 돌아가기
+      await api.put(`/community/update/${id}`, postData);
+      alert('수정이 완료되었습니다.')
+      navigate('/mypage/userwrite');
     } catch (error) {
+      alert('수정이 실패하였습니다.')
       console.error('Error updating post:', error);
     }
   };

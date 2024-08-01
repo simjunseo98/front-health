@@ -12,11 +12,18 @@ const CommunityDetail = () => {
   const [error, setError] = useState(null);
   // const [comments, setComments] = useState([]);
 
+  const formatDate = (isString) => {
+    const date = new Date(isString);
+    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  };
+
+
   useEffect(() => {
     const fetchCommunityItem = async () => {
       try {
         const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
         setCommunityItem(response.data);
+        // await api.post(`/community/${id}/check`);  커뮤니티 조회수 증가 요청 추후 api 연결 이후 사용 예정
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -55,7 +62,7 @@ const CommunityDetail = () => {
         <p><strong>글제목:</strong> {communityItem.communityTitle}</p>
         <p><strong>글내용:</strong> {communityItem.communityContents}</p>
         <p><strong>작성자:</strong> {communityItem.userId}</p>
-        <p><strong>작성일:</strong> {communityItem.communityCreated}</p>
+        <p><strong>작성일:</strong> {formatDate(communityItem.communityCreated)}</p>
         <p><strong>조회수:</strong> {communityItem.communityCheck}</p>
         <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
       </div>

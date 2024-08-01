@@ -15,6 +15,11 @@ const Community = () => {
   const [search, setSearch] = useState('');   // 검색어 상태
   const [searchResult, setSearchResult] = useState([]); // 검색결과 상태
   const [searchInput, setSearchInput] = useState(''); // 검색 입력 상태
+  
+  const formatDate = (isString) => {
+    const date = new Date(isString);
+    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  };
 
   useEffect(() => {
     const getCommunity = async () => {
@@ -94,7 +99,7 @@ const Community = () => {
                 </td>
                 <td>{communityItem.communityContents}</td>
                 <td>{communityItem.user.userId}</td>
-                <td>{communityItem.communityCreated}</td>
+                <td>{formatDate(communityItem.communityCreated)}</td>
                 <td>{communityItem.communityCheck}</td>
                 <td>{communityItem.communityRecommend}</td>
               </tr>
