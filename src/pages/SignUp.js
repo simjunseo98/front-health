@@ -30,7 +30,7 @@ const Signup = () => {
         data.userAge = data.userAge.toString();
         data.userPhone = data.userPhone.toString();
         try {
-            const response = await axios.post('/user/signup', data, {
+            const response = await axios.post('https://trendy-healthy-backend.store/user/signup', data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },

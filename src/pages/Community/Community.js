@@ -62,7 +62,7 @@ const Community = () => {
 
   const indexOfLastItem = page * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = searchResult.slice(indexOfFirstItem, indexOfLastItem); // searchResult를 사용
+  const currentItems = searchResult.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div>
@@ -91,17 +91,17 @@ const Community = () => {
           <tbody>
             {currentItems.map((communityItem) => (
               <tr key={communityItem.id}>
-                <td>{communityItem.communitySq}</td>
-                <td>
+                <td className={styles.overflowEllipsis}>{communityItem.communitySq}</td>
+                <td className={styles.overflowEllipsis}>
                   <Link to={`/community/${communityItem.communitySq}`}>
                     {communityItem.communityTitle}
                   </Link>
                 </td>
-                <td>{communityItem.communityContents}</td>
-                <td>{communityItem.user.userId}</td>
-                <td>{formatDate(communityItem.communityCreated)}</td>
-                <td>{communityItem.communityCheck}</td>
-                <td>{communityItem.communityRecommend}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.communityContents}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.user.userId}</td>
+                <td className={styles.overflowEllipsis}>{formatDate(communityItem.communityCreated)}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.communityCheck}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.communityRecommend}</td>
               </tr>
             ))}
           </tbody>
