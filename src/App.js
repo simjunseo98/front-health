@@ -17,6 +17,7 @@ import UserWriteUpdate from './pages/Mypage/UserWriteUpdate'
 //css
 import styles from './assets/styles/layout.module.scss';
 import TodayWrite from './pages/Today/TodayWrite';
+import UserHeart from './pages/Mypage/UserHeart';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="userupdate" element={<UserUpdate />} />
               <Route path="userwrite" element={<UserWrite />} />
               <Route path="userwriteupdate/:id" element={<UserWriteUpdate />} />
+              <Route path="userheart" element={<UserHeart/>} />
               {/* 필요한 다른 서브 페이지들 추가 */}
             </Route>
           </Routes>
