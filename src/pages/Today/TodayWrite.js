@@ -57,7 +57,7 @@ const TodayWrite = () => {
         />
         {imagePreview && (
           <div>
-            <img src={imagePreview} alt="Image Preview" style={{ width: '400px',height:'300px', marginTop: '10px' }} />
+            <img src={imagePreview} alt="" style={{ width: '400px',height:'300px', marginTop: '10px' }} />
           </div>
         )}
       </Form.Group>
