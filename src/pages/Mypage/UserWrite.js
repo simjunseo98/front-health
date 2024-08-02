@@ -76,7 +76,9 @@ const UserWrite = () => {
             </tr>
           </thead>
           <tbody>
+            
             {currentItems.map((communityItem) => {
+            
               return (
                 <tr key={communityItem.id}>
                   <td>
@@ -93,6 +95,7 @@ const UserWrite = () => {
                   <td>{communityItem.price}</td>
                   <td>{communityItem.category}</td>
                   <td className={styles.tableCellCenter}>
+
                     <Button variant="success" onClick={() => handleEdit(communityItem.id)}>수정</Button>
                     <Button variant="danger" onClick={() => handleDelete(communityItem.id)}>삭제</Button>
                   </td>

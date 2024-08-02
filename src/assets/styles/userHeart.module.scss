@@ -1,0 +1,23 @@
+.today-wrapper {
+    padding: 20px;
+  }
+  
+  .today-header {
+    h2{
+      font-size: 4px;
+      margin-bottom: 20px;
+    }
+  }
+  
+  
+  .cardList {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      padding: 4.5rem;
+    }
+    .addbutton{
+    justify-content: center;
+    align-items: center;
+    }  
