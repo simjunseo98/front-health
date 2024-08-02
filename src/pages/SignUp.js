@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import api from '../services/api';
+// import api from '../services/api';
+import axios from 'axios';
 
 // 유효성 검사
 const valid = yup.object().shape({
@@ -29,7 +30,7 @@ const Signup = () => {
         data.userAge = data.userAge.toString();
         data.userPhone = data.userPhone.toString();
         try {
-            const response = await api.post('/user/signup', data, {
+            const response = await axios.post('/user/signup', data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
