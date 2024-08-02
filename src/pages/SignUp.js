@@ -27,8 +27,6 @@ const Signup = () => {
     });
 
     const onSubmit = async (data) => {
-        data.userAge = data.userAge.toString();
-        data.userPhone = data.userPhone.toString();
         try {
             const response = await axios.post('https://trendy-healthy-backend.store/user/signup', data, {
                 headers: {
@@ -82,7 +80,7 @@ const Signup = () => {
                 </div>
                 <div>
                     <label>나이 :</label>
-                    <input type="number" {...register('userAge')} />
+                    <input type="text" {...register('userAge')} />
                     <p>{errors.userAge?.message}</p>
                 </div>
                 <div>
