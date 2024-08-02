@@ -15,8 +15,8 @@ const valid = yup.object().shape({
     userName: yup.string().required('이름을 입력하세요'),
     userEmail: yup.string().email('유효한 이메일을 입력하세요').required('이메일을 입력하세요'),
     userAddress: yup.string().required('주소를 입력하세요'),
-    userAge: yup.number().typeError('나이는 숫자여야 합니다').required('나이를 입력하세요').positive('유효한 나이를 입력하세요').integer('나이는 정수여야 합니다'),
-    userPhone: yup.number().typeError('유효한 전화번호를 입력하세요').required('전화번호를 입력하세요')
+    userAge: yup.string().matches(/^\d+$/, '나이는 숫자여야 합니다').required('나이를 입력하세요'),
+    userPhone: yup.string().matches(/^\d+$/, '전화번호는 숫자여야 합니다').required('전화번호를 입력하세요')
 });
 
 const Signup = () => {
@@ -26,10 +26,6 @@ const Signup = () => {
     });
 
     const onSubmit = async (data) => {
-        // 문자열인 요소들을 숫자타입으로 변경
-        data.userAge = parseInt(data.userAge, 10);  
-        data.userPhone = parseInt(data.userPhone, 10);
-
         try {
             const response = await api.post('/user/signup', data, {
                 headers: {
@@ -38,11 +34,11 @@ const Signup = () => {
                 withCredentials: true
             });
             console.log('회원가입 성공 :', response.data);
-            alert('회원가입 성공😊')
+            alert('회원가입 성공😊');
             navigate('/login');
         } catch (error) {
             console.error('회원가입 실패 :', error);
-            alert('회원가입 실패했습니다.❌')
+            alert('회원가입 실패했습니다.❌');
             console.log(data);
         }
     };
@@ -83,7 +79,7 @@ const Signup = () => {
                 </div>
                 <div>
                     <label>나이 :</label>
-                    <input type="number" {...register('userAge')} />
+                    <input type="text" {...register('userAge')} />
                     <p>{errors.userAge?.message}</p>
                 </div>
                 <div>
