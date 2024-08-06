@@ -23,7 +23,7 @@ const Login = ({ setIsLoggedIn }) => {
       console.log('응답 데이터 : ', response);
       const { 'access-token': accessToken } = response.data;
       sessionStorage.setItem('token', accessToken);
-      sessionStorage.setItem('userId', userId);
+      // sessionStorage.setItem('userId', userId);
       alert('로그인 성공했습니다.😊');
       setIsLoggedIn(true);
       window.location.href = '/';
