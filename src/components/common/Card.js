@@ -5,18 +5,9 @@ import styles from '../../assets/styles/today/card.module.scss';
 
 export const Card = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLiked, setIsLiked] = useState(post.isLiked || false);
-  const [likes, setLikes] = useState(post.likes || 0);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  const toggleLike = (e) => {
-    e.stopPropagation();
-    const newIsLiked = !isLiked;
-    setIsLiked(newIsLiked);
-    setLikes(newIsLiked ? likes + 1 : likes - 1);
-  };
 
   return (
     <div>
@@ -28,20 +19,16 @@ export const Card = ({ post }) => {
             onError={(e) => { e.target.onerror = null; e.target.src = "https://via.placeholder.com/150"; }}
           />
         </div>
-        <div className={styles.cardFooter} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.cardFooter}>
           <div className={styles.heart}>
-            {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {likes}
+            {post.isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {post.likes}
           </div>
-
         </div>
       </div>
       <PostModal 
         isOpen={isModalOpen} 
         isClose={closeModal} 
         post={post} 
-        isLiked={isLiked} 
-        likes={likes} 
-        toggleLike={toggleLike} 
       />
     </div>
   );

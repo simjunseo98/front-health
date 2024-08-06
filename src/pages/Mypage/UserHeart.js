@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
 import api from '../../services/api';
 import { Card } from '../../components/common/Card';
@@ -9,10 +8,9 @@ import styles from '../../assets/styles/userHeart.module.scss';
 const UserHeart = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-//   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [activePage, setActivePage] = useState(1); // 현재 페이지 상태
-  const [postsPerPage] = useState(16); // 페이지당 게시물 수
+  const [postsPerPage] = useState(4); // 페이지당 게시물 수
 
   useEffect(() => {
     const getUserHeart = async () => {
@@ -22,7 +20,7 @@ const UserHeart = () => {
         });
 
         // 좋아요가 된 게시물만 필터링
-        const likedPosts = response.data.filter(posts => posts.isLiked);
+        const likedPosts = response.data.filter(post => post.isLiked);
 
         setPosts(likedPosts || []);
         setLoading(false);
@@ -48,7 +46,6 @@ const UserHeart = () => {
     return <p>에러메세지: {error}</p>;
   }
 
-  // 페이지에 맞는 게시물 계산
   const indexOfLastItem = activePage * postsPerPage;
   const indexOfFirstItem = indexOfLastItem - postsPerPage;
   const currentItems = posts.slice(indexOfFirstItem, indexOfLastItem);
