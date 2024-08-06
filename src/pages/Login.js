@@ -4,7 +4,7 @@ import Loading from '../components/common/Loading';
 import Logo from '../assets/images/dumbel.jpg';
 import api from '../services/api';
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,6 @@ const Login = ({ setIsLoggedIn }) => {
         const { 'access-token': accessToken } = response.data;
         sessionStorage.setItem('token', accessToken);
         alert('로그인 성공했습니다.😊');
-        setIsLoggedIn(true);
         window.location.href = '/';
       } else {
         console.error('응답 상태 코드가 200이 아닙니다:', response.status);
