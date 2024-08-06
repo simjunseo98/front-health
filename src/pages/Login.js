@@ -21,12 +21,17 @@ const Login = ({ setIsLoggedIn }) => {
       });
   
       console.log('응답 데이터 : ', response);
-      const { 'access-token': accessToken } = response.data;
-      sessionStorage.setItem('token', accessToken);
-      // sessionStorage.setItem('userId', userId);
-      alert('로그인 성공했습니다.😊');
-      setIsLoggedIn(true);
-      window.location.href = '/';
+      
+      if (response.status === 200) {
+        const { 'access-token': accessToken } = response.data;
+        sessionStorage.setItem('token', accessToken);
+        alert('로그인 성공했습니다.😊');
+        setIsLoggedIn(true);
+        window.location.href = '/';
+      } else {
+        console.error('응답 상태 코드가 200이 아닙니다:', response.status);
+        alert('로그인이 실패했습니다.❌');
+      }
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);
       alert('로그인이 실패했습니다.❌');
