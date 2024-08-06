@@ -5,6 +5,7 @@ import { Card} from '../../components/common/Card';
 import styles from '../../assets/styles/today/today.module.scss';
 import CommonPagination from '../../components/common/CommonPagination';
 import axios from 'axios';
+//import api from '../../services/api';
 
 const Today = () => {
   const [posts, setPosts] = useState([]);

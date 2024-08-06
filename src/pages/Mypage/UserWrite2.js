@@ -1,17 +1,14 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-//import api from '../../services/api';
 import axios from 'axios';
 import Loading from '../../components/common/Loading';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import CommonPagination from '../../components/common/CommonPagination';
 import styles from '../../assets/styles/userWrite.module.scss';
-//import styles from '../../assets/styles/today/card.module.scss';
 
 const UserWrite2 = () => {
-   
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,12 +19,7 @@ const UserWrite2 = () => {
   useEffect(() => {
     const getUserWrite2 = async () => {
       try {
-        const response = await axios.get('https://fakestoreapi.com/products', {
-        
-        });
-
-        // 게시물과 총 게시물 수 설정
-
+        const response = await axios.get('https://fakestoreapi.com/products');
         setPosts(response.data || []);
         setLoading(false);
       } catch (error) {
@@ -39,8 +31,22 @@ const UserWrite2 = () => {
 
     getUserWrite2();
   }, []);
+
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/products/${id}`);
+      setPosts(posts.filter(item => item.id !== id));
+    } catch (error) {
+      setError(error.message || '알 수 없는 오류가 발생했습니다.');
+    }
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/mypage/todaywriteupdate/${id}`);
   };
 
   if (loading) {
@@ -56,19 +62,6 @@ const UserWrite2 = () => {
   const indexOfFirstItem = indexOfLastItem - postsPerPage;
   const currentItems = posts.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`/products/${id}`);
-      setPosts(posts.filter(item => item.id !== id));
-    } catch (error) {
-      setError(error);
-    }
-  };
-
-  const handleEdit = (id) => {
-    console.log(id);
-    navigate(`/Mypage/TodayWriteUpdate/${id}`);
-  };
   return (
     <div>
       <h2>게시물 목록</h2>
@@ -83,32 +76,37 @@ const UserWrite2 = () => {
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
-            <tr key={post.id}>
-              <td>
-                <img
-                  src={post.image}
-                  style={{ width: '50px', height: '50px' }}
-                />
-              </td>
-              <td>
-                <div
-                  className={styles.heart}
-                >
-                  {post.isLiked ? (
-                    <AiFillHeart style={{ color: 'red' }} />
-                  ) : (
-                    <AiOutlineHeart />
-                  )}
-                  {post.likes}
-                </div>
-              </td>
-              <td className={styles.tableCellCenter}>
-                <Button variant="success" onClick={() => handleEdit(posts.id)}>수정</Button>
-                <Button variant="danger" onClick={() => handleDelete(posts.id)}>삭제</Button>
-              </td>
+          {currentItems.length > 0 ? (
+            currentItems.map(post => (
+              <tr key={post.id}>
+                <td>
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    style={{ width: '50px', height: '50px' }}
+                  />
+                </td>
+                <td>
+                  <div className={styles.heart}>
+                    {post.isLiked ? (
+                      <AiFillHeart style={{ color: 'red' }} />
+                    ) : (
+                      <AiOutlineHeart />
+                    )}
+                    {post.likes}
+                  </div>
+                </td>
+                <td className={styles.tableCellCenter}>
+                  <Button variant="success" onClick={() => handleEdit(post.id)}>수정</Button>
+                  <Button variant="danger" onClick={() => handleDelete(post.id)}>삭제</Button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="3">No posts available</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </Table>
       <CommonPagination

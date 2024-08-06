@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import styles from '../../assets/styles/today/postModal.module.scss';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 //import api from '../../services/api'; // api 파일에서 함수 가져오기
-import axios from 'axios';
+//import axios from 'axios';
 
 Modal.setAppElement('#root');
 
