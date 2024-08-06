@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import styles from '../../assets/styles/today/postModal.module.scss';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-Modal.setAppElement('#root'); // 애플리케이션의 루트 요소를 설정합니다.
+//import api from '../../services/api'; // api 파일에서 함수 가져오기
+import axios from 'axios';
 
-const PostModal = ({ isOpen, isClose, post, isLiked, likes, toggleLike }) => {
+Modal.setAppElement('#root');
+
+const PostModal = ({ isOpen, isClose, post }) => {
+  const [isLiked, setIsLiked] = useState(post.isLiked || false);
+  const [likes, setLikes] = useState(post.likes || 0);
   const [comments, setComments] = useState(post.comments || []);
   const [newComment, setNewComment] = useState('');
 
@@ -13,6 +18,43 @@ const PostModal = ({ isOpen, isClose, post, isLiked, likes, toggleLike }) => {
       const updatedComments = [...comments, { username: '현재 사용자', text: newComment }];
       setComments(updatedComments);
       setNewComment('');
+    }
+  };
+  
+  // 게시물에 좋아요 추가
+ const likePost = async (todayId) => {
+  try {
+     // const response = await axios.post(`/today/todaylike/${todayId}`);
+      console.log('hi')
+     // return response.data;
+  } catch (error) {
+      throw new Error('Failed to like post');
+  }
+};
+
+// 게시물에 좋아요 제거
+const unlikePost = async (todayId) => {
+  try {
+   //   const response = await axios.post(`/today/todaylike/${todayId}`);
+    console.log('by')
+   //return response.data;
+  } catch (error) {
+      throw new Error('Failed to unlike post');
+  }
+};
+  const toggleLike = async () => {
+    try {
+      if (isLiked) {
+        await unlikePost(post.id);
+        setIsLiked(false);
+        setLikes(likes - 1);
+      } else {
+        await likePost(post.id);
+        setIsLiked(true);
+        setLikes(likes + 1);
+      }
+    } catch (error) {
+      console.error('Failed to toggle like:', error);
     }
   };
 
@@ -34,7 +76,7 @@ const PostModal = ({ isOpen, isClose, post, isLiked, likes, toggleLike }) => {
           </div>
         </div>
         <div className={styles.commentSection}>
-        <div className={styles.modalText}>
+          <div className={styles.modalText}>
             <p className={styles.modalDescription}>{post.description}</p>
           </div>
           <div className={styles.commentList}>
@@ -46,7 +88,7 @@ const PostModal = ({ isOpen, isClose, post, isLiked, likes, toggleLike }) => {
             ))}
           </div>
           <div className={styles.commentForm}>
-          <div className={styles.heart} onClick={toggleLike}>
+            <div className={styles.heart} onClick={toggleLike}>
               {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {likes}
             </div>
             <input

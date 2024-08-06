@@ -11,13 +11,15 @@ import UserUpdate from './pages/Mypage/UserUpdate';
 import CommunityDetail from './pages/Community/CommunityDetail';
 import CommonHeader from './components/common/CommonHeader';
 import CommonFooter from './components/common/CommonFooter';
-import UserWrite from './pages/Mypage/UserWrite';
+//import UserWrite from './pages/Mypage/UserWrite';
+import UserWrite2 from './pages/Mypage/UserWrite2';
 import CommunityWrite from './pages/Community/CommunityWrite';
 import UserWriteUpdate from './pages/Mypage/UserWriteUpdate'
 //css
 import styles from './assets/styles/layout.module.scss';
 import TodayWrite from './pages/Today/TodayWrite';
 import UserHeart from './pages/Mypage/UserHeart';
+import TodayWriteUpdate from './pages/Mypage/TodayWriteUpdate';
 
 function App() {
   return (
@@ -40,7 +42,9 @@ function App() {
               <Route index element={<Navigate to="/mypage/userinfo" />} />
               <Route path="userinfo" element={<UserInfo />} />
               <Route path="userupdate" element={<UserUpdate />} />
-              <Route path="userwrite" element={<UserWrite />} />
+             {/* <Route path="userwrite" element={<UserWrite />} />*/}
+              <Route path="userwrite2" element={<UserWrite2 />} />
+              <Route path="todaywriteupdate/:id" element={<TodayWriteUpdate />}/>
               <Route path="userwriteupdate/:id" element={<UserWriteUpdate />} />
               <Route path="userheart" element={<UserHeart/>} />
               {/* 필요한 다른 서브 페이지들 추가 */}
