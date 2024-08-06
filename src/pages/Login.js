@@ -13,17 +13,18 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.post('/jwt/authenticate',
-        null,
-        {
-          params: { username: id, password: password },
-          headers: { 'Content-Type': 'application/json' }
-        }
-      );
+      const response = await api.post('/jwt/authenticate', {
+        username: id, 
+        password: password
+      }, {
+        headers: { 'Content-Type': 'application/json' }
+      });
+  
       console.log('응답 데이터 : ', response);
       const { 'access-token': accessToken } = response.data;
       sessionStorage.setItem('token', accessToken);
-      alert('로그인 성공했습니다.😊')
+      sessionStorage.setItem('userId', userId);
+      alert('로그인 성공했습니다.😊');
       setIsLoggedIn(true);
       window.location.href = '/';
     } catch (error) {
@@ -33,6 +34,7 @@ const Login = ({ setIsLoggedIn }) => {
       setLoading(false);
     }
   };
+  
 
   if (loading) {
     return <div><Loading /></div>;
