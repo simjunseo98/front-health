@@ -42,7 +42,7 @@ const UserUpdateTest = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await api.get('/user/one?userId=admin');
+        const response = await api.get('/user/one');
         setUserInfo(response.data);
         // setValue를 사용하여 폼 필드 초기화
         Object.keys(response.data).forEach(key => setValue(key, response.data[key]));

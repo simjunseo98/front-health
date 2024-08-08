@@ -14,7 +14,7 @@ const UserInfo = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await api.get('/user/one?userId=admin');
+        const response = await api.get('/user/one');
         setUserInfo(response.data);
         setLoading(false);
       } catch (error) {
