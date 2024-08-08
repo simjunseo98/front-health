@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 // 유효성 검사 스키마 정의
 const validationSchema = yup.object().shape({
-  username: yup.string().required('이름을 입력하세요'),
+  userName: yup.string().required('이름을 입력하세요'),
   userEmail: yup.string().email('유효한 이메일을 입력하세요').required('이메일을 입력하세요'),
   userPhone: yup.string().required('전화번호를 입력하세요'),
   userAddress: yup.string().required('주소를 입력하세요'),
