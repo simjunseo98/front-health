@@ -108,7 +108,7 @@ const UserUpdateTest = () => {
           <Form.Group className="mb-3">
             <Form.Label>이름</Form.Label>
             <Controller
-              name="username"
+              name="userName"
               control={control}
               render={({ field }) => <Form.Control {...field} />}
             />
