@@ -93,7 +93,7 @@ const Community = () => {
               <tr key={communityItem.id}>
                 <td className={styles.overflowEllipsis}>{communityItem.communitySq}</td>
                 <td className={styles.overflowEllipsis}>
-                  <Link to={`/community/communitySq/${communityItem.communitySq}`}>
+                  <Link to={`/community/communityDetail/${communityItem.communitySq}`}>
                     {communityItem.communityTitle}
                   </Link>
                 </td>

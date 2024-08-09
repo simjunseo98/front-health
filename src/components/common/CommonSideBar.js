@@ -39,6 +39,17 @@ function CommonSidebar() {
         </li>
         <li>
           <NavLink 
+            to="/mypage/userwrite2" 
+            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link text-white'}
+          >
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#speedometer2" />
+            </svg>
+            내가 작성한 게시글(준서 여기서 작업하자)
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
             to="/mypage/userheart" 
             className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link text-white'}
           >

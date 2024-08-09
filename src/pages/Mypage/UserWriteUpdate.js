@@ -19,7 +19,7 @@ const UserWriteUpdate = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+        const response = await api.get(`/community/myCommunityContents/${id}`);
         console.log(id)
         const data = response.data;
         setTitle(data.title);
