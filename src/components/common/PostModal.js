@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import styles from '../../assets/styles/today/postModal.module.scss';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-//import api from '../../services/api'; // api 파일에서 함수 가져오기
-//import axios from 'axios';
+import api from '../../services/api'; // api 파일에서 함수 가져오기
 
 Modal.setAppElement('#root');
 
@@ -13,20 +12,34 @@ const PostModal = ({ isOpen, isClose, post }) => {
   const [comments, setComments] = useState(post.comments || []);
   const [newComment, setNewComment] = useState('');
 
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     if (newComment.trim() !== '') {
-      const updatedComments = [...comments, { username: '현재 사용자', text: newComment }];
-      setComments(updatedComments);
-      setNewComment('');
+      const commentData = { username: '현재 사용자', text: newComment };
+      try {
+        const addedComment = await addComment(post.id, commentData);
+        setComments([...comments, addedComment]);
+        setNewComment('');
+      } catch (error) {
+        console.error('Failed to add comment:', error);
+      }
     }
   };
   
+  //댓글 등록시 서버에 요청
+  const addComment = async (postId, commentData) => {
+    try {
+        const response = await api.post(`/today/comments`, { postId: postId,...commentData});
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to add comment');
+    }
+};
   // 게시물에 좋아요 추가
  const likePost = async (todayId) => {
   try {
-     // const response = await axios.post(`/today/todaylike/${todayId}`);
+      const response = await api.post(`/today/todaylike/${todayId}`);
       console.log('hi')
-     // return response.data;
+      return response.data;
   } catch (error) {
       throw new Error('Failed to like post');
   }
@@ -35,9 +48,9 @@ const PostModal = ({ isOpen, isClose, post }) => {
 // 게시물에 좋아요 제거
 const unlikePost = async (todayId) => {
   try {
-   //   const response = await axios.post(`/today/todaylike/${todayId}`);
+     const response = await api.post(`/today/todaylike/${todayId}`);
     console.log('by')
-   //return response.data;
+   return response.data;
   } catch (error) {
       throw new Error('Failed to unlike post');
   }

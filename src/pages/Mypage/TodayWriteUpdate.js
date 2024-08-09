@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Button, Container } from 'react-bootstrap';
-//import api from '../../services/api';
-import axios from 'axios';
+import api from '../../services/api';
 import styles from '../../assets/styles/today/todayWrite.module.scss';
 
 const TodayWriteUpdate = () => {
@@ -16,7 +15,7 @@ const TodayWriteUpdate = () => {
   useEffect(() => {
     const fetchPostData2 = async () => {
       try {
-        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+        const response = await api.get(`https://trendy-healthy-backend.store${id}`);
         console.log(id)
         const data = response.data;
         setImage(data.image);
@@ -36,7 +35,7 @@ const TodayWriteUpdate = () => {
     const postData = { image, contents, userId, created};
 
     try {
-      await axios.put(`/today/update/${id}`, postData);
+      await api.put(`/today/update/${id}`, postData);
       alert('수정이 완료되었습니다.')
       navigate('/mypage/userwrite2');
     } catch (error) {
