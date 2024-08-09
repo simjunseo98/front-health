@@ -48,7 +48,7 @@ const CommunityDetail = () => {
         <p><strong>커뮤니티 고유번호:</strong> {communityItem.communitySq}</p>
         <p><strong>글제목:</strong> {communityItem.communityTitle}</p>
         <p><strong>글내용:</strong> {communityItem.communityContents}</p>
-        <p><strong>작성자:</strong> {communityItem.coments.user.userId}</p>
+        <p><strong>작성자:</strong> {communityItem.user.userId}</p>
         <p><strong>작성일:</strong> {formatDate(communityItem.communityCreated)}</p>
         <p><strong>조회수:</strong> {communityItem.communityview}</p>
         <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
