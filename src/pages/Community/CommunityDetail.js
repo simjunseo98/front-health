@@ -20,7 +20,7 @@ const CommunityDetail = () => {
   useEffect(() => {
     const fetchCommunityItem = async () => {
       try {
-        const response = await api.get(`/community/communitySq/${id}`);
+        const response = await api.get(`/community/communityDetail/${id}`);
         setCommunityItem(response.data);
         await api.post(`/community/view/${id}`);
         setLoading(false);
