@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import axios from 'axios';
+import api from '../../services/api';
 import Loading from '../../components/common/Loading';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
@@ -19,7 +19,7 @@ const UserWrite2 = () => {
   useEffect(() => {
     const getUserWrite2 = async () => {
       try {
-        const response = await axios.get('https://fakestoreapi.com/products');
+        const response = await api.get('https://trendy-healthy-backend.store');
         setPosts(response.data || []);
         setLoading(false);
       } catch (error) {
@@ -38,7 +38,7 @@ const UserWrite2 = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/products/${id}`);
+      await api.delete(`/products/${id}`);
       setPosts(posts.filter(item => item.id !== id));
     } catch (error) {
       setError(error.message || '알 수 없는 오류가 발생했습니다.');
