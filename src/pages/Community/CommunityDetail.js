@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
-// import api from '../../services/api';
-import axios from 'axios';
 import styles from '../../assets/styles/community/communityDetail.module.scss';
+import api from '../../services/api';
 
 const CommunityDetail = () => {
   const { id } = useParams();
@@ -21,9 +20,9 @@ const CommunityDetail = () => {
   useEffect(() => {
     const fetchCommunityItem = async () => {
       try {
-        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+        const response = await api.get(`/community/communitySq/${id}`);
         setCommunityItem(response.data);
-        // await api.post(`/community/${id}/check`);  커뮤니티 조회수 증가 요청 추후 api 연결 이후 사용 예정
+        await api.post(`/community/recommend/${id}`);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -67,7 +66,6 @@ const CommunityDetail = () => {
         <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
       </div>
 
-      {/* CommunityComments TB (커뮤니티 댓글 테이블) */}
       <div className={styles.commentsSection}>
         <h3>댓글</h3>
         {/* comments.map((comment) => (
