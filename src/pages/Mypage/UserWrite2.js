@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import CommonPagination from '../../components/common/CommonPagination';
 import styles from '../../assets/styles/userWrite.module.scss';
+import axios from 'axios';
 
 const UserWrite2 = () => {
   const [posts, setPosts] = useState([]);
@@ -19,7 +20,7 @@ const UserWrite2 = () => {
   useEffect(() => {
     const getUserWrite2 = async () => {
       try {
-        const response = await api.get('https://trendy-healthy-backend.store');
+        const response = await axios.get('https://fakestoreapi.com/docs/products');
         setPosts(response.data || []);
         setLoading(false);
       } catch (error) {
