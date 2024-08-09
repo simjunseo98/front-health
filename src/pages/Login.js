@@ -19,8 +19,7 @@ const Login = () => {
       }, {
         headers: { 'Content-Type': 'application/json' }
       });
-  
-      console.log('응답 데이터 : ', response);
+      console.log('응답 데이터 : ', response.data);
       
       if (response.status === 200) {
         const { 'access-token': accessToken } = response.data;

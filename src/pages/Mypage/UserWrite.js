@@ -19,7 +19,7 @@ const UserWrite = () => {
   useEffect(() => {
     const getUserWrite = async () => {
       try {
-        const response = await api.get('/products');
+        const response = await api.get('/community​/myCommunityContents');
         setCommunity(response.data);
         setLoading(false);
       } catch (error) {
@@ -37,7 +37,7 @@ const UserWrite = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`/products/${id}`);
+      await api.delete('/community/delete');
       setCommunity(community.filter(item => item.id !== id));
     } catch (error) {
       setError(error);

@@ -16,11 +16,9 @@ const Today = () => {
   useEffect(() => {
     const getToday = async () => {
       try {
-        const response = await api.get('https://trendy-healthy-backend.store', {
+        const response = await api.get('/today/all', {
         
         });
-
-        // 게시물과 총 게시물 수 설정
 
         setPosts(response.data || []);
         setLoading(false);

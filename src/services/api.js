@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-//const baseURL = 'https://fakestoreapi.com'; // 서버 연결 전까지 사용할 fakeApi
 const baseURL = 'https://trendy-healthy-backend.store'; // 서버 연결 후 사용할 API
 
 const api = axios.create({

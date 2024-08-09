@@ -28,7 +28,7 @@ function CommonSidebar() {
         </li>
         <li>
           <NavLink 
-            to="/mypage/userwrite2" 
+            to="/mypage/userwrite" 
             className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link text-white'}
           >
             <svg className="bi pe-none me-2" width="16" height="16">
