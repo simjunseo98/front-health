@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import api from '../../services/api';
+// import api from '../../services/api';
 import Loading from '../../components/common/Loading';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
@@ -20,7 +20,7 @@ const UserWrite2 = () => {
   useEffect(() => {
     const getUserWrite2 = async () => {
       try {
-        const response = await axios.get('https://fakestoreapi.com/docs/products');
+        const response = await axios.get('https://fakestoreapi.com/products');
         setPosts(response.data || []);
         setLoading(false);
       } catch (error) {
@@ -39,7 +39,7 @@ const UserWrite2 = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`/products/${id}`);
+      await axios.delete(`https://fakestoreapi.com/products/${id}`);
       setPosts(posts.filter(item => item.id !== id));
     } catch (error) {
       setError(error.message || '알 수 없는 오류가 발생했습니다.');
