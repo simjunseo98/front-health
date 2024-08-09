@@ -35,7 +35,7 @@ function App() {
             <Route path="/today" element={<Today />} />
             <Route path="/todaywrite" element={<TodayWrite />} />
             <Route path="/community" element={<Community />} />
-            <Route path="/community/:id" element={<CommunityDetail />} />
+            <Route path="/community/communityDetail/:id" element={<CommunityDetail />} />
             <Route path="/communitywrite" element={<CommunityWrite />} />
             {/* 마이페이지 중첩라우팅 */}
             <Route path="/mypage" element={<MyPage />}>
