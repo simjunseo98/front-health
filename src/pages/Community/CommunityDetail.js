@@ -22,13 +22,13 @@ const CommunityDetail = () => {
       try {
         const response = await api.get(`/community/communitySq/${id}`);
         setCommunityItem(response.data);
-        await api.post(`/community/recommend/${id}`);
+        await api.post(`/community/view/${id}`);
         setLoading(false);
       } catch (error) {
         setError(error);
         setLoading(false);
       }
-    };
+    },[];
 
     fetchCommunityItem();
 
@@ -62,7 +62,7 @@ const CommunityDetail = () => {
         <p><strong>글내용:</strong> {communityItem.communityContents}</p>
         <p><strong>작성자:</strong> {communityItem.userId}</p>
         <p><strong>작성일:</strong> {formatDate(communityItem.communityCreated)}</p>
-        <p><strong>조회수:</strong> {communityItem.communityCheck}</p>
+        <p><strong>조회수:</strong> {communityItem.communityview}</p>
         <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
       </div>
 

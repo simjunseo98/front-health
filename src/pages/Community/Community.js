@@ -93,14 +93,14 @@ const Community = () => {
               <tr key={communityItem.id}>
                 <td className={styles.overflowEllipsis}>{communityItem.communitySq}</td>
                 <td className={styles.overflowEllipsis}>
-                  <Link to={`/community/${communityItem.communitySq}`}>
+                  <Link to={`/community/communitySq/${communityItem.communitySq}`}>
                     {communityItem.communityTitle}
                   </Link>
                 </td>
                 <td className={styles.overflowEllipsis}>{communityItem.communityContents}</td>
                 <td className={styles.overflowEllipsis}>{communityItem.user.userId}</td>
                 <td className={styles.overflowEllipsis}>{formatDate(communityItem.communityCreated)}</td>
-                <td className={styles.overflowEllipsis}>{communityItem.communityCheck}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.communityview}</td>
                 <td className={styles.overflowEllipsis}>{communityItem.communityRecommend}</td>
               </tr>
             ))}
