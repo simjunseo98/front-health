@@ -28,7 +28,7 @@ const CommunityDetail = () => {
         setError(error);
         setLoading(false);
       }
-    },[];
+    };
 
     fetchCommunityItem();
 
