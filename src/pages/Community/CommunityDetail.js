@@ -9,13 +9,11 @@ const CommunityDetail = () => {
   const [communityItem, setCommunityItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [comments, setComments] = useState([]);
 
-  const formatDate = (isString) => {
-    const date = new Date(isString);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
     return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
   };
-
 
   useEffect(() => {
     const fetchCommunityItem = async () => {
@@ -32,16 +30,6 @@ const CommunityDetail = () => {
 
     fetchCommunityItem();
 
-    // const fetchComments = async () => {
-    //   try {
-    //     const response = await api.get(`/comments/${id}`);
-    //     setComments(response.data);
-    //   } catch (error) {
-    //     console.error('댓글을 불러오는데 실패했습니다.', error);
-    //   }
-    // };
-
-    // fetchComments();
   }, [id]);
 
   if (loading) {
@@ -62,20 +50,23 @@ const CommunityDetail = () => {
         <p><strong>글내용:</strong> {communityItem.communityContents}</p>
         <p><strong>작성자:</strong> {communityItem.userId}</p>
         <p><strong>작성일:</strong> {formatDate(communityItem.communityCreated)}</p>
-        <p><strong>조회수:</strong> {communityItem.communityview}</p>
+        <p><strong>조회수:</strong> {communityItem.communityView}</p>
         <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
       </div>
 
       <div className={styles.commentsSection}>
         <h3>댓글</h3>
-        {/* comments.map((comment) => (
-          <div key={comment.communityCommentsSq} className={styles.comment}>
-            <p><strong>작성자:</strong> {comment.userId}</p>
-            <p><strong>내용:</strong> {comment.communityCommentsContents}</p>
-            <p><strong>작성날짜:</strong> {comment.communityCommentsCreated}</p>
-          </div>
-        )) */}
-        <p>댓글 내용이 여기에 표시됩니다.</p>
+        {communityItem.comments && communityItem.comments.length > 0 ? (
+          communityItem.comments.map((comment) => (
+            <div key={comment.communityCommentsSq} className={styles.comment}>
+              <p><strong>작성자:</strong> {comment.user.userId}</p>
+              <p><strong>내용:</strong> {comment.communityCommentsContents}</p>
+              <p><strong>작성날짜:</strong> {formatDate(comment.communityCommentsCreated)}</p>
+            </div>
+          ))
+        ) : (
+          <p>댓글이 없습니다.</p>
+        )}
       </div>
     </div>
   );
