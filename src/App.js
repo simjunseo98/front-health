@@ -15,6 +15,7 @@ import UserWrite from './pages/Mypage/UserWrite';
 import UserWrite2 from './pages/Mypage/UserWrite2';
 import CommunityWrite from './pages/Community/CommunityWrite';
 import UserWriteUpdate from './pages/Mypage/UserWriteUpdate'
+import PrivateRoute from './components/common/PrivateRoute';
 //css
 import styles from './assets/styles/layout.module.scss';
 import TodayWrite from './pages/Today/TodayWrite';
@@ -38,7 +39,11 @@ function App() {
             <Route path="/community/communityDetail/:id" element={<CommunityDetail />} />
             <Route path="/communitywrite" element={<CommunityWrite />} />
             {/* 마이페이지 중첩라우팅 */}
-            <Route path="/mypage" element={<MyPage />}>
+            <Route path="/mypage" element={
+              <PrivateRoute>
+                <MyPage />
+              </PrivateRoute>
+            }>
               <Route index element={<Navigate to="/mypage/userinfo" />} />
               <Route path="userinfo" element={<UserInfo />} />
               <Route path="userupdate" element={<UserUpdate />} />

@@ -3,10 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
 import api from '../../services/api';
 import CommonPagination from '../../components/common/CommonPagination';
-//css
-import styles from '../../assets/styles/userWrite.module.scss';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import styles from '../../assets/styles/userWrite.module.scss';
+
+// 날짜 포맷 함수
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+};
 
 const UserWrite = () => {
   const [community, setCommunity] = useState([]);
@@ -19,7 +24,7 @@ const UserWrite = () => {
   useEffect(() => {
     const getUserWrite = async () => {
       try {
-        const response = await api.get('/community​/myCommunityContents');
+        const response = await api.get('/community/myCommunityContents');
         setCommunity(response.data);
         setLoading(false);
       } catch (error) {
@@ -37,15 +42,16 @@ const UserWrite = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete('/community/delete');
-      setCommunity(community.filter(item => item.id !== id));
+      await api.delete(`/community/delete/${id}`);
+      alert('게시글 삭제를 완료했습니다.')
+      setCommunity(community.filter(item => item.communitySq !== id)); // ID가 아닌 communitySq 사용
     } catch (error) {
+      alert('게시글 삭제가 실패하였습니다.')
       setError(error);
     }
   };
 
   const handleEdit = (id) => {
-    console.log(id);
     navigate(`/mypage/userwriteupdate/${id}`);
   };
 
@@ -68,40 +74,36 @@ const UserWrite = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>이미지</th>
+              <th>번호</th>
               <th>제목</th>
-              <th>가격</th>
-              <th>카테고리</th>
+              <th>내용</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+              <th>추천수</th>
               <th>수정/삭제</th>
             </tr>
           </thead>
           <tbody>
-            
-            {currentItems.map((communityItem) => {
-            
-              return (
-                <tr key={communityItem.id}>
-                  <td>
-                    <img
-                      src={communityItem.image}
-                      alt={communityItem.title}
-                      style={{ width: '50px', height: '50px' }} />
-                  </td>
-                  <td>
-                    <Link to={`/community/${communityItem.id}`}>
-                      {communityItem.title}
-                    </Link>
-                  </td>
-                  <td>{communityItem.price}</td>
-                  <td>{communityItem.category}</td>
-                  <td className={styles.tableCellCenter}>
-
-                    <Button variant="success" onClick={() => handleEdit(communityItem.id)}>수정</Button>
-                    <Button variant="danger" onClick={() => handleDelete(communityItem.id)}>삭제</Button>
-                  </td>
-                </tr>
-              );
-            })}
+            {currentItems.map((communityItem) => (
+              <tr key={communityItem.communitySq}>
+                <td className={styles.overflowEllipsis}>{communityItem.communitySq}</td>
+                <td className={styles.overflowEllipsis}>
+                  <Link to={`/community/communityDetail/${communityItem.communitySq}`}>
+                    {communityItem.communityTitle}
+                  </Link>
+                </td>
+                <td className={styles.overflowEllipsis}>{communityItem.communityContents}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.user.userId}</td>
+                <td className={styles.overflowEllipsis}>{formatDate(communityItem.communityCreated)}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.communityview}</td>
+                <td className={styles.overflowEllipsis}>{communityItem.communityRecommend}</td>
+                <td className={styles.tableCellCenter}>
+                  <Button variant="success" onClick={() => handleEdit(communityItem.communitySq)}>수정</Button>
+                  <Button variant="danger" onClick={() => handleDelete(communityItem.communitySq)}>삭제</Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>

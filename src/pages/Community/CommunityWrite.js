@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container } from 'react-bootstrap';
 import api from '../../services/api';
@@ -11,15 +11,27 @@ const UserWrite = () => {
   const [created, setCreated] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    setCreated(formattedDate);
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const postData = { communityTitle: title, communityContents: contents, userId, communityCreated: created };
 
     try {
       await api.post('/community', postData);
+      alert('게시글 작성완료 되었습니다.')
       navigate('/community/register'); 
     } catch (error) {
-      console.error('Error creating post:', error);
+      alert('게시글 작성이 실패했습니다.');
+      console.error('게시글 작성이 실패했습니다.:', error);
     }
   };
 
@@ -55,6 +67,7 @@ const UserWrite = () => {
             placeholder="작성자 아이디를 입력하세요"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
+            readOnly
           />
         </Form.Group>
 
