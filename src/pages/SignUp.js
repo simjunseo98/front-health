@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-// import api from '../services/api';
-import axios from 'axios';
+import api from '../services/api';
 
 // 유효성 검사
 const valid = yup.object().shape({
@@ -28,10 +27,7 @@ const Signup = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('https://trendy-healthy-backend.store/user/signup', data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+            const response = await api.post('/user/signup', data, {
                 withCredentials: true
             });
             console.log('회원가입 성공 :', response.data);
