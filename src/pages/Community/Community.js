@@ -75,38 +75,38 @@ const Community = () => {
         <button type="button" className='btn btn-outline-primary' onClick={handleSearch} style={{ whiteSpace: 'nowrap' }}>검색</button>
       </div>
 
-      <div>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>제목</th>
-              <th>내용</th>
-              <th>작성자</th>
-              <th>작성일</th>
-              <th>조회수</th>
-              <th>추천수</th>
+      <div className={styles.communityContainer}>
+      <Table striped bordered hover className={styles.communityTable}>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th>추천수</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((communityItem) => (
+            <tr key={communityItem.id}>
+              <td className={styles.overflowEllipsis}>{communityItem.communitySq}</td>
+              <td className={styles.overflowEllipsis}>
+                <Link to={`/community/communityDetail/${communityItem.communitySq}`}>
+                  {communityItem.communityTitle}
+                </Link>
+              </td>
+              <td className={styles.overflowEllipsis}>{communityItem.communityContents}</td>
+              <td className={styles.overflowEllipsis}>{communityItem.user.userId}</td>
+              <td className={styles.overflowEllipsis}>{formatDate(communityItem.communityCreated)}</td>
+              <td className={styles.overflowEllipsis}>{communityItem.communityview}</td>
+              <td className={styles.overflowEllipsis}>{communityItem.communityRecommend}</td>
             </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((communityItem) => (
-              <tr key={communityItem.id}>
-                <td className={styles.overflowEllipsis}>{communityItem.communitySq}</td>
-                <td className={styles.overflowEllipsis}>
-                  <Link to={`/community/communityDetail/${communityItem.communitySq}`}>
-                    {communityItem.communityTitle}
-                  </Link>
-                </td>
-                <td className={styles.overflowEllipsis}>{communityItem.communityContents}</td>
-                <td className={styles.overflowEllipsis}>{communityItem.user.userId}</td>
-                <td className={styles.overflowEllipsis}>{formatDate(communityItem.communityCreated)}</td>
-                <td className={styles.overflowEllipsis}>{communityItem.communityview}</td>
-                <td className={styles.overflowEllipsis}>{communityItem.communityRecommend}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+          ))}
+        </tbody>
+      </Table>
+    </div>
       <div className={styles.writeButtonContainer}>
         <Link to="/communitywrite" className="btn btn-primary">
           게시글작성

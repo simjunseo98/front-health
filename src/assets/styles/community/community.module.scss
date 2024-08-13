@@ -5,6 +5,46 @@
   align-items: center;
   margin-bottom: 20px;
 }
+/* 테이블의 전체 너비를 설정 */
+.communityContainer {
+  width: 100% !important;
+  overflow-x: auto!important; /* 테이블이 가로로 넘칠 경우 스크롤 추가 */
+}
+
+/* 테이블 스타일 */
+.communityTable {
+  width: 100% !important; /* 테이블의 너비를 부모 컨테이너에 맞게 설정 */
+  border-collapse: collapse !important; /* 테두리 간격 제거 */
+}
+
+.communityTable th, .communityTable td {
+  text-align: left !important; /* 셀 내 텍스트 정렬 설정 */
+  padding: 8px !important; /* 셀 내부 여백 설정 */
+  border: 1px solid #ddd !important; /* 셀 경계 설정 */
+}
+
+/* 테이블 헤더 스타일 */
+.communityTable thead th {
+  background-color: #f8f9fa !important; /* 헤더 배경색 설정 */
+}
+
+/* 각 셀의 텍스트가 일정 길이를 넘어가면 ...으로 표시 */
+.overflowEllipsis {
+  white-space: nowrap !important; /* 텍스트가 한 줄로 유지되도록 설정 */
+  overflow: hidden !important; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis !important; /* 넘치는 텍스트를 ...으로 표시 */
+}
+
+/* 모바일에서 테이블을 스크롤 가능하도록 설정 */
+@media (max-width: 768px) {
+  .communityTable {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
 
 .writeButtonContainer {
   display: flex;
@@ -15,12 +55,6 @@ h2 {
   text-align: center;
   margin-top: 30px;
   margin-bottom: 40px;
-}
-
-.overflowEllipsis {
-  white-space: nowrap; 
-  overflow: hidden;    
-  text-overflow: ellipsis; 
 }
 
 
