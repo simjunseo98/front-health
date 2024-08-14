@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
 import styles from '../../assets/styles/community/communityDetail.module.scss';
 import api from '../../services/api';
+import { AiFillLike,AiFillDislike  } from 'react-icons/ai';
 
 const CommunityDetail = () => {
   const { id } = useParams();
   const [communityItem, setCommunityItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [newComment, setNewComment] = useState('');
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -32,6 +34,25 @@ const CommunityDetail = () => {
 
   }, [id]);
 
+  const addCommunityComments = async () => {
+    if (newComment.trim() === '') return; // 빈 댓글 방지
+    try {
+      const response = await api.post(`/community/comments/${id}`, {
+        communityId: id,
+        communityCommentsContents: newComment
+      });console.log('hi');
+
+      // 새로 추가된 댓글을 포함한 댓글 리스트 업데이트
+      setCommunityItem(prevState => ({
+        ...prevState,
+        comments: [...prevState.comments, response.data]
+      }));
+
+      setNewComment(''); // 댓글 입력 필드 초기화
+    } catch (error) {
+      console.error('Failed to add comment:', error);
+    }
+  }; 
   if (loading) {
     return <div><Loading /></div>;
   }
@@ -45,17 +66,33 @@ const CommunityDetail = () => {
       {/* Community TB (커뮤니티 테이블) */}
       <div className={styles.communityInfo}>
         <h3>커뮤니티 정보</h3>
-        <p><strong>커뮤니티 고유번호:</strong> {communityItem.communitySq}</p>
-        <p><strong>글제목:</strong> {communityItem.communityTitle}</p>
-        <p><strong>글내용:</strong> {communityItem.communityContents}</p>
+        <div className={styles.communityHeader}>
+        <p><strong>고유번호:</strong> {communityItem.communitySq}</p>
         <p><strong>작성자:</strong> {communityItem.user.userId}</p>
         <p><strong>작성일:</strong> {formatDate(communityItem.communityCreated)}</p>
         <p><strong>조회수:</strong> {communityItem.communityview}</p>
         <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
+        </div>
+        <p><strong>글제목:</strong> {communityItem.communityTitle}</p>
+        <hr></hr>
+        <p className={styles.communityText}><strong></strong> {communityItem.communityContents}</p>
+        <div className={styles.buttonLike}>
+        <button className={styles.recommendButton}> <AiFillLike />추천</button> 
+        <button className={styles.dislikeButton}><AiFillDislike />비추천</button>
       </div>
-
+      </div>
+<hr></hr>
       <div className={styles.commentsSection}>
         <h3>댓글</h3>
+        <div className={styles.commentsContainer}>
+        <textarea
+              className={styles.commentsWrite}
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="댓글을 입력하세요..."
+            />
+        <button className={styles.commentsButton} onClick={addCommunityComments}>등록</button>
+        </div>
         {communityItem.comments && communityItem.comments.length > 0 ? (
           communityItem.comments.map((comment) => (
             <div key={comment.communityCommentsSq} className={styles.comment}>

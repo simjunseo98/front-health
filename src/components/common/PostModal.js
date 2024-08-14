@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import styles from '../../assets/styles/today/postModal.module.scss';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import api from '../../services/api'; // api 파일에서 함수 가져오기
+import { useParams } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -11,6 +12,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
   const [likes, setLikes] = useState(post.likes || 0);
   const [comments, setComments] = useState(post.comments || []);
   const [newComment, setNewComment] = useState('');
+  const { id } = useParams();
 
   const handleAddComment = async () => {
     if (newComment.trim() !== '') {
@@ -28,7 +30,8 @@ const PostModal = ({ isOpen, isClose, post }) => {
   //댓글 등록시 서버에 요청
   const addComment = async (postId, commentData) => {
     try {
-        const response = await api.post(`/today/comments`, { postId: postId,...commentData});
+        const response = await api.post(`/today/comments/${id}`, 
+          { postId: postId,...commentData});
         return response.data;
     } catch (error) {
         throw new Error('Failed to add comment');
