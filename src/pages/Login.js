@@ -20,8 +20,10 @@ const Login = () => {
       console.log('응답 데이터 : ', response.data);
       
       if (response.status === 200) {
-        const { 'access-token': accessToken } = response.data;
+        const data = JSON.parse(response.data);
+        const { 'access-token': accessToken, userId } = data;
         sessionStorage.setItem('token', accessToken);
+        sessionStorage.setItem('userId', userId);
         alert('로그인 성공했습니다.😊');
         window.location.href = '/';
       } else {
