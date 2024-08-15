@@ -14,14 +14,13 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await api.post('/jwt/authenticate', {
-          username: id, 
-          password: password
+        username: id, 
+        password: password
       });
       console.log('응답 데이터 : ', response.data);
-      
+  
       if (response.status === 200) {
-        const data = JSON.parse(response.data);
-        const { 'access-token': accessToken, userId } = data;
+        const { 'access-token': accessToken, userId } = response.data;
         sessionStorage.setItem('token', accessToken);
         sessionStorage.setItem('userId', userId);
         alert('로그인 성공했습니다.😊');
@@ -37,6 +36,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+  
   
 
   if (loading) {
