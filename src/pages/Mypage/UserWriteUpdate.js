@@ -9,20 +9,18 @@ const UserWriteUpdate = () => {
   const [communitySq, setCommunitySq] = useState('');
   const [title, setTitle] = useState('');
   const [contents, setContents] = useState('');
-  const [userId, setUserId] = useState('');
   const [created, setCreated] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await api.get(`/community/myCommunityContents/${id}`);
-        console.log(id)
+        const response = await api.get(`/community/communityDetail/${id}`);
         const data = response.data;
-        setTitle(data.title);
-        setContents(data.contents);
-        setUserId(data.userId);
-        setCreated(data.created);
+        setCommunitySq(data.communitySq);  
+        setTitle(data.communityTitle);
+        setContents(data.communityContents);
+        setCreated(data.communityCreated.substring(0, 10));
       } catch (error) {
         console.error('Error fetching post data:', error);
       }
@@ -33,14 +31,19 @@ const UserWriteUpdate = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const postData = { communitySq,title, contents, userId, created };
+    const postData = { 
+      communitySq, 
+      communityTitle: title, 
+      communityContents: contents, 
+      communityCreated: created 
+    };
 
     try {
       await api.put('/community/update', postData);
-      alert('수정이 완료되었습니다.')
+      alert('수정이 완료되었습니다.');
       navigate('/mypage/userwrite');
     } catch (error) {
-      alert('수정이 실패하였습니다.')
+      alert('수정이 실패하였습니다.');
       console.error('Error updating post:', error);
     }
   };
@@ -54,7 +57,6 @@ const UserWriteUpdate = () => {
           <Form.Control
             type="text"
             value={communitySq}
-            onChange={(e) => setCommunitySq(e.target.value)}
             readOnly
           />
         </Form.Group>
@@ -76,16 +78,6 @@ const UserWriteUpdate = () => {
             placeholder="내용을 입력하세요"
             value={contents}
             onChange={(e) => setContents(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formUserId">
-          <Form.Label>작성자 아이디</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="작성자 아이디를 입력하세요"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
           />
         </Form.Group>
 

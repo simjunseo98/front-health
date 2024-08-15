@@ -17,18 +17,22 @@ const UserWrite = () => {
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
-
     setCreated(formattedDate);
+
+    const storedUserId = sessionStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
   }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const postData = { communityTitle: title, communityContents: contents, userId, communityCreated: created };
+    const postData = { communityTitle: title, communityContents: contents };
 
     try {
-      await api.post('/community', postData);
-      alert('게시글 작성완료 되었습니다.')
-      navigate('/community/register'); 
+      await api.post('/community/register', postData);
+      alert('게시글 작성완료 되었습니다.');
+      navigate('/community'); 
     } catch (error) {
       alert('게시글 작성이 실패했습니다.');
       console.error('게시글 작성이 실패했습니다.:', error);
@@ -64,9 +68,7 @@ const UserWrite = () => {
           <Form.Label>작성자 아이디</Form.Label>
           <Form.Control
             type="text"
-            placeholder="작성자 아이디를 입력하세요"
             value={userId}
-            onChange={(e) => setUserId(e.target.value)}
             readOnly
           />
         </Form.Group>
@@ -76,7 +78,7 @@ const UserWrite = () => {
           <Form.Control
             type="date"
             value={created}
-            onChange={(e) => setCreated(e.target.value)}
+            readOnly
           />
         </Form.Group>
 
