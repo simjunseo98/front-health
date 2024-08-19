@@ -14,7 +14,7 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await api.post('/jwt/authenticate', {
-        username: id, 
+        userId: id, 
         password: password
       });
       console.log('응답 데이터 : ', response.data);
