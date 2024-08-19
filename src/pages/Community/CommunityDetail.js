@@ -32,6 +32,7 @@ const CommunityDetail = () => {
       }
     };
 
+    //추천 여부
     const checkRecommendation = async () => {
       try {
         const response = await api.get(`/community/recommend/check/${id}`);
@@ -52,12 +53,13 @@ const CommunityDetail = () => {
 
   }, [id]);
 
+  //댓글 추가
   const addCommunityComments = async () => {
     if (newComment.trim() === '') return; // 빈 댓글 방지
     try {
-      const response = await api.post(`/community/comments/${id}`, {
-        communityId: id,
-        communityCommentsContents: newComment
+      const response = await api.post(`/communityComments/insert`, {
+        communityCommentsContents: newComment,
+        community: { communitySq: id } // 커뮤니티 ID를 포함한 객체로 전달
       });
 
       // 새로 추가된 댓글을 포함한 댓글 리스트 업데이트
@@ -68,7 +70,42 @@ const CommunityDetail = () => {
 
       setNewComment(''); // 댓글 입력 필드 초기화
     } catch (error) {
-      console.error('Failed to add comment:', error);
+      console.error('댓글 작성이 실패했습니다 :', error);
+    }
+  };
+
+  //댓글 수정
+  const updateCommunityComment = async (commentId, updatedContent) => {
+    try {
+      const response = await api.put(`/communityComments/update`, {
+        communityCommentsSq: commentId,
+        communityCommentsContents: updatedContent,
+      });
+
+      // 수정된 댓글 반영
+      setCommunityItem(prevState => ({
+        ...prevState,
+        comments: prevState.comments.map(comment => 
+          comment.communityCommentsSq === commentId ? response.data : comment
+        )
+      }));
+    } catch (error) {
+      console.error('댓글 수정이 실패했습니다 :', error);
+    }
+  };
+
+  //댓글 삭제
+  const deleteCommunityComment = async (commentId) => {
+    try {
+      await api.delete(`/communityComments/delete/${commentId}`);
+
+      // 삭제된 댓글 제거
+      setCommunityItem(prevState => ({
+        ...prevState,
+        comments: prevState.comments.filter(comment => comment.communityCommentsSq !== commentId)
+      }));
+    } catch (error) {
+      console.error('댓글 삭제가 실패했습니다 :', error);
     }
   };
 
@@ -141,6 +178,14 @@ const CommunityDetail = () => {
               <p><strong>작성자:</strong> {comment.user.userId}</p>
               <p><strong>내용:</strong> {comment.communityCommentsContents}</p>
               <p><strong>작성날짜:</strong> {formatDate(comment.communityCommentsCreated)}</p>
+              {isLoggedIn && comment.user.userId === sessionStorage.getItem('userId') && (
+                <div className={styles.commentActions}>
+                  <button onClick={() => updateCommunityComment(comment.communityCommentsSq, prompt("수정할 내용을 입력하세요", comment.communityCommentsContents))}>
+                    수정
+                  </button>
+                  <button onClick={() => deleteCommunityComment(comment.communityCommentsSq)}>삭제</button>
+                </div>
+              )}
             </div>
           ))
         ) : (
