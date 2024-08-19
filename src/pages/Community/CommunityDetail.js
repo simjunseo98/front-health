@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
 import styles from '../../assets/styles/community/communityDetail.module.scss';
 import api from '../../services/api';
-import { AiFillLike, AiFillDislike } from 'react-icons/ai';
+import { AiFillLike } from 'react-icons/ai';
 
 const CommunityDetail = () => {
   const { id } = useParams();
@@ -12,6 +12,7 @@ const CommunityDetail = () => {
   const [error, setError] = useState(null);
   const [newComment, setNewComment] = useState('');
   const [hasRecommended, setHasRecommended] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -40,8 +41,14 @@ const CommunityDetail = () => {
       }
     };
 
+    const checkLoginStatus = () => {
+      const token = sessionStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
     fetchCommunityItem();
     checkRecommendation();
+    checkLoginStatus();
 
   }, [id]);
 
@@ -63,7 +70,7 @@ const CommunityDetail = () => {
     } catch (error) {
       console.error('Failed to add comment:', error);
     }
-  }; 
+  };
 
   const toggleRecommendation = async () => {
     try {
@@ -74,7 +81,7 @@ const CommunityDetail = () => {
       }));
       setHasRecommended(prevState => !prevState);
     } catch (error) {
-      console.error('Failed to toggle recommendation:', error);
+      console.error('추천을 실패했습니다:', error);
     }
   };
 
@@ -98,31 +105,36 @@ const CommunityDetail = () => {
           <p><strong>추천수:</strong> {communityItem.communityRecommend}</p>
         </div>
         <p><strong>글제목:</strong> {communityItem.communityTitle}</p>
-        <hr></hr>
+        <hr />
         <p className={styles.communityText}><strong></strong> {communityItem.communityContents}</p>
-        <div className={styles.buttonLike}>
-          <button 
-            className={`${styles.recommendButton} ${hasRecommended ? styles.recommended : ''}`} 
-            onClick={toggleRecommendation}
-          >
-            <AiFillLike />
-            {hasRecommended ? '추천 취소' : '추천'}
-          </button> 
-          <button className={styles.dislikeButton}><AiFillDislike />비추천</button>
-        </div>
+        {isLoggedIn && (
+          <div className={styles.buttonLike}>
+            <button 
+              className={`${styles.recommendButton} ${hasRecommended ? styles.recommended : ''}`} 
+              onClick={toggleRecommendation}
+            >
+              <AiFillLike />
+              {hasRecommended ? '추천 취소' : '추천'}
+            </button> 
+          </div>
+        )}
       </div>
-      <hr></hr>
+      <hr />
       <div className={styles.commentsSection}>
         <h3>댓글</h3>
-        <div className={styles.commentsContainer}>
-          <textarea
-            className={styles.commentsWrite}
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="댓글을 입력하세요..."
-          />
-          <button className={styles.commentsButton} onClick={addCommunityComments}>등록</button>
-        </div>
+        {isLoggedIn ? (
+          <div className={styles.commentsContainer}>
+            <textarea
+              className={styles.commentsWrite}
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="댓글을 입력하세요..."
+            />
+            <button className={styles.commentsButton} onClick={addCommunityComments}>등록</button>
+          </div>
+        ) : (
+          <p>로그인 후 댓글을 작성할 수 있습니다.</p>
+        )}
         {communityItem.comments && communityItem.comments.length > 0 ? (
           communityItem.comments.map((comment) => (
             <div key={comment.communityCommentsSq} className={styles.comment}>

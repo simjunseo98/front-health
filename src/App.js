@@ -37,7 +37,9 @@ function App() {
             <Route path="/todaywrite" element={<TodayWrite />} />
             <Route path="/community" element={<Community />} />
             <Route path="/community/communityDetail/:id" element={<CommunityDetail />} />
+            <PrivateRoute>
             <Route path="/communitywrite" element={<CommunityWrite />} />
+            </PrivateRoute>
             {/* 마이페이지 중첩라우팅 */}
             <Route path="/mypage" element={
               <PrivateRoute>
