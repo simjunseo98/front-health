@@ -135,7 +135,7 @@ const CommunityDetail = () => {
       <div className={styles.communityInfo}>
         <h3>커뮤니티 정보</h3>
         <div className={styles.communityHeader}>
-          <p><strong>고유번호:</strong> {communityItem.communitySq}</p>
+          <p><strong>글번호:</strong> {communityItem.communitySq}</p>
           <p><strong>작성자:</strong> {communityItem.user.userId}</p>
           <p><strong>작성일:</strong> {formatDate(communityItem.communityCreated)}</p>
           <p><strong>조회수:</strong> {communityItem.communityview}</p>

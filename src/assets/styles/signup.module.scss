@@ -1,0 +1,79 @@
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+    margin: 50px;
+    width: 400px;
+
+
+  }
+  
+  .signupContainer {
+    background-color: white;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #262626;
+    font-weight: 600;
+  }
+  
+  .signupContainer label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #8e8e8e;
+    text-align: left;
+  }
+  
+  .signupContainer input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+    outline: none;
+  }
+  
+  .signupContainer input:focus {
+    border-color: #a8a8a8;
+  }
+  
+  .signupContainer p {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #0095f6;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #007bb5;
+  }
+  
+  .signupContainer .inputField {
+    margin-bottom: 15px;
+  }
+  
