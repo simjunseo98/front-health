@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import api from '../services/api';
+import styles from '../assets/styles/signup.module.scss'
 
 // 유효성 검사
 const valid = yup.object().shape({
@@ -41,51 +42,53 @@ const Signup = () => {
     };
 
     return (
-        <div>
+        <div className={styles.Container}>
+        <div className={styles.signupContainer}>
             <h2>회원가입</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
+                <div className={styles.inputField}>
                     <label>아이디 :</label>
                     <input type="text" {...register('userId')} />
                     <p>{errors.userId?.message}</p>
                 </div>
-                <div>
+                <div className={styles.inputField}>
                     <label>비밀번호 :</label>
                     <input type="password" {...register('userPw')} />
                     <p>{errors.userPw?.message}</p>
                 </div>
-                <div>
+                <div className={styles.inputField}>
                     <label>비밀번호 확인 :</label>
                     <input type="password" {...register('confirmPassword')} />
                     <p>{errors.confirmPassword?.message}</p>
                 </div>
-                <div>
+                <div className={styles.inputField}>
                     <label>이름 :</label>
                     <input type="text" {...register('userName')} />
                     <p>{errors.userName?.message}</p>
                 </div>
-                <div>
+                <div className={styles.inputField}>
                     <label>이메일 :</label>
                     <input type="email" {...register('userEmail')} />
                     <p>{errors.userEmail?.message}</p>
                 </div>
-                <div>
+                <div className={styles.inputField}>
                     <label>주소 :</label>
                     <input type="text" {...register('userAddress')} />
                     <p>{errors.userAddress?.message}</p>
                 </div>
-                <div>
+                <div className={styles.inputField}>
                     <label>나이 :</label>
                     <input type="text" {...register('userAge')} />
                     <p>{errors.userAge?.message}</p>
                 </div>
-                <div>
+                <div className={styles.inputField}>
                     <label>전화번호 :</label>
                     <input type="text" {...register('userPhone')} />
                     <p>{errors.userPhone?.message}</p>
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
+        </div>
         </div>
     );
 };
