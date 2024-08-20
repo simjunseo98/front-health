@@ -14,7 +14,7 @@ export const Card = ({ post }) => {
       <div className={styles.cardWrapper} onClick={openModal}>
         <div className={styles.cardBodyImg}>
           <img 
-            src={post.image}
+            src={post.imageurl}
             alt={post.title}
             onError={(e) => { e.target.onerror = null; e.target.src = "https://via.placeholder.com/150"; }}
           />

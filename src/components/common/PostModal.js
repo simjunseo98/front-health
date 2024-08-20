@@ -85,15 +85,15 @@ const unlikePost = async (todayId) => {
       overlayClassName={styles.overlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalBody}>
-          <img src={post.image} alt={post.title} className={styles.modalImage} />
+          <img src={post.imageurl} alt={post.title} className={styles.modalImage} />
           <div className={styles.modalFooter}>
-            <div className={styles.username}>{post.username} 임시: 작성자</div>
-            <div className={styles.date}>{post.date} 임시: 작성일</div>
+            <div className={styles.username}>{post.user.userId} 임시: 작성자</div>
+            <div className={styles.date}>{post.todayCreated} 임시: 작성일</div>
           </div>
         </div>
         <div className={styles.commentSection}>
           <div className={styles.modalText}>
-            <p className={styles.modalDescription}>{post.description}</p>
+            <p className={styles.modalDescription}>{post.todayContents}</p>
           </div>
           <div className={styles.commentList}>
             {comments.map((comment, index) => (
