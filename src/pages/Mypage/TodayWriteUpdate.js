@@ -6,7 +6,7 @@ import styles from '../../assets/styles/today/todayWrite.module.scss';
 
 const TodayWriteUpdate = () => {
   const { id } = useParams();  
-  const {todaySq , setTodaySq} = useState('');
+  const [todaySq , setTodaySq] = useState('');
   const [image, setImage] = useState('');
   const [contents, setContents] = useState('');
   const [created, setCreated] = useState('');
