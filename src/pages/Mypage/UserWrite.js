@@ -25,7 +25,10 @@ const UserWrite = () => {
     const getUserWrite = async () => {
       try {
         const response = await api.get('/community/myCommunityContents');
-        setCommunity(response.data);
+        const sortedData = response.data.sort(
+          (a, b) => new Date(b.communityCreated) - new Date(a.communityCreated)
+        );
+        setCommunity(sortedData);
         setLoading(false);
       } catch (error) {
         setError(error);

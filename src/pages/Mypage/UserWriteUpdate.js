@@ -5,7 +5,7 @@ import api from '../../services/api';
 import styles from '../../assets/styles/userWrite.module.scss';
 
 const UserWriteUpdate = () => {
-  const { id } = useParams();  // URL에서 id를 추출
+  const { id } = useParams(); 
   const [communitySq, setCommunitySq] = useState('');
   const [title, setTitle] = useState('');
   const [contents, setContents] = useState('');
@@ -22,7 +22,7 @@ const UserWriteUpdate = () => {
         setContents(data.communityContents);
         setCreated(data.communityCreated.substring(0, 10));
       } catch (error) {
-        console.error('Error fetching post data:', error);
+        console.error('게시물 데이터를 가져오는 중 오류 발생:', error);
       }
     };
 
@@ -44,7 +44,7 @@ const UserWriteUpdate = () => {
       navigate('/mypage/userwrite');
     } catch (error) {
       alert('수정이 실패하였습니다.');
-      console.error('Error updating post:', error);
+      console.error('게시물 데이터를 업데이트 중 오류 발생:', error);
     }
   };
 

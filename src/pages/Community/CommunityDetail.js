@@ -38,7 +38,7 @@ const CommunityDetail = () => {
         const response = await api.get(`/community/recommend/check/${id}`);
         setHasRecommended(response.data.hasRecommended);
       } catch (error) {
-        console.error('Failed to check recommendation:', error);
+        console.error('추천이 실패 하였습니다:', error);
       }
     };
 
@@ -59,9 +59,10 @@ const CommunityDetail = () => {
     try {
       const response = await api.post(`/communityComments/insert`, {
         communityCommentsContents: newComment,
-        community: { communitySq: id } // 커뮤니티 ID를 포함한 객체로 전달
+        community: { communitySq: id }, // 커뮤니티 ID를 포함한 객체로 전달
+        communityCommentsCreated: new Date().toISOString()
       });
-
+      alert('댓글 작성이 성공했습니다.')
       // 새로 추가된 댓글을 포함한 댓글 리스트 업데이트
       setCommunityItem(prevState => ({
         ...prevState,
@@ -71,6 +72,7 @@ const CommunityDetail = () => {
       setNewComment(''); // 댓글 입력 필드 초기화
     } catch (error) {
       console.error('댓글 작성이 실패했습니다 :', error);
+      alert('댓글 작성을 실패했습니다.')
     }
   };
 
@@ -81,7 +83,7 @@ const CommunityDetail = () => {
         communityCommentsSq: commentId,
         communityCommentsContents: updatedContent,
       });
-
+      alert('댓글 수정을 성공했습니다.')
       // 수정된 댓글 반영
       setCommunityItem(prevState => ({
         ...prevState,
@@ -91,6 +93,7 @@ const CommunityDetail = () => {
       }));
     } catch (error) {
       console.error('댓글 수정이 실패했습니다 :', error);
+      alert('댓글 수정을 실패했습니다.')
     }
   };
 
@@ -98,7 +101,7 @@ const CommunityDetail = () => {
   const deleteCommunityComment = async (commentId) => {
     try {
       await api.delete(`/communityComments/delete/${commentId}`);
-
+      alert('댓글이 삭제 되었습니다.')
       // 삭제된 댓글 제거
       setCommunityItem(prevState => ({
         ...prevState,
@@ -106,6 +109,7 @@ const CommunityDetail = () => {
       }));
     } catch (error) {
       console.error('댓글 삭제가 실패했습니다 :', error);
+      alert('댓글 삭제가 실패했습니다.')
     }
   };
 
