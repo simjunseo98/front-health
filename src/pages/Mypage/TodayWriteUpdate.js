@@ -31,11 +31,12 @@ const TodayWriteUpdate = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const now = new Date().toISOString();
     const postData = { 
       todaySq,
       imageurl:image, 
       todayContents:contents, 
-      todayCreated:created
+      todayCreated:now
     };
 
     try {

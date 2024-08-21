@@ -27,7 +27,8 @@ const UserWrite = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const postData = { communityTitle: title, communityContents: contents, communityCreated: created};
+    const now = new Date().toISOString();
+    const postData = { communityTitle: title, communityContents: contents, communityCreated: now};
 
     try {
       await api.post('/community/register', postData);

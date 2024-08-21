@@ -31,11 +31,12 @@ const UserWriteUpdate = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const now = new Date().toISOString();
     const postData = { 
       communitySq, 
       communityTitle: title, 
       communityContents: contents, 
-      communityCreated: created 
+      communityCreated: now 
     };
 
     try {
