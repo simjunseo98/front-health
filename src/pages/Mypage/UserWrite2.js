@@ -15,6 +15,12 @@ const UserWrite2 = () => {
   const [postsPerPage] = useState(4);
   const navigate = useNavigate();
 
+// 날짜 포맷 함수
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+};
+
   useEffect(() => {
     const getUserWrite2 = async () => {
       try {
@@ -103,7 +109,7 @@ const UserWrite2 = () => {
                   {post.todayHearts}
                 </td>
                 <td>
-                  {post.todayCreated}
+                  {formatDate(post.todayCreated)}
                 </td>
                 <td className={styles.tableCellCenter}>
                   <Button variant="success" onClick={() => handleEdit(post.todaySq)}>수정</Button>

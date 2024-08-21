@@ -20,7 +20,7 @@ const TodayWriteUpdate = () => {
         setTodaySq(data.todaySq)
         setImage(data.imageurl);
         setContents(data.todayContents);
-        setCreated(data.todayCreated);
+        setCreated(data.todayCreated.substring(0, 10));
       } catch (error) {
         console.error('게시물 데이터를 가져오는 중 오류 발생:', error);
       }

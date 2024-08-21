@@ -82,6 +82,7 @@ const CommunityDetail = () => {
       const response = await api.put(`/communityComments/update`, {
         communityCommentsSq: commentId,
         communityCommentsContents: updatedContent,
+        communityCommentsCreated: new Date().toISOString()
       });
       alert('댓글 수정을 성공했습니다.')
       // 수정된 댓글 반영
