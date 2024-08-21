@@ -85,9 +85,10 @@ const UserWriteUpdate = () => {
         <Form.Group controlId="formCreated">
           <Form.Label>작성일</Form.Label>
           <Form.Control
-            type="date"
+            type="text"
             value={created}
             onChange={(e) => setCreated(e.target.value)}
+            readOnly
           />
         </Form.Group>
         <Button variant="primary" type="submit">

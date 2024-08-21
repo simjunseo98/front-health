@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import CommonPagination from '../../components/common/CommonPagination';
 import styles from '../../assets/styles/userWrite.module.scss';
 import api from '../../services/api';
-
+// 내가쓴 오운완 게시글
 const UserWrite2 = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);

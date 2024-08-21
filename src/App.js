@@ -16,11 +16,11 @@ import UserWrite2 from './pages/Mypage/UserWrite2';
 import CommunityWrite from './pages/Community/CommunityWrite';
 import UserWriteUpdate from './pages/Mypage/UserWriteUpdate'
 import PrivateRoute from './components/common/PrivateRoute';
-//css
-import styles from './assets/styles/layout.module.scss';
+import TodayWriteUpdate from './pages/Mypage/TodayWriteUpdate';
 import TodayWrite from './pages/Today/TodayWrite';
 import UserHeart from './pages/Mypage/UserHeart';
-import TodayWriteUpdate from './pages/Mypage/TodayWriteUpdate';
+//css
+import styles from './assets/styles/layout.module.scss';
 
 function App() {
   return (
@@ -34,7 +34,14 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/challenge" element={<Challenge />} />
             <Route path="/today" element={<Today />} />
-            <Route path="/todaywrite" element={<TodayWrite />} />
+            <Route 
+              path="/todaywrite" 
+              element={
+                <PrivateRoute>
+                  <TodayWrite />
+                </PrivateRoute>
+              } 
+            />
             <Route path="/community" element={<Community />} />
             <Route path="/community/communityDetail/:id" element={<CommunityDetail />} />
             <Route 
@@ -45,7 +52,6 @@ function App() {
                 </PrivateRoute>
               } 
             />
-            {/* 마이페이지 중첩라우팅 */}
             <Route path="/mypage" element={
               <PrivateRoute>
                 <MyPage />
@@ -59,7 +65,6 @@ function App() {
               <Route path="todaywriteupdate/:id" element={<TodayWriteUpdate />} />
               <Route path="userwriteupdate/:id" element={<UserWriteUpdate />} />
               <Route path="userheart" element={<UserHeart />} />
-              {/* 필요한 다른 서브 페이지들 추가 */}
             </Route>
           </Routes>
         </div>

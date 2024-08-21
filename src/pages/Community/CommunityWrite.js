@@ -44,6 +44,14 @@ const UserWrite = () => {
     <Container className={styles.createPostContainer}>
       <h2>게시글 작성</h2>
       <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formUserId">
+          <Form.Label>작성자 아이디</Form.Label>
+          <Form.Control
+            type="text"
+            value={userId}
+            readOnly
+          />
+        </Form.Group>
         <Form.Group controlId="formTitle">
           <Form.Label>글제목</Form.Label>
           <Form.Control
@@ -53,7 +61,6 @@ const UserWrite = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group controlId="formContents">
           <Form.Label>글내용</Form.Label>
           <Form.Control
@@ -64,25 +71,14 @@ const UserWrite = () => {
             onChange={(e) => setContents(e.target.value)}
           />
         </Form.Group>
-
-        <Form.Group controlId="formUserId">
-          <Form.Label>작성자 아이디</Form.Label>
-          <Form.Control
-            type="text"
-            value={userId}
-            readOnly
-          />
-        </Form.Group>
-
         <Form.Group controlId="formCreated">
           <Form.Label>작성일</Form.Label>
           <Form.Control
-            type="date"
+            type="text"
             value={created}
             readOnly
           />
         </Form.Group>
-
         <Button variant="primary" type="submit">
           작성하기
         </Button>
