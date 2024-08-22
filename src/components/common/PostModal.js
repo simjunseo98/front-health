@@ -93,12 +93,6 @@ const PostModal = ({ isOpen, isClose, post }) => {
           <div className={styles.modalText}>
             <p className={styles.modalDescription}>{post.todayContents}</p>
           </div>
-          <div className={styles.likeSection}>
-            <div className={styles.heart} onClick={toggleLike}>
-              {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {likes}
-            </div>
-          </div>
-        </div>
         <div className={styles.commentSection}>
           <div className={styles.commentList}>
             {comments.map((comment, index) => (
@@ -113,6 +107,9 @@ const PostModal = ({ isOpen, isClose, post }) => {
               </div>
             ))}
           </div>
+                <div className={styles.heart} onClick={toggleLike}>
+                  {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {likes}
+                </div>
           <div className={styles.commentForm}>
             <input
               type="text"
@@ -125,6 +122,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
           </div>
         </div>
         <button className={styles.closeButton} onClick={isClose}>×</button>
+      </div>
       </div>
     </Modal>
   );
