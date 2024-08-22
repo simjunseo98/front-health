@@ -16,8 +16,6 @@ api.interceptors.request.use(
             config.headers['Authorization'] = `Bearer ${token}`;
             console.log('헤더에 추가된 토큰 :', token);
         }
-        // // 모든 요청에 대해 Content-Type을 설정
-        // config.headers['Content-Type'] = 'application/json; charset=utf-8';
         return config;
     },
     error => {

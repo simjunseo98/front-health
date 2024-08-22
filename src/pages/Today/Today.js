@@ -16,11 +16,12 @@ const Today = () => {
   useEffect(() => {
     const getToday = async () => {
       try {
-        const response = await api.get('/today/all', {
-        
+        const response = await api.get('/today/all');
+        const sortedPosts = response.data.sort((a, b) => {
+          return new Date(b.todayCreated) - new Date(a.todayCreated);
         });
 
-        setPosts(response.data || []);
+        setPosts(sortedPosts || []);
         setLoading(false);
       } catch (error) {
         console.error('API 호출 중 오류 발생:', error);
