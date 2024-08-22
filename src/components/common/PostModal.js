@@ -107,10 +107,10 @@ const PostModal = ({ isOpen, isClose, post }) => {
               </div>
             ))}
           </div>
+          <div className={styles.commentForm}>
                 <div className={styles.heart} onClick={toggleLike}>
                   {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {likes}
                 </div>
-          <div className={styles.commentForm}>
             <input
               type="text"
               className={styles.commentInput}
