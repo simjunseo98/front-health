@@ -35,22 +35,27 @@ const TodayWrite = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const formData = new FormData();
     formData.append('content', todayContents);
     if (todayImage) {
       formData.append('file', todayImage);
     }
-
+  
     try {
-      await api.post('/today/create', formData); 
-      alert('게시물 작성이 완료되었습니다.')
+      await api.post('/today/create', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      alert('게시물 작성이 완료되었습니다.');
       navigate('/today/register');
     } catch (error) {
       console.error('Error creating post:', error);
-      alert('게시물 작성을 실패하였습니다.')
+      alert('게시물 작성을 실패하였습니다.');
     }
   };
+  
 
   return (
     <Container className={styles.createPostContainer}>
