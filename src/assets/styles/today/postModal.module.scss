@@ -1,6 +1,6 @@
 .modal {
-  max-width: 900px; /* 모달의 최대 너비를 900px로 설정 */
-  min-width: 800px; /* 모달의 최소 너비를 800px로 설정 */
+  max-width: 1000px; /* 모달의 최대 너비를 900px로 설정 */
+  min-width: 900px; /* 모달의 최소 너비를 800px로 설정 */
   min-height: 650px; /* 모달의 최소 높이를 650px로 설정 */
   margin: auto; /* 모달을 화면 중앙에 위치시키기 위해 상하좌우 자동 여백 */
   background: white; /* 모달 배경을 흰색으로 설정 */
@@ -9,7 +9,7 @@
   position: relative; /* 자식 요소들에 대해 상대적인 위치 지정 */
   top: 50%; /* 화면 중앙에 위치 */
   left: 50%;
-  transform: translate(-50%, -45%); /* 중앙 위치를 정확히 맞추기 위한 변환 */
+  transform: translate(-85%, -50%); /* 중앙 위치를 정확히 맞추기 위한 변환 */
   z-index: 9999;
 }
 
