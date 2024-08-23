@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from '../../assets/styles/today/postModal.module.scss';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
@@ -7,42 +7,42 @@ import api from '../../services/api';
 Modal.setAppElement('#root');
 
 const PostModal = ({ isOpen, isClose, post }) => {
-  const [isLiked, setIsLiked] = useState(post.isLiked || false);
+  const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(post.todayHearts || 0);
   const [comments, setComments] = useState(post.comments || []);
   const [newComment, setNewComment] = useState('');
-  const [updateCommentId, setUpdateCommentId] = useState(null); // 수정 중인 댓글 ID
-  const [updateCommentContent, setUpdateCommentContent] = useState(''); // 수정 중인 댓글 내용
+  const [updateCommentId, setUpdateCommentId] = useState(null);
+  const [updateCommentContent, setUpdateCommentContent] = useState('');
+
+  useEffect(() => {
+    if (post) {
+      checkHeart(post.todaySq);
+      setComments(post.comments || []); // 댓글 상태 업데이트
+    }
+  }, [post]);
 
   const handleAddComment = async () => {
     if (newComment.trim() !== '') {
-      const commentData = { 
-        todaySq: post.todaySq,       // 게시물 ID
-        todayCommentsContents: newComment, // 댓글 내용
-        todayCommentsCreated:new Date().toISOString() //작성일
+      const commentData = {
+        todayCommentsContents: newComment, 
+        todayCommentsCreated: new Date().toISOString(),
+        todaySq: post.todaySq 
       };
-
       try {
-        // 서버에 댓글을 등록
         const addedComment = await addComment(post.todaySq, commentData);
-        
-        // 댓글 리스트에 새 댓글 추가
         setComments([...comments, addedComment]);
-        
-        // 입력 필드 초기화
         setNewComment('');
       } catch (error) {
         console.error('Failed to add comment:', error);
       }
     }
   };
-  
-  // 서버에 댓글을 추가하는 메소드
+
   const addComment = async (postId, commentData) => {
     try {
-      const response = await api.post('/todayComments/register', { 
-        postId, 
-        ...commentData 
+      const response = await api.post('/todayComments/register', {
+        ...commentData,
+        postId 
       });
       return response.data;
     } catch (error) {
@@ -50,13 +50,11 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
-  // 댓글 수정 시작 시 호출
-  const startupdateComment = (comment) => {
+  const startUpdateComment = (comment) => {
     setUpdateCommentId(comment.todayCommentsSq);
     setUpdateCommentContent(comment.todayCommentsContents);
   };
 
-  // 댓글 수정 완료 시 호출
   const handleUpdateComment = async () => {
     try {
       const response = await api.put(`/todayComments/update`, {
@@ -65,13 +63,9 @@ const PostModal = ({ isOpen, isClose, post }) => {
         todayCommentsCreated: new Date().toISOString()
       });
       alert('댓글 수정에 성공했습니다.');
-      
-      // 수정된 댓글 반영
-      setComments(post.comments.map(comment => 
+      setComments(comments.map(comment => 
         comment.todayCommentsSq === updateCommentId ? response.data : comment
       ));
-      
-      // 수정 상태 초기화
       setUpdateCommentId(null);
       setUpdateCommentContent('');
     } catch (error) {
@@ -80,13 +74,10 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
-  // 댓글 삭제
   const deleteComment = async (commentId) => {
     try {
       await api.delete(`/todayComments/delete/${commentId}`);
       alert('댓글이 삭제되었습니다.');
-      
-      // 삭제된 댓글을 화면에서 제거
       setComments(comments.filter(comment => comment.todayCommentsSq !== commentId));
     } catch (error) {
       console.error('댓글 삭제에 실패했습니다:', error);
@@ -94,37 +85,25 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
-  const likePost = async (todayId) => {
+  const checkHeart = async (postId) => {
     try {
-      const response = await api.post(`/today/todaylike/${todayId}`);
-      return response.data;
+      const response = await api.get(`/hearts/hasLiked/${postId}`);
+      setIsLiked(response.data.isLiked);
     } catch (error) {
-      throw new Error('Failed to like post');
-    }
-  };
-
-  const unlikePost = async (todayId) => {
-    try {
-      const response = await api.post(`/today/todaylike/${todayId}`);
-      return response.data;
-    } catch (error) {
-      throw new Error('Failed to unlike post');
+      console.error('찜 여부 확인에 실패했습니다:', error);
     }
   };
 
   const toggleLike = async () => {
     try {
-      if (isLiked) {
-        await unlikePost(post.todaySq);
-        setIsLiked(false);
-        setLikes(likes - 1);
-      } else {
-        await likePost(post.todaySq);
-        setIsLiked(true);
-        setLikes(likes + 1);
-      }
+      await api.post(`/hearts/toggle/${post.todaySq}`);
+      setIsLiked(prevIsLiked => {
+        const newIsLiked = !prevIsLiked;
+        setLikes(prevLikes => newIsLiked ? prevLikes + 1 : prevLikes - 1);
+        return newIsLiked;
+      });
     } catch (error) {
-      console.error('Failed to toggle like:', error);
+      console.error('찜 등록/취소에 실패했습니다:', error);
     }
   };
 
@@ -153,7 +132,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
           </div>
           <div className={styles.commentSection}>
             <div className={styles.commentList}>
-              {post.comments.map((comment) => (
+              {comments.map((comment) => (
                 <div key={comment.todayCommentsSq} className={styles.comment}>
                   <div className={styles.commentHeader}>
                     <span className={styles.commentUsername}>{comment.user.userId}</span>
@@ -172,7 +151,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
                     ) : (
                       <>
                         {comment.todayCommentsContents}
-                        <div className={styles.update} onClick={() => startupdateComment(comment)}>수정</div>
+                        <div className={styles.update} onClick={() => startUpdateComment(comment)}>수정</div>
                         <div className={styles.delete} onClick={() => deleteComment(comment.todayCommentsSq)}>삭제</div>
                       </>
                     )}

@@ -29,9 +29,13 @@ const UserWrite = () => {
           (a, b) => new Date(b.communityCreated) - new Date(a.communityCreated)
         );
         setCommunity(sortedData);
-        setLoading(false);
       } catch (error) {
-        setError(error);
+        if (error.response && error.response.status === 404) {  //게시글이 없을 시 404를 반환하고 배열을 비움
+          setCommunity([]);
+        } else {
+          setError(error);
+        }
+      } finally {
         setLoading(false);
       }
     };
@@ -47,7 +51,7 @@ const UserWrite = () => {
     try {
       await api.delete(`/community/delete/${id}`);
       alert('게시글 삭제를 완료했습니다.');
-      setCommunity(community.filter(item => item.communitySq !== id)); // ID가 아닌 communitySq 사용
+      setCommunity(community.filter(item => item.communitySq !== id));
     } catch (error) {
       alert('게시글 삭제가 실패하였습니다.');
       setError(error);

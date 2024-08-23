@@ -49,7 +49,7 @@ const TodayWrite = () => {
         },
       });
       alert('게시물 작성이 완료되었습니다.');
-      navigate('/today/register');
+      navigate('/today');
     } catch (error) {
       console.error('Error creating post:', error);
       alert('게시물 작성을 실패하였습니다.');

@@ -67,7 +67,7 @@ const Today = () => {
               </div>
             ))
           ) : (
-            <p>No posts available</p>
+            <p>게시글이 없습니다.</p>
           )}
         </div>
       </div>
