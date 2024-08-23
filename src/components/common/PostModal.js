@@ -24,6 +24,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
           // 찜 여부 확인
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
           setIsLiked(heartResponse.data.isLiked);
+          console.log('찜 여부 :', isLiked);
           // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
