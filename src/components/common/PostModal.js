@@ -22,8 +22,8 @@ const PostModal = ({ isOpen, isClose, post }) => {
         try {
           // 찜 여부 확인
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
-          setIsLiked(heartResponse.data);
           console.log('찜 여부 :', heartResponse.data);
+          setIsLiked(heartResponse.data);
           // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
@@ -98,6 +98,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
       setIsLiked(prevIsLiked => {
         const newIsLiked = !prevIsLiked;
         setLikes(prevLikes => newIsLiked ? prevLikes + 1 : prevLikes - 1);
+        console.log('찜 클릭 :', isLiked);
         return newIsLiked;
       });
     } catch (error) {
@@ -164,7 +165,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
             </div>
             <div className={styles.commentForm}>
               <div className={styles.heart} onClick={toggleLike}>
-                {isLiked ? <AiOutlineHeart /> : <AiFillHeart style={{ color: 'red' }} />} {likes}
+                {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart /> } {likes}
               </div>
               <input
                 type="text"
