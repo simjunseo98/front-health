@@ -24,7 +24,6 @@ const PostModal = ({ isOpen, isClose, post }) => {
           // 찜 여부 확인
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
           setIsLiked(heartResponse.data.isLiked);
-          console.log('찜 여부:', heartResponse.data);
           // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
@@ -35,7 +34,6 @@ const PostModal = ({ isOpen, isClose, post }) => {
       fetchData();
     }
   }, [post]);
-  
 
   const handleAddComment = async () => {
     if (newComment.trim() === '') return; // 빈 댓글 방지
@@ -60,7 +58,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
     setUpdateCommentContent(comment.todayCommentsContents);
   };
 
-  //댓글 수정
+  // 댓글 수정
   const handleUpdateComment = async () => {
     try {
       const response = await api.put(`/todayComments/update`, {
@@ -80,7 +78,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
-  //댓글 삭제
+  // 댓글 삭제
   const deleteComment = async (commentId) => {
     try {
       await api.delete(`/todayComments/delete/${commentId}`);
@@ -91,8 +89,8 @@ const PostModal = ({ isOpen, isClose, post }) => {
       alert('댓글 삭제에 실패했습니다.');
     }
   };
-  
-  //찜 요청
+
+  // 찜 요청
   const toggleLike = async () => {
     try {
       await api.post(`/hearts/toggle/${post.todaySq}`);
