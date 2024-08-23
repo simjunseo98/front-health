@@ -18,7 +18,8 @@ const PostModal = ({ isOpen, isClose, post }) => {
     if (newComment.trim() !== '') {
       const commentData = { 
         todaySq: post.todaySq,       // 게시물 ID
-        todayCommentsContents: newComment // 댓글 내용
+        todayCommentsContents: newComment, // 댓글 내용
+        todayCommentsCreated:new Date().toISOString() //작성일
       };
 
       try {
@@ -66,7 +67,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
       alert('댓글 수정에 성공했습니다.');
       
       // 수정된 댓글 반영
-      setComments(comments.map(comment => 
+      setComments(post.comments.map(comment => 
         comment.todayCommentsSq === updateCommentId ? response.data : comment
       ));
       
@@ -152,7 +153,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
           </div>
           <div className={styles.commentSection}>
             <div className={styles.commentList}>
-              {comments.map((comment) => (
+              {post.comments.map((comment) => (
                 <div key={comment.todayCommentsSq} className={styles.comment}>
                   <div className={styles.commentHeader}>
                     <span className={styles.commentUsername}>{comment.user.userId}</span>
