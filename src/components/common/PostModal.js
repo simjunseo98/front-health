@@ -42,7 +42,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
     try {
       const response = await api.post('/todayComments/register', commentData);
       alert('댓글 작성이 완료되었습니다.')
-      console.log(response.data);
+      console.log(commentData);
       return response.data;
     } catch (error) {
       alert('댓글 작성에 실패했습니다.')
