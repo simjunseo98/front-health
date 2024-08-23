@@ -26,10 +26,10 @@ const PostModal = ({ isOpen, isClose, post }) => {
       const commentData = {
         todayCommentsContents: newComment, 
         todayCommentsCreated: new Date().toISOString(),
-        todaySq: post.todaySq 
+        todaySq: post.todaySq  
       };
       try {
-        const addedComment = await addComment(post.todaySq, commentData);
+        const addedComment = await addComment(commentData); 
         setComments([...comments, addedComment]);
         setNewComment('');
       } catch (error) {
@@ -38,14 +38,13 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
-  const addComment = async (postId, commentData) => {
+  const addComment = async (commentData) => {
     try {
-      const response = await api.post('/todayComments/register', {
-        ...commentData,
-        postId 
-      });
+      const response = await api.post('/todayComments/register', commentData);
+      alert('댓글 작성이 완료되었습니다.')
       return response.data;
     } catch (error) {
+      alert('댓글 작성에 실패했습니다.')
       throw new Error('Failed to add comment');
     }
   };
