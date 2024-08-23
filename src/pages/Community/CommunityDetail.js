@@ -42,6 +42,7 @@ const CommunityDetail = () => {
       }
     };
 
+    //로그인 확인
     const checkLoginStatus = () => {
       const token = sessionStorage.getItem('token');
       setIsLoggedIn(!!token);
@@ -114,6 +115,7 @@ const CommunityDetail = () => {
     }
   };
 
+  //추천 요청
   const toggleRecommendation = async () => {
     try {
       const response = await api.post(`/community/recommend/${id}`);

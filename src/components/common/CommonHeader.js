@@ -41,11 +41,6 @@ function CommonHeader() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/challenge" className={`scroll-to-section ${location.pathname === '/challenge' ? 'active' : ''}`}>
-                    Challenge
-                  </Link>
-                </li>
-                <li>
                   <Link to="/today" className={`scroll-to-section ${location.pathname === '/today' ? 'active' : ''}`}>
                     Today's
                   </Link>

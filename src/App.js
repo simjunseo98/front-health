@@ -4,7 +4,6 @@ import Signup from './pages/SignUp';
 import Login from './pages/Login';
 import MyPage from './pages/Mypage/MyPage';
 import UserInfo from './pages/Mypage/UserInfo';
-import Challenge from './pages/Challenge';
 import Today from './pages/Today/Today';
 import Community from './pages/Community/Community';
 import UserUpdate from './pages/Mypage/UserUpdate';
@@ -32,7 +31,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/challenge" element={<Challenge />} />
             <Route path="/today" element={<Today />} />
             <Route 
               path="/todaywrite" 

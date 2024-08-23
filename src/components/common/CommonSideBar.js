@@ -34,7 +34,7 @@ function CommonSidebar() {
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#speedometer2" />
             </svg>
-            내가 작성한 게시글
+            내가 쓴 커뮤니티 게시글
           </NavLink>
         </li>
         <li>
@@ -45,7 +45,7 @@ function CommonSidebar() {
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#speedometer2" />
             </svg>
-            내가 작성한 오운완 게시글
+            내가 쓴 오운완 게시글
           </NavLink>
         </li>
         <li>
@@ -57,17 +57,6 @@ function CommonSidebar() {
               <use xlinkHref="#table" />
             </svg>
             내가 좋아요한 게시글
-          </NavLink>
-        </li>
-        <li>
-          <NavLink 
-            to="/mypage/products" 
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link text-white'}
-          >
-            <svg className="bi pe-none me-2" width="16" height="16">
-              <use xlinkHref="#grid" />
-            </svg>
-            내 운동계획
           </NavLink>
         </li>
       </ul>

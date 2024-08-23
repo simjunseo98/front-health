@@ -13,40 +13,39 @@ const PostModal = ({ isOpen, isClose, post }) => {
   const [newComment, setNewComment] = useState('');
   const [updateCommentId, setUpdateCommentId] = useState(null);
   const [updateCommentContent, setUpdateCommentContent] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (post) {
       checkHeart(post.todaySq);
       setComments(post.comments || []); // 댓글 상태 업데이트
     }
+
+    // 로그인 상태 확인
+    const checkLoginStatus = () => {
+      const token = sessionStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
+    checkLoginStatus();
+
   }, [post]);
 
   const handleAddComment = async () => {
-    if (newComment.trim() !== '') {
-      const commentData = {
-        todayCommentsContents: newComment, 
-        todayCommentsCreated: new Date().toISOString(),
-        todaySq: post.todaySq  
-      };
-      try {
-        const addedComment = await addComment(commentData); 
-        setComments([...comments, addedComment]);
-        setNewComment('');
-      } catch (error) {
-        console.error('Failed to add comment:', error);
-      }
-    }
-  };
-
-  const addComment = async (commentData) => {
+    if (newComment.trim() === '') return; // 빈 댓글 방지
     try {
-      const response = await api.post('/todayComments/register', commentData);
-      alert('댓글 작성이 완료되었습니다.')
-      console.log(commentData);
-      return response.data;
+      const response = await api.post('/todayComments/register', {
+        todayCommentsContents: newComment,
+        todayEntity: { id: post.todaySq }, 
+        todayCommentsCreated: new Date().toISOString()
+      });
+      alert('댓글 작성이 성공했습니다.');
+      // 새로 추가된 댓글을 포함한 댓글 리스트 업데이트
+      setComments([...comments, response.data]);
+      setNewComment(''); // 댓글 입력 필드 초기화
     } catch (error) {
-      alert('댓글 작성에 실패했습니다.')
-      throw new Error('Failed to add comment');
+      console.error('댓글 작성이 실패했습니다:', error);
+      alert('댓글 작성을 실패했습니다.');
     }
   };
 
@@ -55,6 +54,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
     setUpdateCommentContent(comment.todayCommentsContents);
   };
 
+  //댓글 수정
   const handleUpdateComment = async () => {
     try {
       const response = await api.put(`/todayComments/update`, {
@@ -74,6 +74,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
+  //댓글 삭제
   const deleteComment = async (commentId) => {
     try {
       await api.delete(`/todayComments/delete/${commentId}`);
@@ -85,15 +86,18 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
+  //찜 여부 확인
   const checkHeart = async (postId) => {
     try {
       const response = await api.get(`/hearts/hasLiked/${postId}`);
       setIsLiked(response.data.isLiked);
+      console.log(response.data);
     } catch (error) {
       console.error('찜 여부 확인에 실패했습니다:', error);
     }
   };
-
+  
+  //찜 요청
   const toggleLike = async () => {
     try {
       await api.post(`/hearts/toggle/${post.todaySq}`);
@@ -151,8 +155,12 @@ const PostModal = ({ isOpen, isClose, post }) => {
                     ) : (
                       <>
                         {comment.todayCommentsContents}
-                        <div className={styles.update} onClick={() => startUpdateComment(comment)}>수정</div>
-                        <div className={styles.delete} onClick={() => deleteComment(comment.todayCommentsSq)}>삭제</div>
+                        {isLoggedIn && comment.user.userId === sessionStorage.getItem('userId') && (
+                          <>
+                            <div className={styles.update} onClick={() => startUpdateComment(comment)}>수정</div>
+                            <div className={styles.delete} onClick={() => deleteComment(comment.todayCommentsSq)}>삭제</div>
+                          </>
+                        )}
                       </>
                     )}
                   </div>
