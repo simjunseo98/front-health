@@ -49,7 +49,7 @@ const UserWrite2 = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`today/delete/${id}`);
+      await api.delete(`/today/delete/${id}`);
       alert('게시글 삭제를 완료했습니다.');
       setPosts(posts.filter(item => item.todaySq !== id));
     } catch (error) {
