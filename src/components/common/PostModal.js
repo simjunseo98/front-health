@@ -17,26 +17,32 @@ const PostModal = ({ isOpen, isClose, post }) => {
 
   useEffect(() => {
     if (post) {
-      checkHeart(post.todaySq);
-      setComments(post.comments || []); // 댓글 상태 업데이트
+      setComments(post.comments || []);
+      // 비동기 함수 정의 및 호출
+      const fetchData = async () => {
+        try {
+          // 찜 여부 확인
+          const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
+          setIsLiked(heartResponse.data.isLiked);
+          console.log('찜 여부:', heartResponse.data);
+          // 로그인 상태 확인
+          const token = sessionStorage.getItem('token');
+          setIsLoggedIn(!!token);
+        } catch (error) {
+          console.error('API 호출 중 오류 발생:', error);
+        }
+      };
+      fetchData();
     }
-
-    // 로그인 상태 확인
-    const checkLoginStatus = () => {
-      const token = sessionStorage.getItem('token');
-      setIsLoggedIn(!!token);
-    };
-
-    checkLoginStatus();
-
   }, [post]);
+  
 
   const handleAddComment = async () => {
     if (newComment.trim() === '') return; // 빈 댓글 방지
     try {
       const response = await api.post('/todayComments/register', {
         todayCommentsContents: newComment,
-        todayEntity: { id: post.todaySq }, 
+        todayEntity: { todaySq: post.todaySq }, 
         todayCommentsCreated: new Date().toISOString()
       });
       alert('댓글 작성이 성공했습니다.');
@@ -83,17 +89,6 @@ const PostModal = ({ isOpen, isClose, post }) => {
     } catch (error) {
       console.error('댓글 삭제에 실패했습니다:', error);
       alert('댓글 삭제에 실패했습니다.');
-    }
-  };
-
-  //찜 여부 확인
-  const checkHeart = async (postId) => {
-    try {
-      const response = await api.get(`/hearts/hasLiked/${postId}`);
-      setIsLiked(response.data.isLiked);
-      console.log(response.data);
-    } catch (error) {
-      console.error('찜 여부 확인에 실패했습니다:', error);
     }
   };
   
