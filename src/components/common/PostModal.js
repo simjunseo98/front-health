@@ -18,13 +18,12 @@ const PostModal = ({ isOpen, isClose, post }) => {
   useEffect(() => {
     if (post) {
       setComments(post.comments || []);
-      // 비동기 함수 정의 및 호출
       const fetchData = async () => {
         try {
           // 찜 여부 확인
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
           setIsLiked(heartResponse.data.isLiked);
-          console.log('찜 여부 :', isLiked);
+          console.log('찜 여부 :', heartResponse.data.isLiked);
           // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
@@ -34,7 +33,8 @@ const PostModal = ({ isOpen, isClose, post }) => {
       };
       fetchData();
     }
-  }, [post]);
+  }, [post]); // post가 변경될 때만 useEffect가 실행됩니다.
+  
 
   const handleAddComment = async () => {
     if (newComment.trim() === '') return; // 빈 댓글 방지
@@ -104,6 +104,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
       console.error('찜 등록/취소에 실패했습니다:', error);
     }
   };
+  
 
   if (!post) return null;
 
