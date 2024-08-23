@@ -7,9 +7,14 @@
   border-radius: 10px; /* 모달 모서리를 10px 반경으로 둥글게 만듦 */
   padding: 10px; /* 모달 내부에 10px 패딩을 추가 */
   position: relative; /* 자식 요소들에 대해 상대적인 위치 지정 */
+  top: 50%; /* 화면 중앙에 위치 */
+  left: 50%;
+  transform: translate(-50%, -45%); /* 중앙 위치를 정확히 맞추기 위한 변환 */
+  z-index: 9999;
 }
 
-.overlay {
+.overlay {  
+  z-index: 9998;
   background-color: rgba(0, 0, 0, 0.75); /* 배경을 반투명한 검은색으로 설정 */
   position: fixed; /* 스크롤 시에도 고정된 위치에 유지 */
   top: 0; /* 화면 상단에 위치 */
