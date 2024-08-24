@@ -21,7 +21,6 @@ const PostModal = ({ isOpen, isClose, post }) => {
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
           console.log('찜 여부 :', heartResponse.data);
           setIsLiked(heartResponse.data);
-          setLikes(post.todayHearts || 0); // 좋아요 수는 포스트 데이터에서 초기화
           // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
