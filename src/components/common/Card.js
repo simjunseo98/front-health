@@ -3,7 +3,7 @@ import PostModal from './PostModal';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import styles from '../../assets/styles/today/card.module.scss';
 
-export const Card = ({ post }) => {
+export const Card = React.memo(({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -25,11 +25,13 @@ export const Card = ({ post }) => {
           </div>
         </div>
       </div>
-      <PostModal 
-        isOpen={isModalOpen} 
-        isClose={closeModal} 
-        post={post} 
-      />
+      {isModalOpen && (
+        <PostModal 
+          isOpen={isModalOpen} 
+          isClose={closeModal} 
+          post={post} 
+        />
+      )}
     </div>
   );
-};
+});

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Modal from 'react-modal';
 import styles from '../../assets/styles/today/postModal.module.scss';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import api from '../../services/api'; 
+import api from '../../services/api';
 
 Modal.setAppElement('#root');
 
@@ -11,20 +11,14 @@ const PostModal = ({ isOpen, isClose, post }) => {
   const [likes, setLikes] = useState(post.todayHearts || 0);
   const [comments, setComments] = useState(post.comments || []);
   const [newComment, setNewComment] = useState('');
-  const [updateCommentId, setUpdateCommentId] = useState(null);
-  const [updateCommentContent, setUpdateCommentContent] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (post) {
-      setComments(post.comments || []);
       const fetchData = async () => {
         try {
-          // 찜 여부 확인
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
-          console.log('찜 여부 :', heartResponse.data);
           setIsLiked(heartResponse.data);
-          // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
         } catch (error) {
@@ -33,79 +27,32 @@ const PostModal = ({ isOpen, isClose, post }) => {
       };
       fetchData();
     }
-  }, [post]); // post가 변경될 때만 useEffect가 실행됩니다.
-  
+  }, [post]);
 
   const handleAddComment = async () => {
-    if (newComment.trim() === '') return; // 빈 댓글 방지
+    if (newComment.trim() === '') return;
     try {
       const response = await api.post('/todayComments/register', {
         todayCommentsContents: newComment,
-        todayEntity: { todaySq: post.todaySq }, 
-        todayCommentsCreated: new Date().toISOString()
+        todayEntity: { todaySq: post.todaySq },
+        todayCommentsCreated: new Date().toISOString(),
       });
-      alert('댓글 작성이 성공했습니다.');
-      // 새로 추가된 댓글을 포함한 댓글 리스트 업데이트
       setComments([...comments, response.data]);
-      setNewComment(''); // 댓글 입력 필드 초기화
+      setNewComment('');
     } catch (error) {
-      console.error('댓글 작성이 실패했습니다:', error);
-      alert('댓글 작성을 실패했습니다.');
+      console.error('댓글 작성 실패:', error);
     }
   };
 
-  const startUpdateComment = (comment) => {
-    setUpdateCommentId(comment.todayCommentsSq);
-    setUpdateCommentContent(comment.todayCommentsContents);
-  };
-
-  // 댓글 수정
-  const handleUpdateComment = async () => {
+  const toggleLike = async () => {
     try {
-      const response = await api.put(`/todayComments/update`, {
-        todayCommentsSq: updateCommentId,
-        todayCommentsContents: updateCommentContent,
-        todayCommentsCreated: new Date().toISOString()
-      });
-      alert('댓글 수정에 성공했습니다.');
-      setComments(comments.map(comment => 
-        comment.todayCommentsSq === updateCommentId ? response.data : comment
-      ));
-      setUpdateCommentId(null);
-      setUpdateCommentContent('');
+      await api.post(`/hearts/toggle/${post.todaySq}`);
+      setIsLiked(prev => !prev);
+      setLikes(prev => (isLiked ? prev - 1 : prev + 1));
     } catch (error) {
-      console.error('댓글 수정에 실패했습니다:', error);
-      alert('댓글 수정에 실패했습니다.');
+      console.error('찜 등록/취소 실패:', error);
     }
   };
-
-  // 댓글 삭제
-  const deleteComment = async (commentId) => {
-    try {
-      await api.delete(`/todayComments/delete/${commentId}`);
-      alert('댓글이 삭제되었습니다.');
-      setComments(comments.filter(comment => comment.todayCommentsSq !== commentId));
-    } catch (error) {
-      console.error('댓글 삭제에 실패했습니다:', error);
-      alert('댓글 삭제에 실패했습니다.');
-    }
-  };
-
-// 찜 요청
-const toggleLike = async () => {
-  try {
-    await api.post(`/hearts/toggle/${post.todaySq}`);
-    setIsLiked((prevIsLiked) => {
-      const newIsLiked = !prevIsLiked;
-      setLikes((prevLikes) => (newIsLiked ? prevLikes + 1 : prevLikes - 1));
-      console.log('찜 클릭 :', newIsLiked);  // 여기서 newIsLiked를 사용
-      return newIsLiked;
-    });
-  } catch (error) {
-    console.error('찜 등록/취소에 실패했습니다:', error);
-  }
-};
-
 
   if (!post) return null;
 
@@ -132,31 +79,18 @@ const toggleLike = async () => {
           </div>
           <div className={styles.commentSection}>
             <div className={styles.commentList}>
-              {comments.map((comment) => (
+              {comments.map(comment => (
                 <div key={comment.todayCommentsSq} className={styles.comment}>
                   <div className={styles.commentHeader}>
                     <span className={styles.commentUsername}>{comment.user.userId}</span>
                     <span className={styles.commentDate}>{new Date(comment.todayCommentsCreated).toLocaleDateString()}</span>
                   </div>
                   <div className={styles.commentText}>
-                    {updateCommentId === comment.todayCommentsSq ? (
+                    {comment.todayCommentsContents}
+                    {isLoggedIn && comment.user.userId === sessionStorage.getItem('userId') && (
                       <>
-                        <input
-                          type="text"
-                          value={updateCommentContent}
-                          onChange={(e) => setUpdateCommentContent(e.target.value)}
-                        />
-                        <button onClick={handleUpdateComment}>수정 완료</button>
-                      </>
-                    ) : (
-                      <>
-                        {comment.todayCommentsContents}
-                        {isLoggedIn && comment.user.userId === sessionStorage.getItem('userId') && (
-                          <>
-                            <div className={styles.update} onClick={() => startUpdateComment(comment)}>수정</div>
-                            <div className={styles.delete} onClick={() => deleteComment(comment.todayCommentsSq)}>삭제</div>
-                          </>
-                        )}
+                        <div className={styles.update}>수정</div>
+                        <div className={styles.delete}>삭제</div>
                       </>
                     )}
                   </div>
@@ -165,13 +99,13 @@ const toggleLike = async () => {
             </div>
             <div className={styles.commentForm}>
               <div className={styles.heart} onClick={toggleLike}>
-                {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart /> } {likes}
+                {isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {likes}
               </div>
               <input
                 type="text"
                 className={styles.commentInput}
                 value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
+                onChange={e => setNewComment(e.target.value)}
                 placeholder="댓글을 입력하세요..."
               />
               <button className={styles.commentButton} onClick={handleAddComment}>게시</button>
@@ -184,4 +118,4 @@ const toggleLike = async () => {
   );
 };
 
-export default PostModal;
+export default React.memo(PostModal);
