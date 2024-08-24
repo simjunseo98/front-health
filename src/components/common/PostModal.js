@@ -91,21 +91,21 @@ const PostModal = ({ isOpen, isClose, post }) => {
     }
   };
 
-  // 찜 요청
-  const toggleLike = async () => {
-    try {
-      await api.post(`/hearts/toggle/${post.todaySq}`);
-      setIsLiked(prevIsLiked => {
-        const newIsLiked = !prevIsLiked;
-        setLikes(prevLikes => newIsLiked ? prevLikes + 1 : prevLikes - 1);
-        console.log('찜 클릭 :', isLiked);
-        return newIsLiked;
-      });
-    } catch (error) {
-      console.error('찜 등록/취소에 실패했습니다:', error);
-    }
-  };
-  
+// 찜 요청
+const toggleLike = async () => {
+  try {
+    await api.post(`/hearts/toggle/${post.todaySq}`);
+    setIsLiked((prevIsLiked) => {
+      const newIsLiked = !prevIsLiked;
+      setLikes((prevLikes) => (newIsLiked ? prevLikes + 1 : prevLikes - 1));
+      console.log('찜 클릭 :', newIsLiked);  // 여기서 newIsLiked를 사용
+      return newIsLiked;
+    });
+  } catch (error) {
+    console.error('찜 등록/취소에 실패했습니다:', error);
+  }
+};
+
 
   if (!post) return null;
 
