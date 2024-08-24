@@ -19,6 +19,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
         try {
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
           setIsLiked(heartResponse.data);
+          setLikes(post.todayHearts || 0); // 좋아요 수는 포스트 데이터에서 초기화
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
         } catch (error) {
@@ -47,13 +48,15 @@ const PostModal = ({ isOpen, isClose, post }) => {
   const toggleLike = async () => {
     try {
       await api.post(`/hearts/toggle/${post.todaySq}`);
-      setIsLiked(prev => !prev);
-      setLikes(prev => (isLiked ? prev - 1 : prev + 1));
+      setIsLiked(prevIsLiked => {
+        setLikes(prevLikes => (prevIsLiked ? prevLikes - 1 : prevLikes + 1));
+        return !prevIsLiked;
+      });
     } catch (error) {
       console.error('찜 등록/취소 실패:', error);
     }
   };
-
+  
   if (!post) return null;
 
   return (

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PostModal from './PostModal';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import styles from '../../assets/styles/today/card.module.scss';
 
 export const Card = React.memo(({ post }) => {
@@ -21,7 +20,7 @@ export const Card = React.memo(({ post }) => {
         </div>
         <div className={styles.cardFooter}>
           <div className={styles.heart}>
-            {post.isLiked ? <AiFillHeart style={{ color: 'red' }} /> : <AiOutlineHeart />} {post.likes}
+            {/* 카드에서는 좋아요 상태를 관리하지 않음 */}
           </div>
         </div>
       </div>
