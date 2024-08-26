@@ -22,7 +22,7 @@ const TodayWriteUpdate = () => {
         setImage(data.imageurl);
         setContents(data.todayContents);
         setImagePreview(data.imageurl); // 미리보기 URL 설정
-        setCreated(data.todayCreated);
+        setCreated(data.todayCreated.substring(0, 10));
       } catch (error) {
         console.error('게시물 데이터를 가져오는 중 오류 발생:', error);
       }
