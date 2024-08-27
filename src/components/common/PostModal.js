@@ -121,7 +121,7 @@ const toggleLike = async () => {
             <div className={styles.date}>작성일: {new Date(post.todayCreated).toLocaleDateString()}</div>
           </div>
           <div className={styles.modalText}>
-            <p className={styles.modalDescription}>{post.todayContents}</p>
+           {post.user.userID}: <p className={styles.modalDescription}>{post.todayContents}</p>
           </div>
           <div className={styles.commentSection}>
             <div className={styles.commentList}>
