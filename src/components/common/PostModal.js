@@ -144,7 +144,7 @@ const toggleLike = async () => {
                     ) : (
                       <>
                         {comment.todayCommentsContents}
-                        {isLoggedIn && comment.user.userId === sessionStorage.getItem('userId') && (
+                        {isLoggedIn && post.user.userId === sessionStorage.getItem('userId') && (
                           <>
                             <div className={styles.update} onClick={() => startUpdateComment(comment)}>수정</div>
                             <div className={styles.delete} onClick={() => deleteComment(comment.todayCommentsSq)}>삭제</div>
