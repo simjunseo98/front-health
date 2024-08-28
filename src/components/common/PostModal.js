@@ -12,15 +12,18 @@ const PostModal = ({ isOpen, isClose, post }) => {
   const [updateCommentId, setUpdateCommentId] = useState(null);
   const [updateCommentContent, setUpdateCommentContent] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   useEffect(() => {
     if (post) {
       setComments(post.comments || []);
+      setLikes(post.todayHearts || 0);
       const fetchData = async () => {
         try {
           // 찜 여부 확인
           const heartResponse = await api.get(`/hearts/hasLiked/${post.todaySq}`);
-          console.log('찜 여부 :', heartResponse.data);
-          setIsLiked(heartResponse.data);
+          setIsLiked(heartResponse.data.hasLiked);
+          console.log("찜 여부 :", heartResponse.data.hasLiked)
           // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
           setIsLoggedIn(!!token);
@@ -30,8 +33,24 @@ const PostModal = ({ isOpen, isClose, post }) => {
       };
       fetchData();
     }
-  }, [post]); // post가 변경될 때만 useEffect가 실행됩니다.
+  }, [post]);
+
+  // 찜 토글 요청
+  const toggleLike = async () => {
+    try {
+      await api.post(`/hearts/toggle/${post.todaySq}`);
+      
+      // 포스트 데이터를 다시 가져와 상태 업데이트
+      const updatedPost = await api.get(`/today/${post.todaySq}`);
+      setIsLiked(updatedPost.data.hasLiked);
+      setLikes(updatedPost.data.todayHearts);
   
+    } catch (error) {
+      console.error('찜 등록/취소에 실패했습니다:', error);
+    }
+  };
+
+//댓글 작성  
   const handleAddComment = async () => {
     if (newComment.trim() === '') return; // 빈 댓글 방지
     try {
@@ -53,6 +72,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
     setUpdateCommentId(comment.todayCommentsSq);
     setUpdateCommentContent(comment.todayCommentsContents);
   };
+
   // 댓글 수정
   const handleUpdateComment = async () => {
     try {
@@ -72,6 +92,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
       alert('댓글 수정에 실패했습니다.');
     }
   };
+
   // 댓글 삭제
   const deleteComment = async (commentId) => {
     try {
@@ -83,22 +104,6 @@ const PostModal = ({ isOpen, isClose, post }) => {
       alert('댓글 삭제에 실패했습니다.');
     }
   };
-
-// 찜 요청
-const toggleLike = async () => {
-  try {
-    await api.post(`/hearts/toggle/${post.todaySq}`);
-    setIsLiked((prevIsLiked) => {
-      const newIsLiked = !prevIsLiked;
-      setLikes((prevLikes) => (newIsLiked ? prevLikes + 1 : prevLikes - 1));
-      console.log('찜 클릭 :', newIsLiked);  // 여기서 newIsLiked를 사용
-      return newIsLiked;
-    });
-  } catch (error) {
-    console.error('찜 등록/취소에 실패했습니다:', error);
-  }
-};
-
 
   if (!post) return null;
 
