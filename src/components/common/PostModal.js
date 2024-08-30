@@ -26,6 +26,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
           console.log("찜 여부 :", heartResponse.data.hasLiked)
           // 로그인 상태 확인
           const token = sessionStorage.getItem('token');
+          console.log('토큰 확인:', token);
           setIsLoggedIn(!!token);
         } catch (error) {
           console.error('API 호출 중 오류 발생:', error);
@@ -39,12 +40,12 @@ const PostModal = ({ isOpen, isClose, post }) => {
   const toggleLike = async () => {
     try {
       await api.post(`/hearts/toggle/${post.todaySq}`);
-      
-      // 포스트 데이터를 다시 가져와 상태 업데이트
-      const updatedPost = await api.get(`/today/${post.todaySq}`);
-      setIsLiked(updatedPost.data.hasLiked);
-      setLikes(updatedPost.data.todayHearts);
-  
+      setIsLiked((prevIsLiked) => {
+        const newIsLiked = !prevIsLiked;
+        setLikes((prevLikes) => (newIsLiked ? prevLikes + 1 : prevLikes - 1));
+        console.log('찜 클릭 :', newIsLiked);  // 여기서 newIsLiked를 사용
+        return newIsLiked;
+      });
     } catch (error) {
       console.error('찜 등록/취소에 실패했습니다:', error);
     }
@@ -149,7 +150,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
                     ) : (
                       <>
                         {comment.todayCommentsContents}
-                        {isLoggedIn && post.user.userId === sessionStorage.getItem('userId') && (
+                        {isLoggedIn && comment.user.userId === sessionStorage.getItem('userId') && (
                           <>
                             <div className={styles.update} onClick={() => startUpdateComment(comment)}>수정</div>
                             <div className={styles.delete} onClick={() => deleteComment(comment.todayCommentsSq)}>삭제</div>
