@@ -42,8 +42,7 @@ const Today = () => {
   return (
     <div className={styles.todayWrapper}>
       <div className={styles.todayHeader}>
-        <h2>오늘 운동 완!</h2>
-      <Link to="/todaywrite" className="btn btn-primary">
+      <Link to="/todaywrite" className={styles.writeButton}>
       📝-작성 버튼
       </Link>
       </div>
