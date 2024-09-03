@@ -42,7 +42,7 @@ const Today = () => {
   return (
     <div className={styles.todayWrapper}>
       <Link to="/todaywrite" className={styles.writeButton}>
-      📝-작성 버튼
+      📝-작성하기
       </Link>
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
