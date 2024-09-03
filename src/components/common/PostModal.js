@@ -47,6 +47,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
         return newIsLiked;
       });
     } catch (error) {
+      alert('로그인 후 이용해주세요!')
       console.error('찜 등록/취소에 실패했습니다:', error);
     }
   };
