@@ -41,11 +41,9 @@ const Today = () => {
 
   return (
     <div className={styles.todayWrapper}>
-      <div className={styles.todayHeader}>
       <Link to="/todaywrite" className={styles.writeButton}>
       📝-작성 버튼
       </Link>
-      </div>
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
           {currentItems.length > 0 ? (
