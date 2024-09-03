@@ -127,7 +127,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
             <div className={styles.date}>작성일: {new Date(post.todayCreated).toLocaleDateString()}</div>
           </div>
           <div className={styles.modalText}>
-           {post.user.userID}: <p className={styles.modalDescription}>{post.todayContents}</p>
+           {post.user.userId}: <p className={styles.modalDescription}>{post.todayContents}</p>
           </div>
           <div className={styles.commentSection}>
             <div className={styles.commentList}>
