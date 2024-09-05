@@ -44,6 +44,7 @@ const Today = () => {
       <Link to="/todaywrite" className={styles.writeButton}>
       📝-작성하기
       </Link>
+      <hr />
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
           {currentItems.length > 0 ? (
