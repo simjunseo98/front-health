@@ -11,7 +11,7 @@ const Community = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  const [itemsPerPage] = useState(10);
   const [search, setSearch] = useState('');   // 검색어 상태
   const [searchResult, setSearchResult] = useState([]); // 검색결과 상태
   const [searchInput, setSearchInput] = useState(''); // 검색 입력 상태
