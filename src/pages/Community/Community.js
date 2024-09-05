@@ -70,7 +70,6 @@ const Community = () => {
   return (
     <div style={{width:'1500px',height:'100%'}}>
       <h2>실시간 헬스 갤러리</h2>
-      <hr />
       <div className='input-group' style={{ justifyContent: 'space-between',alignContent:'center', Width: '1300px', margin: '0 auto', marginBottom: '30px', marginTop: '30px'}}>
         <div style={{ display: 'flex', flex: 1, alignItems: 'center' }}>
         <input type="search" className='form-control rounded' style={{flex: 1,maxWidth:'500px',marginRight:'10px',alignItems:'center',marginLeft:'500px' }} placeholder="검색어를 입력하세요." aria-label="Search" aria-describedby="search-addon"
@@ -79,12 +78,13 @@ const Community = () => {
         />
         <button type="button" className='btn btn-outline-primary' onClick={handleSearch} style={{ whiteSpace: 'nowrap',borderRadius:'3px'
         
-         }}>검색</button>   
+      }}>검색</button>   
          </div> 
         <Link to="/communitywrite" className="btn btn-primary" style={{marginRight:'100px',borderRadius:'5px'}}>
           게시글작성
         </Link>
       </div>
+      <hr />
 
       <div className={styles.communityContainer}>
       <Table striped bordered hover style={{width:'100%',textAlign:'center', margin:'0 auto',
