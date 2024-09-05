@@ -41,11 +41,11 @@ const Today = () => {
 
   return (
     <div className={styles.todayWrapper}>
-      <h2 className={styles.todayName}>근육자랑 갤러리</h2>
-      <Link to="/todaywrite" className={styles.writeButton}>
-      📝-작성하기
-      </Link>
+      <h2>오.운.완 갤러리</h2>
       <hr />
+      <Link to="/todaywrite" className={styles.writeButton}>
+      📝게시글쓰기
+      </Link>
       <div className={styles.todayBody}>
         <div className={styles.cardList}>
           {currentItems.length > 0 ? (

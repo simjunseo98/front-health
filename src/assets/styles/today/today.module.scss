@@ -3,8 +3,6 @@
   padding: 20px;
 }
 
-
-
 .writeButton{
   padding: 8px 16px; /* 버튼 내부에 8px 상하, 16px 좌우 패딩 추가 */
   border: none; /* 테두리를 제거 */
@@ -26,9 +24,9 @@
   justify-content: center;
   align-items: center;
   }  
-  .todayName{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
+
+
+  h2 {
+    text-align: center;
+    margin-top: 30px;
   }
-
-
