@@ -4,10 +4,10 @@
 }
 
 .writeButton{
-  padding: 8px 16px; /* 버튼 내부에 8px 상하, 16px 좌우 패딩 추가 */
-  border: none; /* 테두리를 제거 */
-  cursor: pointer; /* 마우스를 올리면 커서가 손가락 모양으로 변경 */
-  font-size: 26px; /* 텍스트 크기를 14px로 설정 */
+  padding: 8px 16px;
+  border: none; 
+  cursor: pointer;
+  font-size: 20px; 
   display: flex;
   justify-content: center;
   color: darkslategray;
@@ -18,7 +18,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     overflow-x: auto;
-    padding: 3rem;
+    margin-left: 50px;
   }
   .addbutton{
   justify-content: center;
@@ -29,4 +29,6 @@
   h2 {
     text-align: center;
     margin-top: 30px;
+    margin-bottom: 50px;
+    font-family: 'Red Hat Text', sans-serif;
   }
