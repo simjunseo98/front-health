@@ -41,6 +41,7 @@ const Today = () => {
 
   return (
     <div className={styles.todayWrapper}>
+      <h2 className={styles.todayName}>근육자랑 갤러리</h2>
       <Link to="/todaywrite" className={styles.writeButton}>
       📝-작성하기
       </Link>
