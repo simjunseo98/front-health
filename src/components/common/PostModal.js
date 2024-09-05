@@ -139,7 +139,7 @@ const PostModal = ({ isOpen, isClose, post }) => {
                     <span className={styles.commentDate}>{new Date(comment.todayCommentsCreated).toLocaleDateString()}</span>
                   </div>
                   <div className={styles.commentText}>
-                    - {updateCommentId === comment.todayCommentsSq ? (
+                     {updateCommentId === comment.todayCommentsSq ? (
                       <>
                         <input
                           type="text"
