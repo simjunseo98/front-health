@@ -13,6 +13,6 @@
   데이터 관리 : MySQL,JPA<br>
   배포&서버 : AWS(EC2,S3,RDS),GitHubActions (CI/CD)<br>
   기타 도구 : Swagger
-<br>
+---
 ## 📍 주요 기능
 
