@@ -21,15 +21,17 @@
   width="32%"  align="center">
 <img src='https://github.com/user-attachments/assets/3650949e-86e1-4bd4-bcaa-8c40d992caee'width="32%"  align="center">
 </p><br>
-- 카드 형식의 컴포넌트로 각 게시물을 클릭시 모달 화면이 뜨게 설계를 하였습니다.
+- 카드 형식의 컴포넌트로 각 게시물을 클릭시 모달 화면이 뜨게 설계를 하였고, 게시물 작성시 사용한 이미지가 보이게 설계 하였습니다.
+- 게시물의 좋아요 및 댓글을 작성할 수 있게 해서 커뮤니케이션이 가능하게 하였습니다.<br>
 <p align="center">
 <img src='https://github.com/user-attachments/assets/9e4365b8-8519-4e91-af06-e5027e56b16e'width="32%"  align="center">
 <img src='https://github.com/user-attachments/assets/f69acf7f-f735-4405-aee1-804c0bdabf5b'width="32%"  align="center">
 <img src='https://github.com/user-attachments/assets/9c9b7919-69e5-4bf8-bfc6-7e905bd9485e'width="32%" align="center">
 </p><br>
-
+- 게시물을 작성하고 수정하고 삭제할 수 있고, 댓글을 작성할 수 있게 구현하였습니다.<br>
 <p align="center">
 <img src='https://github.com/user-attachments/assets/c21c00e8-33ca-4aae-bff5-90f83e4cc5e5'width="32%" align="center">
 <img src='https://github.com/user-attachments/assets/2be688c3-5ad1-426b-8e66-ac718cee482f'width="32%" align="center">
 <img src='https://github.com/user-attachments/assets/462e976e-d249-4b11-98c4-77898447ae13'width="32%" align="center">
 </p>
+- 마이페이지에서 로그인된 유저의 게시물을 확인하고 , 정보를 수정및 확인할 수 있습니다.
