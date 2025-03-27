@@ -30,10 +30,14 @@
 <img src='https://github.com/user-attachments/assets/f69acf7f-f735-4405-aee1-804c0bdabf5b'width="32%"  align="center">
 <img src='https://github.com/user-attachments/assets/9c9b7919-69e5-4bf8-bfc6-7e905bd9485e'width="32%" align="center">
 </p><br>
-- 게시물을 작성하고 수정하고 삭제할 수 있고, 댓글을 작성할 수 있게 구현하였습니다.<br>
+- 게시물을 작성하고 수정하고 삭제할 수 있고, 댓글을 작성할 수 있게 구현하였습니다.
+
+---
 <p align="center">
 <img src='https://github.com/user-attachments/assets/c21c00e8-33ca-4aae-bff5-90f83e4cc5e5'width="32%" align="center">
 <img src='https://github.com/user-attachments/assets/2be688c3-5ad1-426b-8e66-ac718cee482f'width="32%" align="center">
 <img src='https://github.com/user-attachments/assets/462e976e-d249-4b11-98c4-77898447ae13'width="32%" align="center">
 </p>
 - 마이페이지에서 로그인된 유저의 게시물을 확인하고 , 정보를 수정및 확인할 수 있습니다.
+
+---
