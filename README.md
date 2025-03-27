@@ -17,6 +17,7 @@
 - 데이터 관리 : MySQL,JPA
 - 배포&서버 : AWS(EC2,S3,RDS),GitHubActions (CI/CD)
 - 기타 도구 : Swagger
---
+
+---
 ## 📍 주요 기능
 
