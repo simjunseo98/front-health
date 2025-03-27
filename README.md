@@ -14,7 +14,7 @@
   배포&서버 : AWS(EC2,S3,RDS),GitHubActions (CI/CD)<br>
   기타 도구 : Swagger
 ---
-## 📍 주요 기능
+## 📍 주요 기능화면
 ![Image](https://github.com/user-attachments/assets/fa70a467-d0b7-464b-83b6-9ff70ddcd453)|
 ![Image](https://github.com/user-attachments/assets/b4b5e82a-57ad-49ef-ae5e-3c57459ba473)
 ![Image](https://github.com/user-attachments/assets/3650949e-86e1-4bd4-bcaa-8c40d992caee)
