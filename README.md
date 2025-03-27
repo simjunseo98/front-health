@@ -8,7 +8,7 @@
 ## 개요
 - 📅 개발기간: 24.07 ~ 24.08
 - 👥 멤버 구성: FE(1명), BE(1명)
-- ⚙️ 개발 환경
+- ⚙️ 개발 환경 <br>
   UI &상태 관리 : React, bootstrap5<br>
   스타일링: Styled-components,Css, bootstrap5<br>
   데이터 관리 : MySQL,JPA<br>
