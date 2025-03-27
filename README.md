@@ -23,7 +23,7 @@
 </p><br>
 - 카드 형식의 컴포넌트로 각 게시물을 클릭시 모달 화면이 뜨게 설계를 하였고, 게시물 작성시 사용한 이미지가 보이게 설계 하였습니다.<br>
 - 게시물의 좋아요 및 댓글을 작성할 수 있게 해서 커뮤니케이션이 가능하게 하였습니다.
-<br>
+---
 <p align="center">
 <img src='https://github.com/user-attachments/assets/9e4365b8-8519-4e91-af06-e5027e56b16e'width="32%"  align="center">
 <img src='https://github.com/user-attachments/assets/f69acf7f-f735-4405-aee1-804c0bdabf5b'width="32%"  align="center">
