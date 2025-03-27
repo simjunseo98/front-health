@@ -21,7 +21,7 @@
   width="32%"  align="center">
 <img src='https://github.com/user-attachments/assets/3650949e-86e1-4bd4-bcaa-8c40d992caee'width="32%"  align="center">
 </p><br>
-
+- 카드 형식의 컴포넌트로 각 게시물을 클릭시 모달 화면이 뜨게 설계를 하였습니다.
 <p align="center">
 <img src='https://github.com/user-attachments/assets/9e4365b8-8519-4e91-af06-e5027e56b16e'width="32%"  align="center">
 <img src='https://github.com/user-attachments/assets/f69acf7f-f735-4405-aee1-804c0bdabf5b'width="32%"  align="center">
