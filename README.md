@@ -15,7 +15,6 @@
   기타 도구 : Swagger
 ---
 ## 📍 주요 기능
-![Image](https://github.com/user-attachments/assets/043fb399-cbea-42b4-b42d-2f2e58203ded)
 ![Image](https://github.com/user-attachments/assets/fa70a467-d0b7-464b-83b6-9ff70ddcd453)
 ![Image](https://github.com/user-attachments/assets/b4b5e82a-57ad-49ef-ae5e-3c57459ba473)
 ![Image](https://github.com/user-attachments/assets/3650949e-86e1-4bd4-bcaa-8c40d992caee)
@@ -25,5 +24,4 @@
 ![Image](https://github.com/user-attachments/assets/c21c00e8-33ca-4aae-bff5-90f83e4cc5e5)
 ![Image](https://github.com/user-attachments/assets/2be688c3-5ad1-426b-8e66-ac718cee482f)
 ![Image](https://github.com/user-attachments/assets/462e976e-d249-4b11-98c4-77898447ae13)
-![Image](https://github.com/user-attachments/assets/a251e4d7-cb2b-4076-bf4d-bef98495c7b3)
 
